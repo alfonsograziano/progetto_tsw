@@ -86,7 +86,7 @@ create table payment(
     expire_date varchar(5)
 );
 
-create table ordination(
+create table customer_order(
 	id int not null primary key auto_increment,
     shipping_id int,
     payment_id int,
@@ -116,7 +116,7 @@ create table make(
 	id_customer int,
     id_order int,
     foreign key(id_customer) references customer(id),
-    foreign key(id_order) references ordination(id),
+    foreign key(id_order) references customer_order(id),
     primary key(id_customer, id_order)
 );
 
@@ -131,7 +131,7 @@ create table contains(
 	quantity int,
     id_order int not null,
     id_ordered_product int not null,
-    foreign key(id_order) references ordination(id),
+    foreign key(id_order) references customer_order(id),
     foreign key(id_ordered_product) references ordered_product(id),
     primary key(id_order, id_ordered_product)
 );
