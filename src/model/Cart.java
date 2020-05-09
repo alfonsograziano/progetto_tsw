@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.bean.Product;
+
 public class Cart {
 
 	private List<Product> products;

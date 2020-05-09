@@ -1,11 +1,16 @@
-package model;
+package model.bean;
 
 public class Customer {
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", phone="
+				+ phone + ", password=" + password + "]";
+	}
 	private int id;
 	private String name;
 	private String surname;
-	private String mail;
+	private String email;
 	private String phone;
 	private String password;
 	public int getId() {
@@ -26,11 +31,11 @@ public class Customer {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPhone() {
 		return phone;

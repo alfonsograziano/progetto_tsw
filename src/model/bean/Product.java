@@ -1,4 +1,6 @@
-package model;
+package model.bean;
+
+import java.util.ArrayList;
 
 public class Product {
 	private int id;
@@ -6,7 +8,16 @@ public class Product {
 	private String brand; 
 	private double price;
 	private String description;
-	private String imgPath;
+	
+	private ArrayList<String> pictures;
+	private ArrayList<String> categories;
+	
+	public Product() {
+		pictures = new ArrayList<>();
+		categories = new ArrayList<>();
+
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -38,10 +49,5 @@ public class Product {
 		this.description = description;
 	} 
 	
-	public String getImgPath() {
-		return imgPath;
-	}
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
-	}
+
 }

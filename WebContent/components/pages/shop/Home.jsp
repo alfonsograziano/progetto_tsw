@@ -17,9 +17,16 @@
 	
 		<jsp:include page="Header.jsp" />	
 		
-		<jsp:include page="ProductView.jsp" />	
-		
-	
+		<!--<jsp:include page="ProductView.jsp" /> -->
+		<div style="display:flex; flex-direction:row; flex-wrap: wrap; width:100%;">
+			<% for(int i = 0; i <= 5; i++){ %>
+				<jsp:include page="../../shared/ProductCard.jsp">
+					<jsp:param name="title" value="Mouse pezzotto" />
+					<jsp:param name="price" value="14,37$" />
+				</jsp:include>
+			<% } %>
+		</div>
+			
 		<jsp:include page="Footer.jsp" />	
 	
 	</body>

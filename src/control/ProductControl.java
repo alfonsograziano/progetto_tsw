@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.ProductModelDS;
 import model.Cart;
-import model.Product;
+import model.bean.Product;
+import model.dao.ProductModelDS;
 
 /**
  * Servlet implementation class ProductControl
@@ -19,15 +19,11 @@ import model.Product;
 public class ProductControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
-	static ProductModelDS model;
-	
-	static {
-			model = new ProductModelDS();
-	}
-	
+	ProductModelDS model;
+
 	public ProductControl() {
 		super();
+		model = new ProductModelDS();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,6 +37,9 @@ public class ProductControl extends HttpServlet {
 		
 		String action = request.getParameter("action");
 
+		//TODO: crea crud e una servlet per ogni cosa
+		//TODO: vedi logica di business (tutorato)
+		
 		try {
 			if (action != null) {
 				if (action.equalsIgnoreCase("addC")) {
@@ -68,7 +67,6 @@ public class ProductControl extends HttpServlet {
 					bean.setDescription(description);
 					bean.setPrice(price);
 					bean.setBrand(brand);
-					bean.setImgPath(imgPath);
 					model.doSave(bean);
 				}
 			}			

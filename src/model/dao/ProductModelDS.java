@@ -1,4 +1,4 @@
-package db;
+package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,13 +12,14 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import model.Product;
+import model.bean.Product;
 
-public class ProductModelDS{
+
+public class ProductModelDS implements ProductModel{
 
 	private static DataSource ds;
-
-	static {
+	
+	public ProductModelDS(){
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -32,13 +33,13 @@ public class ProductModelDS{
 
 	private static final String TABLE_NAME = "product";
 	
-	public synchronized void doSave(Product product) throws SQLException {
+	public void doSave(Product product) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ProductModelDS.TABLE_NAME
-				+ " (name, brand, description, id, price, imgPath) VALUES (?, ?, ?, ?, ?, ?)";
+				+ " (name, brand, description, id, price) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -48,11 +49,8 @@ public class ProductModelDS{
 			preparedStatement.setString(3, product.getDescription());
 			preparedStatement.setInt(4, product.getId());
 			preparedStatement.setDouble(5, product.getPrice());
-			preparedStatement.setString(6, product.getImgPath());
-
 
 			preparedStatement.executeUpdate();
-
 			connection.commit();
 		} finally {
 			try {
@@ -65,7 +63,7 @@ public class ProductModelDS{
 		}
 	}
 	
-	public synchronized Product doRetrieveByKey(int id) throws SQLException {
+	public Product doRetrieveByKey(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -86,7 +84,6 @@ public class ProductModelDS{
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
 				bean.setBrand(rs.getString("brand"));
-				bean.setBrand(rs.getString("imgPath"));
 
 			}
 
@@ -102,7 +99,7 @@ public class ProductModelDS{
 		return bean;
 	}
 	
-	public synchronized boolean doDelete(int id) throws SQLException {
+	public boolean doDelete(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -129,7 +126,7 @@ public class ProductModelDS{
 		return (result != 0);
 	}
 	
-	public synchronized Collection<Product> doRetrieveAll(String order) throws SQLException {
+	public Collection<Product> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -155,7 +152,6 @@ public class ProductModelDS{
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
 				bean.setBrand(rs.getString("brand"));
-				bean.setImgPath(rs.getString("imgPath"));
 
 				products.add(bean);
 			}
