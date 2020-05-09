@@ -13,14 +13,14 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 		        
 	</head>
+	
 	<body>
 	
 		<jsp:include page="Header.jsp" />	
-		
-		<!--<jsp:include page="ProductView.jsp" /> -->
 		<div style="display:flex; flex-direction:row; flex-wrap: wrap; width:100%;">
 			<% for(int i = 0; i <= 5; i++){ %>
 				<jsp:include page="../../shared/ProductCard.jsp">
+					<jsp:param name="image" value="${pageContext.request.contextPath}/assets/img/products/mouse.jpg" />
 					<jsp:param name="title" value="Mouse pezzotto" />
 					<jsp:param name="price" value="14,37$" />
 				</jsp:include>
