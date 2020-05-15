@@ -3,15 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-<!-- Compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+<jsp:include page="../HeaderData.jsp"></jsp:include>
 <title>Insert title here</title>
 
 </head>
@@ -19,15 +11,21 @@
 	<%
 		Boolean admin = (Boolean) session.getAttribute("isAdmin");
 		if ((admin == null) || (admin == false)) {
-			response.sendRedirect("./AdminLogin.jsp");
+			response.sendRedirect(request.getContextPath()+"/login");
 		}
 	%>
-	<h1>Benvenuto admin</h1>
-	<form action="${pageContext.request.contextPath}/admin/logout">
+	<jsp:include page="VNav.jsp" />	
+	
+	
+	<div style="width:100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+		<h1>Benvenuto admin</h1>
+	<form action="${pageContext.request.contextPath}/logout">
 		<button type='submit'
-						class='col s12 btn waves-effect indigo'>Logout</button>
-
+						class='col s12'>Logout</button>
 	</form>
+	
+	</div>
+
 
 </body>
 </html>

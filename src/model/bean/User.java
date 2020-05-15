@@ -1,6 +1,6 @@
 package model.bean;
 
-public class Customer {
+public class User {
 
 	@Override
 	public String toString() {

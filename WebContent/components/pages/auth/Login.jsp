@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet"
@@ -37,7 +38,7 @@
 			<div class="z-depth-1 grey lighten-4 row"
 				style="display: inline-block; padding: 0px 48px 0px 48px; border: 1px solid #EEE;">
 
-				<form class="col s12" method="post" action="${pageContext.request.contextPath}/admin/login">
+				<form class="col s12" method="post" action="${pageContext.request.contextPath}/login">
 					<div class='row'>
 						<div class='col s12'></div>
 					</div>

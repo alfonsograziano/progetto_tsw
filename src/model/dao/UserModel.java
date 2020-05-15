@@ -3,13 +3,14 @@ package model.dao;
 import java.sql.SQLException;
 import java.util.Collection;
 
-import model.bean.Customer;
+import model.bean.User;
 
-public interface CustomerModel {
-	public Collection<Customer> get() throws SQLException;
-	public Customer getById(int id) throws SQLException;
+public interface UserModel {
+	public int checkPsw(String email, String password)  throws SQLException; 
+	public Collection<User> get() throws SQLException;
+	public User getById(int id) throws SQLException;
 	
-	public void add(Customer customer)  throws SQLException;
-	public void update(Customer customer)  throws SQLException;
+	public void add(User user)  throws SQLException;
+	public void update(User user)  throws SQLException;
 	public boolean delete(int id)  throws SQLException;
 }

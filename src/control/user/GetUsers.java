@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.CustomerModelDs;
+import model.dao.UserModelDS;
 import model.dao.ProductModelDS;
 
 /**
@@ -16,10 +16,10 @@ import model.dao.ProductModelDS;
 @WebServlet("/users")
 public class GetUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CustomerModelDs model;
+	private UserModelDS model;
     public GetUsers() {
         super();
-		model = new CustomerModelDs();
+		model = new UserModelDS();
     }
 
 

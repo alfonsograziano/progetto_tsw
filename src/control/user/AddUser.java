@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.Customer;
-import model.dao.CustomerModelDs;
+import model.bean.User;
+import model.dao.UserModelDS;
 
 /**
  * Servlet implementation class AddUser
@@ -19,11 +19,11 @@ import model.dao.CustomerModelDs;
 @WebServlet("/user/add")
 public class AddUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CustomerModelDs model;
+	private UserModelDS model;
 	
     public AddUser() {
         super();
-		model = new CustomerModelDs();
+		model = new UserModelDS();
     }
 
 
@@ -37,18 +37,15 @@ public class AddUser extends HttpServlet {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String password = request.getParameter("password");
+		
 		System.out.println("Provo a creare: " + email);
 		
-		Customer customer = new Customer();
+		User customer = new User();
 		customer.setName(name);
 		customer.setSurname(surname);
 		customer.setEmail(email);
 		customer.setPhone(phone);
 		customer.setPassword(password);
-		
-	    //Facciamo finta di non conoscere json per ora...
-		//JSONObject obj = new JSONObject();
-		//response.setContentType("application/json;charset=UTF-8");
 
 		try {
 			System.out.println(customer);

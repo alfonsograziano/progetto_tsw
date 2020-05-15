@@ -5,10 +5,17 @@ import java.util.ArrayList;
 public class Product {
 	private int id;
 	private String name;
-	private String brand; 
 	private double price;
 	private String description;
+	private boolean visible;
 	
+	public boolean getVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
 	private ArrayList<String> pictures;
 	private ArrayList<String> categories;
 	
@@ -30,12 +37,7 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBrand() {
-		return brand;
-	}
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
+	
 	public double getPrice() {
 		return price;
 	}

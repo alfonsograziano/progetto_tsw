@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -13,7 +14,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.bean.Product;
-
 
 public class ProductModelDS implements ProductModel{
 
@@ -33,25 +33,22 @@ public class ProductModelDS implements ProductModel{
 
 	private static final String TABLE_NAME = "product";
 	
-	public void doSave(Product product) throws SQLException {
+	public void add(Product product) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ProductModelDS.TABLE_NAME
-				+ " (name, brand, description, id, price) VALUES (?, ?, ?, ?, ?, ?)";
+				+ " (name, description, price) VALUES (?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, product.getName());
-			preparedStatement.setString(2, product.getBrand());
-			preparedStatement.setString(3, product.getDescription());
-			preparedStatement.setInt(4, product.getId());
-			preparedStatement.setDouble(5, product.getPrice());
+			preparedStatement.setString(2, product.getDescription());
+			preparedStatement.setDouble(3, product.getPrice());
 
 			preparedStatement.executeUpdate();
-			connection.commit();
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -63,7 +60,7 @@ public class ProductModelDS implements ProductModel{
 		}
 	}
 	
-	public Product doRetrieveByKey(int id) throws SQLException {
+	public Product getById(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -83,7 +80,6 @@ public class ProductModelDS implements ProductModel{
 				bean.setName(rs.getString("name"));
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
-				bean.setBrand(rs.getString("brand"));
 
 			}
 
@@ -126,17 +122,13 @@ public class ProductModelDS implements ProductModel{
 		return (result != 0);
 	}
 	
-	public Collection<Product> doRetrieveAll(String order) throws SQLException {
+	public ArrayList<Product> get() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		Collection<Product> products = new LinkedList<Product>();
+		ArrayList<Product>  products = new ArrayList<Product>();
 
 		String selectSQL = "SELECT * FROM " + ProductModelDS.TABLE_NAME;
-
-		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
-		}
 
 		try {
 			connection = ds.getConnection();
@@ -151,7 +143,7 @@ public class ProductModelDS implements ProductModel{
 				bean.setName(rs.getString("name"));
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
-				bean.setBrand(rs.getString("brand"));
+				bean.setVisible(rs.getBoolean("visible"));
 
 				products.add(bean);
 			}
@@ -166,5 +158,33 @@ public class ProductModelDS implements ProductModel{
 			}
 		}
 		return products;
+	}
+
+
+	@Override
+	public ArrayList<Product> getByCategory(String categoryId) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public boolean delete(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setCatalogueVisibility(int id, boolean visibility) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void update(Product product) throws SQLException {
+		// TODO Auto-generated method stub
+		
 	}
 }

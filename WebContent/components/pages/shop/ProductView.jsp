@@ -85,7 +85,6 @@
 			<td><%=product.getName()%></td>
 			<td><%=product.getDescription()%></td>
 			<td><%=product.getPrice()%></td>
-			<td><%=product.getBrand()%></td>
 			
 		</tr>
 	</table>
