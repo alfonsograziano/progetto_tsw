@@ -55,7 +55,7 @@
 									  </a>
 									  <a>
 									  	<i class="material-icons tiny" style="color:#455a64;">delete</i>
-									  <a>	
+									  </a>	
 									  
 							</div>
 						</td>
