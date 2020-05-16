@@ -130,9 +130,10 @@ DROP TABLE IF EXISTS `image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `image` (
-  `path` varchar(100) NOT NULL,
+  `id` int NOT NULL auto_increment,
+  `img` BLOB NOT NULLlectures,
   `product_id` int NOT NULL,
-  PRIMARY KEY (`path`),
+  PRIMARY KEY (`id`),
   KEY `product_id4_idx` (`product_id`),
   CONSTRAINT `product_id4` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

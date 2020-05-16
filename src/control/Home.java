@@ -15,7 +15,7 @@ import model.dao.ProductModelDS;
 /**
  * Servlet implementation class Home
  */
-@WebServlet("/home")
+@WebServlet("/")
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

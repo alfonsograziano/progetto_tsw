@@ -24,8 +24,6 @@
 		console.log("Index:<%=i%>")
 		</script>
 		<jsp:include page="../../shared/ProductCard.jsp">
-			<jsp:param name="image" value="${pageContext.request.contextPath}/assets/img/products/mouse.jpg" />
-		
 			<jsp:param name="title" value="<%=products.get(i).getName()%>" />
 			<jsp:param name="price" value="<%=products.get(i).getPrice()%>" />
 		</jsp:include>
