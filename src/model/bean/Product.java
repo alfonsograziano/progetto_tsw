@@ -8,6 +8,7 @@ public class Product {
 	private double price;
 	private String description;
 	private boolean visible;
+
 	
 	public boolean getVisible() {
 		return visible;
