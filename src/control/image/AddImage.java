@@ -3,6 +3,7 @@ package control.image;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import model.dao.ImageModelDS;
 import model.dao.ProductModelDS;
 
 
@@ -20,12 +22,12 @@ import model.dao.ProductModelDS;
 maxFileSize=1024*1024*10,      // 10MB
 maxRequestSize=1024*1024*50)   // 50MB
 
-public class Uploader extends HttpServlet {
+public class AddImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private  final String SAVE_DIR="images";
   
   
-    public Uploader() {
+    public AddImage() {
         super();
 
     }
@@ -53,7 +55,7 @@ public class Uploader extends HttpServlet {
 				try {
 					ImageModelDS.updatePhoto(id,savePath+File.separator+fileName);
 				}
-				catch(SLQException e) {			
+				catch(SQLException e) {			
 		}
 	
 			}

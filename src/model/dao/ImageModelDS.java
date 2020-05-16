@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import it.unisa.DBConnectionPool;
+
 import model.bean.Image;
 import model.bean.Product;
 
@@ -46,7 +46,7 @@ public class ImageModelDS extends HttpServlet {
 		}
 	}
 
-	public synchronized static byte[] load(int id) {
+	public synchronized static byte[] load(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String sql = "SELECT img FROM "+ImageModelDS.TABLE_NAME+" WHERE id = ?";
@@ -79,7 +79,8 @@ public class ImageModelDS extends HttpServlet {
 		return bt;
 	}
 
-	public synchronized static void updatePhoto(int prodotto, String img) throws SQLException {
+	public synchronized static void updatePhoto(String prodotto, String img) throws SQLException {
+		int id = Integer.parseInt(prodotto);
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		 String sql="UPDATE"+ ImageModelDS.TABLE_NAME+ "SET img = ? WHERE id = ?";
@@ -89,13 +90,13 @@ public class ImageModelDS extends HttpServlet {
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
 			preparedStatement.setString(1, img);
-			preparedStatement.setInt(2, prodotto);
+			preparedStatement.setInt(2, id);
 
 			File file = new File(img);
 			try {
 				FileInputStream fis = new FileInputStream(file);
 				preparedStatement.setBinaryStream(1, fis, fis.available());
-				preparedStatement.setInt(2, prodotto);
+				preparedStatement.setInt(2, id);
 				preparedStatement.executeUpdate();
 				connection.commit();
 			} catch (FileNotFoundException e) {
