@@ -3,19 +3,18 @@ package model.bean;
 import java.util.ArrayList;
 
 public class Product {
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
+				+ ", visible=" + visible + ", pictures=" + pictures + ", categories=" + categories + "]";
+	}
 	private int id;
 	private String name;
 	private double price;
 	private String description;
 	private boolean visible;
 	
-	public boolean getVisible() {
-		return visible;
-	}
 
-	public void setVisible(boolean visible) {
-		this.visible = visible;
-	}
 	private ArrayList<String> pictures;
 	private ArrayList<String> categories;
 	
@@ -24,6 +23,15 @@ public class Product {
 		categories = new ArrayList<>();
 
 	}
+	
+	public boolean getVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
 	
 	public int getId() {
 		return id;

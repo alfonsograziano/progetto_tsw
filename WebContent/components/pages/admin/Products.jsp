@@ -32,7 +32,6 @@
 					<th>ID</th>
 					<th>Name</th>
 					<th>Price</th>
-					<th>Quantity</th>
 					<th>Visiblity</th>
 					<th>Actions</th>
 				<tr>
@@ -45,17 +44,13 @@
 						<td><%=products.get(i).getId()%></td>
 						<td><%=products.get(i).getName()%></td>
 						<td><%=products.get(i).getPrice()%></td>
-						<td><%="Non è mai abbastanza"%></td>			
 						<td><%=products.get(i).getVisible()%></td>
 						<td>
 							<div style="display:inline-block;">
 								
-									  <a href="${pageContext.request.contextPath}/admin/dashboard/products/edit/${products.get(i).getId()}">
+									  <a href="${pageContext.request.contextPath}/admin/dashboard/products/update?id=<%=products.get(i).getId()%>">
 									  	<i class="material-icons tiny" style="color:#455a64; margin-right:20px;">edit</i>
 									  </a>
-									  <a>
-									  	<i class="material-icons tiny" style="color:#455a64;">delete</i>
-									  </a>	
 									  
 							</div>
 						</td>

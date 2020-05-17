@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 					request.getSession().setAttribute("isAdmin", new Boolean(true));
 				}
 				
-				response.sendRedirect(request.getContextPath() + "/");
+				response.sendRedirect(request.getContextPath() + "/home");
 
 			}else {
 				response.getWriter().append("Dati d'accesso errati...");

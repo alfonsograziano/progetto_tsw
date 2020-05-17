@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<footer class="page-footer">
+<footer class="page-footer blue-grey darken-3">
   <div class="container">
     <div class="row">
       <div class="col l6 s12">
@@ -10,18 +10,18 @@
       <div class="col l4 offset-l2 s12">
         <h5 class="white-text">Links</h5>
         <ul>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Privacy Policy</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Cookie Policy</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Login</a></li>
         </ul>
+        <img src="${pageContext.request.contextPath}/assets/img/safe-paypal.png" style="width:200px; "/>
       </div>
     </div>
   </div>
-  <div class="footer-copyright">
+  <div class="footer-copyright blue-grey darken-4">
     <div class="container">
-    © 2014 Copyright Text
-    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+    © 2020 BetterHome
+    <a class="grey-text text-lighten-4 right" href="https://github.com/lokk3d/progetto_tsw" target="_blank">Github</a>
     </div>
   </div>
 </footer>

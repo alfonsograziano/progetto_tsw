@@ -2,6 +2,11 @@ package model.bean;
 
 public class Category {
 	
+	@Override
+	public String toString() {
+		return "Category [name=" + name + ", id=" + id + "]";
+	}
+
 	private String name; 
 	private String id;
 	

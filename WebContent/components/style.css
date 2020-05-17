@@ -1,0 +1,37 @@
+.header-section {
+	margin-top: 50px;
+}
+
+.main-product-image {
+	padding: 10px;
+	border: 1px solid black;
+	width: 100%;
+	max-width: 300px;
+}
+
+.product-image-thumbnail {
+	border: 1px solid black;
+	width: 70px;
+	margin-right: 20px;
+	padding: 5px;
+}
+
+.wrap-row {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.center{
+	align-items: center;
+}
+
+.category-item-product-page{
+	margin-right: 20px;
+}
+
+.buy-button{
+	font-size:20px;
+	padding-left:30px;
+	padding-right:30px;
+	margin-left:20px;
+}
