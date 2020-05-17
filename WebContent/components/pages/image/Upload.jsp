@@ -8,7 +8,9 @@
 </head>
 <body>
 <form method="post" action="${ pageContext.request.contextPath}/Uploader" enctype='multipart/form-data'>
-<input type="file" name="file" value="select images..."/>
+<input class="file" type="file" name="file" value="select images..."/>
+prodotto id: <input type = "text" name = "product_id">
+         <br />
 <input type="submit" value="start upload"/>
 </form>
 </body>

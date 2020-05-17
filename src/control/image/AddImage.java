@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
 import model.dao.ImageModelDS;
 import model.dao.ProductModelDS;
 
@@ -35,46 +34,43 @@ public class AddImage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String appPath= request.getServletContext().getRealPath("");
 		String id=request.getParameter("product_id");
-		String savePath= appPath+SAVE_DIR;
-		File fileSaveDir=new File(savePath);
-		if(!fileSaveDir.exists()) {
+		System.out.println("id preso da addImage:"+id);
+	    String savePath = appPath + File.separator + SAVE_DIR;
+	         
+		File fileSaveDir = new File(savePath);
+		if (!fileSaveDir.exists()) {
 			fileSaveDir.mkdir();
 		}
-		for(Part part : request.getParts()) {
-			String fileName= extractFileName(part);
-			if((File.separator).equals("/")) {
-				int index=fileName.lastIndexOf("/");
-				fileName=fileName.substring(index-1);
-			}else if ((File.separator).equals("\\")) {
-				int index=fileName.lastIndexOf("\\");
-				fileName=fileName.substring(index+1);
-			}
-			if (fileName!=null && !fileName.equals("")) {
-				part.write(savePath+File.separator+fileName);
-				
+
+		for (Part part : request.getParts()) {
+			String fileName = extractFileName(part);
+			System.out.println("ciao1");
+			System.out.println("nome file: "+ fileName);
+
+
+			
+			if (fileName != null && !fileName.equals("")) {
+				part.write(savePath + File.separator + fileName);
+				System.out.println("ciao2");
+
 				try {
 					ImageModelDS.updatePhoto(id,savePath+File.separator+fileName);
+					System.out.println("ciao3");
+				} catch (SQLException sqlException) {
+					System.out.println(sqlException);
 				}
-				catch(SQLException e) {			
-		}
-	
 			}
-			}}
-	
+		}
+	}
+
 	 private String extractFileName(Part part) {
 	        String contentDisp = part.getHeader("content-disposition");
 	        String[] items = contentDisp.split(";");
 	        for (String s : items) {
 	            if (s.trim().startsWith("filename")) {
-	                return s.substring(s.indexOf("=") + 2, s.length()-1);
+	                return (s.substring(s.indexOf("=") + 2, s.length()-1));
 	            }
 	        }
 	        return "";
 	    }		
-	
-	
-	
-	
-	
-
 }

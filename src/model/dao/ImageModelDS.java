@@ -56,9 +56,8 @@ public class ImageModelDS extends HttpServlet {
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
-			ResultSet rs = preparedStatement.executeQuery();
 			preparedStatement.setInt(1, id);
-
+			ResultSet rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
 				bt = rs.getBytes("img");
@@ -80,7 +79,7 @@ public class ImageModelDS extends HttpServlet {
 	}
 
 	public synchronized static void updatePhoto(String prodotto, String img) throws SQLException {
-		int id = Integer.parseInt(prodotto);
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		 String sql="UPDATE"+ ImageModelDS.TABLE_NAME+ "SET img = ? WHERE id = ?";
@@ -88,15 +87,12 @@ public class ImageModelDS extends HttpServlet {
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
-			ResultSet rs = preparedStatement.executeQuery();
-			preparedStatement.setString(1, img);
-			preparedStatement.setInt(2, id);
-
+			
 			File file = new File(img);
 			try {
 				FileInputStream fis = new FileInputStream(file);
 				preparedStatement.setBinaryStream(1, fis, fis.available());
-				preparedStatement.setInt(2, id);
+				preparedStatement.setInt(2,Integer.parseInt(prodotto));
 				preparedStatement.executeUpdate();
 				connection.commit();
 			} catch (FileNotFoundException e) {

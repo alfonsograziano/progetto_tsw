@@ -131,7 +131,7 @@ DROP TABLE IF EXISTS `image`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `image` (
   `id` int NOT NULL auto_increment,
-  `img` BLOB NOT NULLlectures,
+  `img` BLOB NOT NULL,
   `product_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `product_id4_idx` (`product_id`),
