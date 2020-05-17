@@ -9,7 +9,7 @@
 </head>
 <body>
 	<%@page import="java.util.ArrayList"%>
-	<%@page import="model.bean.Category"%>
+	<%@page import="model.bean.Shipping"%>
 
 	<%
 		Boolean admin = (Boolean) session.getAttribute("isAdmin");
@@ -18,7 +18,7 @@
 		}
 	%>
 	<%
-		ArrayList<Category> products = (ArrayList<Category>) request.getAttribute("categories");
+		ArrayList<Shipping> shipping_types = (ArrayList<Shipping>) request.getAttribute("shipping_types");
 	%>
 
 	<jsp:include page="VNav.jsp" />
@@ -27,29 +27,34 @@
 	<div
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 		<div style="width: 90%; max-width: 600px;">
-			<h1>Categorie</h1>
+			<h1>Tipi di Spedizione</h1>
 			<table>
 				<thead>
 					<tr>
-						<th>Slug</th>
+						<th>ID</th>
 						<th>Name</th>
+						<th>Days</th>
+						<th>Price</th>
 						<th>Actions</th>
 					<tr>
 				</thead>
 				<tbody>
 					<%
-						for (int i = 0; i < products.size(); i++) {
+						for (int i = 0; i < shipping_types.size(); i++) {
 					%>
 					<tr>
-						<td><%=products.get(i).getId()%></td>
-						<td><%=products.get(i).getName()%></td>
+						<td><%=shipping_types.get(i).getId()%></td>
+						<td><%=shipping_types.get(i).getName()%></td>
+						<td><%=shipping_types.get(i).getDays()%></td>
+						<td><%=shipping_types.get(i).getPrice()%></td>
+						
 						<td>
 							<div style="display: inline-block;">
 
 								<form method="post"
-									action="${pageContext.request.contextPath}/category/delete">
+									action="${pageContext.request.contextPath}/shipping/delete">
 									<input type="hidden" name="id"
-										value="${categories.get(i).getId()}">
+										value="${shipping_types.get(i).getId()}">
 									<button type='submit'>
 										<i class="material-icons tiny" style="color: #455a64;">delete</i>
 									</button>
@@ -67,11 +72,11 @@
 			</table>
 
 			<a style="margin-top: 30px;"
-				href="${pageContext.request.contextPath}/category/add"
+				href="${pageContext.request.contextPath}/shipping/add"
 				class="waves-effect waves-light btn"><i
 				class="material-icons right">add</i>Aggiungi prodotto</a> <a
 				style="margin-top: 30px;"
-				href="${pageContext.request.contextPath}/category/update"
+				href="${pageContext.request.contextPath}/shipping/update"
 				class="waves-effect waves-light btn"><i
 				class="material-icons right">edit</i>Modifica prodotto</a>
 

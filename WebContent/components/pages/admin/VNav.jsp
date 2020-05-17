@@ -4,7 +4,7 @@
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/admin/dashboard" ><i class="material-icons" style="color:white; padding:10px;">home</i></a></li>
 		<li><a href="${pageContext.request.contextPath}/admin/dashboard/products" ><i class="material-icons" style="color:white; padding:10px;">shopping_cart</i></a></li>
-		<li><a href="#" ><i class="material-icons" style="color:white; padding:10px;">local_shipping</i></a></li>
-		
+		<li><a href="${pageContext.request.contextPath}/admin/dashboard/categories" ><i class="material-icons" style="color:white; padding:10px;">attach_file</i></a></li>
+		<li><a href="${pageContext.request.contextPath}/admin/dashboard/shipping_type" ><i class="material-icons" style="color:white; padding:10px;">local_shipping</i></a></li>
 	</ul>
 </div>
