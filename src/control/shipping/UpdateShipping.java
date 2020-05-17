@@ -1,4 +1,4 @@
-package controlo.shipping;
+package control.shipping;
 
 import java.io.IOException;
 import java.sql.SQLException;
