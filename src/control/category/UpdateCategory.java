@@ -45,7 +45,7 @@ public class UpdateCategory extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AddCategory.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/UpdateCategory.jsp");
 		dispatcher.forward(request, response);
 	}
 
