@@ -105,8 +105,24 @@ public class BelongsModelDS implements BelongsModel{
 
 	@Override
 	public boolean delete(String product, int category) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		String deleteSQL = "DELETE from "+TABLE_NAME+" WHERE category = ? AND product= ?";
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(deleteSQL);
+			preparedStatement.setString(1, product);
+			preparedStatement.setInt(2, category);
+
+			preparedStatement.executeUpdate();
+			if (preparedStatement != null)
+				preparedStatement.close();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Error:" + e.getMessage());
+			return false;
+		}
 	}
 
 
@@ -127,8 +143,6 @@ public class BelongsModelDS implements BelongsModel{
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, product);
 
-			System.out.println(selectSQL);
-			
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
@@ -159,8 +173,44 @@ public class BelongsModelDS implements BelongsModel{
 
 	@Override
 	public ArrayList<Product> getByCategory(String category) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ArrayList<Product> products = new ArrayList<Product>();
+
+		String selectSQL = "SELECT * FROM " + BelongsModelDS.TABLE_NAME + 
+				" JOIN product on belongs.product=product.id"+
+				" WHERE category = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, category);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Product bean = new Product();
+				
+				bean.setId(rs.getInt("id"));
+				bean.setName(rs.getString("name"));
+				bean.setDescription(rs.getString("description"));
+				bean.setPrice(rs.getDouble("price"));
+				products.add(bean);
+			}
+			
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return products;
+
 	}
 	
 	

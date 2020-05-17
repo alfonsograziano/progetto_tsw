@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.BelongsModelDS;
 import model.dao.ProductModelDS;
 
 /**
@@ -29,8 +30,11 @@ public class Home extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductModelDS productModel = new ProductModelDS();
+		BelongsModelDS belongsModel = new BelongsModelDS();
+		
 		try {
-			request.setAttribute("products", productModel.get());
+			request.setAttribute("products", belongsModel.getByCategory("main"));
+			//request.setAttribute("products", productModel.get());
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/Home.jsp"); 
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {

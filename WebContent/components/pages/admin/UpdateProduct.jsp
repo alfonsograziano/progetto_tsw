@@ -73,7 +73,10 @@
 		<div class="section"></div>
 
 		<h4>Modifica prodotto</h4>
-		<div class="col s12" style="width: 100%; max-width: 500px;">
+		<form class="col s12" style="width: 100%; max-width: 500px;" method="post"
+		action="${pageContext.request.contextPath}/admin/dashboard/products/update2">
+		<input id="id" name="id" type="hidden" value="${product.id}">
+		
 			<div class='input-field col s12'>
 				<input class='validate' type='text' name='name' id='name'
 					value="${product.name}" /> <label for='email'>Nome del
@@ -120,7 +123,7 @@
 
 			<button onClick="updateProduct()" name='btn_login'
 				class='col s12 btn btn-large waves-effect indigo'>Aggiorna</button>
-		</div>
+		</form>
 	</div>
 
 

@@ -184,7 +184,35 @@ public class ProductModelDS implements ProductModel{
 
 	@Override
 	public void update(Product product) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String updateSQL;
+		
+		updateSQL = "UPDATE product SET name = ?, description = ?, price = ? WHERE id = ?";
+		
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(updateSQL);
+			preparedStatement.setString(1, product.getName());
+			preparedStatement.setString(2, product.getDescription());
+			preparedStatement.setDouble(3, product.getPrice());
+			preparedStatement.setInt(4, product.getId());
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Error:" + e.getMessage());
+		}
+
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Error:" + e.getMessage());
+			}
+
+		}
+
 		
 	}
 }
