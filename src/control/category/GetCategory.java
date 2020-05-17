@@ -17,13 +17,13 @@ import model.dao.CategoryModelDS;
  * Servlet implementation class Category
  */
 @WebServlet("/admin/dashboard/categories")
-public class Category extends HttpServlet {
+public class GetCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Category() {
+    public GetCategory() {
         super();
         // TODO Auto-generated constructor stub
     }
