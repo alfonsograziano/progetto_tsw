@@ -9,4 +9,5 @@ public interface ImageModel {
 	
 	public void updatePhoto(String prodotto, String img) throws SQLException;
 	public byte[] load(int idImmagine) throws SQLException;
+	public void deletePhoto(int idImmagine) throws SQLException;
 }

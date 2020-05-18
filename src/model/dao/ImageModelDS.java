@@ -110,7 +110,34 @@ public class ImageModelDS implements ImageModel {
 			}
 		}
 		}
-	}	
+	
+	public void deletePhoto(int idImmagine) throws SQLException {
+		System.out.println("id che mi hanno passato: "+ idImmagine);
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		 String sql="DELETE FROM "+ ImageModelDS.TABLE_NAME+ " WhERE id= ?";
+		 try {
+				connection = ds.getConnection();
+				preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1,idImmagine);
+					preparedStatement.executeUpdate();
+			} 
+				catch (SQLException sqlException) {
+					System.out.println(sqlException);
+				} 
+		 finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+		 
+		 }
+		 }
+
+	}
 
 
 	
