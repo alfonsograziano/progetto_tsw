@@ -27,14 +27,13 @@ import model.bean.Product;
  * Servlet implementation class ImageModelDS
  */
 @WebServlet("/ImageModelDS")
-public class ImageModelDS extends HttpServlet {
+public class ImageModelDS implements ImageModel {
 	private static DataSource ds;
 	private static final String TABLE_NAME = "image";
 
 
-	
-	public ImageModelDS(){
-		
+
+	public ImageModelDS() {
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -78,11 +77,11 @@ public class ImageModelDS extends HttpServlet {
 		return bt;
 	}
 
-	public synchronized static void updatePhoto(String prodotto, String img) throws SQLException {
+	public synchronized void updatePhoto(String prodotto, String img) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		 String sql="UPDATE"+ ImageModelDS.TABLE_NAME+ "SET img = ? WHERE id = ?";
+		 String sql="UPDATE "+ ImageModelDS.TABLE_NAME+ " SET img = ? WHERE id = ?";
 
 		try {
 			connection = ds.getConnection();
@@ -94,7 +93,7 @@ public class ImageModelDS extends HttpServlet {
 				preparedStatement.setBinaryStream(1, fis, fis.available());
 				preparedStatement.setInt(2,Integer.parseInt(prodotto));
 				preparedStatement.executeUpdate();
-				connection.commit();
+			
 			} catch (FileNotFoundException e) {
 				System.out.println(e);
 			} catch (IOException e) {
@@ -111,6 +110,7 @@ public class ImageModelDS extends HttpServlet {
 		}
 		}
 	}	
+
 
 	
 	

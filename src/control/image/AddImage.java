@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import model.dao.CategoryModelDS;
 import model.dao.ImageModelDS;
 import model.dao.ProductModelDS;
 
@@ -46,15 +48,17 @@ public class AddImage extends HttpServlet {
 			String fileName = extractFileName(part);
 			System.out.println("ciao1");
 			System.out.println("nome file: "+ fileName);
-
+			//System.out.println("proviamo: "+ part.getName());
 
 			
 			if (fileName != null && !fileName.equals("")) {
 				part.write(savePath + File.separator + fileName);
 				System.out.println("ciao2");
-
+				
 				try {
-					ImageModelDS.updatePhoto(id,savePath+File.separator+fileName);
+					ImageModelDS imageModel = new ImageModelDS();
+
+					imageModel.updatePhoto(id,savePath+File.separator+fileName);
 					System.out.println("ciao3");
 				} catch (SQLException sqlException) {
 					System.out.println(sqlException);
