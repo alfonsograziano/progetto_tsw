@@ -49,7 +49,7 @@
 								<form method="post"
 									action="${pageContext.request.contextPath}/category/delete">
 									<input type="hidden" name="id"
-										value="${categories.get(i).getId()}">
+										value="<%=products.get(i).getId()%>">
 									<button type='submit'>
 										<i class="material-icons tiny" style="color: #455a64;">delete</i>
 									</button>

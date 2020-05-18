@@ -11,7 +11,9 @@
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="model.bean.ChoosenProduct"%>
 
-	<%ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart"); %>
+	<%ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart"); 
+	double total=0;
+	%>
 	
 	<jsp:include page="Header.jsp" />
 
@@ -32,6 +34,8 @@
 			<tbody>
 				<%
 					for (int i = 0; i < cart.size(); i++) {
+						total = total + (cart.get(i).getProduct().getPrice()*cart.get(i).getQuantity());
+						
 				%>
 					<tr>
 						<td><%=cart.get(i).getQuantity()%></td>
@@ -43,7 +47,7 @@
 								<form method="post"
 									action="${pageContext.request.contextPath}/cart/delete-one">
 									<input type="hidden" name="id"
-										value="${cart.get(i).getProduct().getId()}">
+										value="<%=cart.get(i).getProduct().getId()%>">
 									<button type='submit'>
 										<i class="material-icons tiny" style="color: #455a64;">exposure_neg_1</i>
 									</button>
@@ -52,7 +56,7 @@
 								<form method="post"
 									action="${pageContext.request.contextPath}/cart/delete-all">
 									<input type="hidden" name="id"
-										value="${cart.get(i).getProduct().getId()}">
+										value="<%=cart.get(i).getProduct().getId()%>">
 									<button type='submit'>
 										<i class="material-icons tiny" style="color: #455a64;">delete</i>
 									</button>
@@ -61,7 +65,7 @@
 								<form method="post"
 									action="${pageContext.request.contextPath}/cart/add-one">
 									<input type="hidden" name="id"
-										value="${cart.get(i).getProduct().getId()}">
+										value="<%=cart.get(i).getProduct().getId()%>">
 									<button type='submit'>
 										<i class="material-icons tiny" style="color: #455a64;">exposure_plus_1</i>
 									</button>
@@ -77,7 +81,8 @@
 				%>
 			</tbody>
 		</table>
-		
+		<h3>Totale</h3>
+		<p><%=total%></p>
 		<a style="margin-top:30px;"
 			href="${pageContext.request.contextPath}/cart/confirm" 
 			class="waves-effect waves-light btn"><i class="material-icons right">check</i>Procedi all'acquisto</a>

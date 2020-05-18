@@ -38,7 +38,7 @@ public class Cart extends HttpServlet {
 			cart = new ArrayList<ChoosenProduct>();
 		}
 		request.getSession().setAttribute("cart", cart);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/cart.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/Cart.jsp");
 			dispatcher.forward(request, response);
 	}
 

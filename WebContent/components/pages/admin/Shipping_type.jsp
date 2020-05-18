@@ -54,7 +54,7 @@
 								<form method="post"
 									action="${pageContext.request.contextPath}/shipping/delete">
 									<input type="hidden" name="id"
-										value="${shipping_types.get(i).getId()}">
+										value="<%=shipping_types.get(i).getId()%>">
 									<button type='submit'>
 										<i class="material-icons tiny" style="color: #455a64;">delete</i>
 									</button>
