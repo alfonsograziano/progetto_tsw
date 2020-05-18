@@ -3,7 +3,7 @@
 
   <nav class="blue-grey darken-3">
     <div class="nav-wrapper" style="margin-left:20px; margin-right:20px;">
-      <a href="#" class="brand-logo" style="display:flex; align-items:center; justify-content:center;">
+      <a href="${pageContext.request.contextPath}/home" class="brand-logo" style="display:flex; align-items:center; justify-content:center;">
       		<img src="${pageContext.request.contextPath}/assets/img/logo.png" style="width:50px; margin-right:10px;"/>
       		Better <b>Home</b>
       </a>

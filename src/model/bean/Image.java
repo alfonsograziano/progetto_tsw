@@ -1,6 +1,10 @@
 package model.bean;
 
 public class Image {
+	@Override
+	public String toString() {
+		return "Image [product_id=" + product_id + ", id=" + id + "]";
+	}
 	private int product_id;
 	private int id;
 	
