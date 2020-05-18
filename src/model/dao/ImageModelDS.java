@@ -81,7 +81,9 @@ public class ImageModelDS implements ImageModel {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		 String sql="UPDATE "+ ImageModelDS.TABLE_NAME+ " SET img = ? WHERE id = ?";
+		 //String sql="UPDATE "+ ImageModelDS.TABLE_NAME+ " SET img = ? WHERE id = ?";
+		 String sql="INSERT INTO "+ ImageModelDS.TABLE_NAME+ "(img, product_id) VALUES (?, ?)";
+
 
 		try {
 			connection = ds.getConnection();
