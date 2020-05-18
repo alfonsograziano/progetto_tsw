@@ -8,5 +8,5 @@ import model.bean.Category;
 public interface ImageModel {
 	
 	public void updatePhoto(String prodotto, String img) throws SQLException;
-	//public boolean delete(int id)  throws SQLException;
+	public byte[] load(int idImmagine) throws SQLException;
 }

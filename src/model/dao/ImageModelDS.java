@@ -45,7 +45,8 @@ public class ImageModelDS implements ImageModel {
 		}
 	}
 
-	public synchronized static byte[] load(int id) throws SQLException {
+	public synchronized  byte[] load(int idImmagine) throws SQLException {
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String sql = "SELECT img FROM "+ImageModelDS.TABLE_NAME+" WHERE id = ?";
@@ -55,7 +56,7 @@ public class ImageModelDS implements ImageModel {
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, id);
+			preparedStatement.setInt(1, idImmagine);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
@@ -81,7 +82,7 @@ public class ImageModelDS implements ImageModel {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		 String sql="UPDATE "+ ImageModelDS.TABLE_NAME+ " SET img = ? WHERE id = ?";
+		 String sql="INSERT INTO "+ ImageModelDS.TABLE_NAME+ "(img,product_id) VALUES (?,?)";
 
 		try {
 			connection = ds.getConnection();

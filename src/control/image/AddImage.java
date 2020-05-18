@@ -38,6 +38,7 @@ public class AddImage extends HttpServlet {
 		String id=request.getParameter("product_id");
 		System.out.println("id preso da addImage:"+id);
 	    String savePath = appPath + File.separator + SAVE_DIR;
+	    //System.out.println("path: "+savePath);
 	         
 		File fileSaveDir = new File(savePath);
 		if (!fileSaveDir.exists()) {
@@ -46,20 +47,17 @@ public class AddImage extends HttpServlet {
 
 		for (Part part : request.getParts()) {
 			String fileName = extractFileName(part);
-			System.out.println("ciao1");
-			System.out.println("nome file: "+ fileName);
-			//System.out.println("proviamo: "+ part.getName());
-
+			
+			//System.out.println("nome file: "+ fileName);
 			
 			if (fileName != null && !fileName.equals("")) {
 				part.write(savePath + File.separator + fileName);
-				System.out.println("ciao2");
+			
 				
 				try {
 					ImageModelDS imageModel = new ImageModelDS();
 
 					imageModel.updatePhoto(id,savePath+File.separator+fileName);
-					System.out.println("ciao3");
 				} catch (SQLException sqlException) {
 					System.out.println(sqlException);
 				}
