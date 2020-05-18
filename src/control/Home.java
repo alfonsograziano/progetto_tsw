@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.BelongsModelDS;
+import model.dao.CategoryModelDS;
 import model.dao.ProductModelDS;
 
 /**
@@ -31,11 +32,15 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductModelDS productModel = new ProductModelDS();
 		BelongsModelDS belongsModel = new BelongsModelDS();
-		
+		CategoryModelDS categoryModel = new CategoryModelDS();
+
 		try {
 			request.setAttribute("products", belongsModel.getByCategory("main"));
+			request.setAttribute("categories", categoryModel.get());
+
 			//request.setAttribute("products", productModel.get());
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/Home.jsp"); 
+			
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			response.getWriter().append("Errore: \n"+e);

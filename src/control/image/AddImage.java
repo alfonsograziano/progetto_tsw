@@ -18,7 +18,7 @@ import model.dao.ImageModelDS;
 import model.dao.ProductModelDS;
 
 
-@WebServlet("/Uploader")
+@WebServlet("/upload")
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
 maxFileSize=1024*1024*10,      // 10MB
 maxRequestSize=1024*1024*50)   // 50MB
@@ -56,8 +56,9 @@ public class AddImage extends HttpServlet {
 				
 				try {
 					ImageModelDS imageModel = new ImageModelDS();
-
 					imageModel.updatePhoto(id,savePath+File.separator+fileName);
+					response.sendRedirect((String) request.getHeader("referer"));
+
 				} catch (SQLException sqlException) {
 					System.out.println(sqlException);
 				}

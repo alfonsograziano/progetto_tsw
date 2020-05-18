@@ -6,7 +6,7 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
-				+ ", visible=" + visible + ", pictures=" + pictures + ", categories=" + categories + "]";
+				+ ", visible=" + visible + ", pictures=" + images + ", categories=" + categories + "]";
 	}
 	private int id;
 	private String name;
@@ -15,17 +15,32 @@ public class Product {
 	private boolean visible;
 	
 
-	private ArrayList<String> pictures;
-	private ArrayList<String> categories;
+	private ArrayList<Image> images;
+	public ArrayList<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(ArrayList<Image> images) {
+		this.images = images;
+	}
+	private ArrayList<Category> categories;
 	
 	public Product() {
-		pictures = new ArrayList<>();
+		images = new ArrayList<>();
 		categories = new ArrayList<>();
 
 	}
 	
 	public boolean getVisible() {
 		return visible;
+	}
+
+	public ArrayList<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(ArrayList<Category> categories) {
+		this.categories = categories;
 	}
 
 	public void setVisible(boolean visible) {

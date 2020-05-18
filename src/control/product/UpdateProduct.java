@@ -42,17 +42,14 @@ public class UpdateProduct extends HttpServlet {
 		
 			ProductModelDS productModel = new ProductModelDS();
 			CategoryModelDS categoryModel = new CategoryModelDS();
-			BelongsModelDS belongsModel = new BelongsModelDS();
 			
 		
 			try {
 				Product product = productModel.getById(productId);
 				ArrayList<Category> categories = categoryModel.get();
-				ArrayList<Category> productCategories = belongsModel.getByProduct(productId);
 			
 				request.setAttribute("product", product);
 				request.setAttribute("categories", categories);
-				request.setAttribute("productCategories", productCategories);
 				
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/UpdateProduct.jsp");
 				dispatcher.forward(request, response);	

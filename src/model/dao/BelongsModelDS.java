@@ -188,7 +188,7 @@ public class BelongsModelDS implements BelongsModel{
 			preparedStatement.setString(1, category);
 
 			ResultSet rs = preparedStatement.executeQuery();
-
+			ImageModelDS imageModel = new ImageModelDS();
 			while (rs.next()) {
 				Product bean = new Product();
 				
@@ -196,6 +196,7 @@ public class BelongsModelDS implements BelongsModel{
 				bean.setName(rs.getString("name"));
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
+				bean.setImages(imageModel.getImagesByProduct(bean.getId()));
 				products.add(bean);
 			}
 			

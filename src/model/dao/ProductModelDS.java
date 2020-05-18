@@ -74,12 +74,16 @@ public class ProductModelDS implements ProductModel{
 			preparedStatement.setInt(1, id);
 
 			ResultSet rs = preparedStatement.executeQuery();
+			BelongsModelDS belongsModel = new BelongsModelDS();
+			ImageModelDS imageModel = new ImageModelDS();
 
-			while (rs.next()) {
+			if(rs.next()) {
 				bean.setId(rs.getInt("id"));
 				bean.setName(rs.getString("name"));
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
+				bean.setCategories(belongsModel.getByProduct(id));
+				bean.setImages(imageModel.getImagesByProduct(id));
 
 			}
 

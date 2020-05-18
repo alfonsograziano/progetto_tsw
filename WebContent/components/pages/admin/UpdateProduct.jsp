@@ -23,11 +23,12 @@
 		ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
 	%>
 	<%
-		ArrayList<Category> productCategories = (ArrayList<Category>) request.getAttribute("productCategories");
-	%>
-	<%
 		Product product = (Product) request.getAttribute("product");
 	%>
+	<%
+		ArrayList<Category> productCategories = product.getCategories();
+	%>
+
 
 	<script>
 	
@@ -42,88 +43,99 @@
 		
 		console.log(array)
 		
-		//Bisogna fare la richiesta per l'aggiornamento
-		/*
-		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "${pageContext.request.contextPath}/products", true);
-		xhttp.onreadystatechange = function() {
-			  if (this.readyState == 4 && this.status == 200) {
-			    alert("#ttappost")
-			  }
-		};
-		*/
-		
 	}
 	
 	
 	</script>
-	
+
 	<script>
 	console.log('<%=productCategories.toString()%>')
 	
 	</script>
-	
-	
+
+
 
 	<jsp:include page="VNav.jsp" />
 
 
-	<div
-		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-		<div class="section"></div>
+	<div style="width: 100%; margin-left: 150px;" class="container">
+		<div style="display: flex; flex-direction: column;">
+			<div>
 
-		<h4>Modifica prodotto</h4>
-		<form class="col s12" style="width: 100%; max-width: 500px;" method="post"
-		action="${pageContext.request.contextPath}/admin/dashboard/products/update2">
-		<input id="id" name="id" type="hidden" value="${product.id}">
-		
-			<div class='input-field col s12'>
-				<input class='validate' type='text' name='name' id='name'
-					value="${product.name}" /> <label for='email'>Nome del
-					prodotto</label>
+				<h4>Modifica prodotto</h4>
+				<form style="width: 100%; max-width: 500px;" method="post"
+					action="${pageContext.request.contextPath}/admin/dashboard/products/update2">
+					<input id="id" name="id" type="hidden" value="${product.id}">
+
+					<div class='input-field '>
+						<input class='validate' type='text' name='name' id='name'
+							value="${product.name}" /> <label for='email'>Nome del
+							prodotto</label>
+					</div>
+
+					<div class="input-field ">
+						<textarea name='description' id="description"
+							class="materialize-textarea">${product.description}</textarea>
+						<label for="textarea1">Descrizione del prodotto</label>
+					</div>
+
+					<div class='input-field '>
+						<input type="number" step="0.01" name='price' id="'price'"
+							value="${product.price}"> <label for='password'>Prezzo</label>
+					</div>
+
+					<div
+						style="display: flex; flex-direction: column; margin-top: 20px; margin-bottom: 30px;">
+						<h5>Categorie</h5>
+
+						<%
+							for (int i = 0; i < categories.size(); i++) {
+						%>
+
+						<label> <input type="checkbox"
+							id="<%=categories.get(i).getId()%>" name="categories"
+							value="<%=categories.get(i).getId()%>"
+							<%for (int j = 0; j < productCategories.size(); j++) {
+					if (categories.get(i).getId().equals(productCategories.get(j).getId())) {
+						out.print("checked=\"checked\"");
+					}
+				}%> />
+
+							<span><%=categories.get(i).getName()%></span>
+						</label>
+
+						<%
+							}
+						%>
+
+					</div>
+
+					<button onClick="updateProduct()" name='btn_login'
+						class='col s12 btn btn-large waves-effect indigo'>Aggiorna</button>
+				</form>
 			</div>
-
-			<div class="input-field col s12">
-				<textarea name='description' id="description"
-					class="materialize-textarea">${product.description}</textarea>
-				<label for="textarea1">Descrizione del prodotto</label>
-			</div>
-
-			<div class='input-field col s12'>
-				<input type="number" step="0.01" name='price' id="'price'"
-					value="${product.price}"> <label for='password'>Prezzo</label>
-			</div>
-
-			<div
-				style="display: flex; flex-direction: column; margin-top: 20px; margin-bottom: 30px;">
-				<h5>Categorie</h5>
-
+			<div style="margin: 20px;">
+				<h5>Immagini</h5>
 				<%
-					for (int i = 0; i < categories.size(); i++) {
+					for (int i = 0; i < product.getImages().size(); i++) {
 				%>
-
-				<label> <input type="checkbox"
-					id="<%=categories.get(i).getId()%>" name="categories"
-					value="<%=categories.get(i).getId()%>"
-					<%
-					for(int j = 0; j < productCategories.size(); j++){
-						if(categories.get(i).getId().equals(productCategories.get(j).getId())){
-							out.print("checked=\"checked\"");
-						}
-					}%> /> 
-					
-					<span><%=categories.get(i).getName()%></span>
-				</label>
-
+				<img style="width: 70px;"
+					src="${pageContext.request.contextPath}/getPicture?id=<%=product.getImages().get(i).getId()%>" />
 				<%
 					}
 				%>
 
+				<form method="post"
+					action="${ pageContext.request.contextPath}/upload"
+					enctype='multipart/form-data'>
+					<input class="file" type="file" name="file" value="Aggiungi immagine"  />
+					<br /> 
+					<input type="hidden" name="product_id" value="<%=product.getId()%>">
+					<input type="submit" value="Carica" class="waves-effect waves-light btn indigo" style="color:white;"/>
+				</form>
 			</div>
+		</div>
 
-			<button onClick="updateProduct()" name='btn_login'
-				class='col s12 btn btn-large waves-effect indigo'>Aggiorna</button>
-		</form>
 	</div>
 
 
