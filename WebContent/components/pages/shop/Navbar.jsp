@@ -21,7 +21,7 @@
               </div>
             </div>          
         </li>         
-        <li><a href="#"><i class="material-icons">shopping_cart</i></a></li>
+        <li><a href="${pageContext.request.contextPath}/cart"><i class="material-icons">shopping_cart</i></a></li>
         <li><a href="#"><i class="material-icons">person</i></a></li>
       </ul>
     </div>

@@ -60,7 +60,11 @@
 							<input value="1" id="quantity" type="number" class="validate"
 								style="max-width: 60px;"> <label for="quantity">Quantity</label>
 						</div>
-						<a class="waves-effect btn orange darken-4 buy-button">Acquista
+						<div class="input-field">
+							<input value="1" id="product" type="hidden" 
+								style="max-width: 60px;">
+						</div>
+						<a href="${pageContext.request.contextPath}/cart/add-to-cart" class="waves-effect btn orange darken-4 buy-button">Acquista
 							ora</a>
 
 					</div>
