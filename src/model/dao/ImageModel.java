@@ -12,4 +12,5 @@ public interface ImageModel {
 	public byte[] load(int idImmagine) throws SQLException;
 	
 	public ArrayList<Image> getImagesByProduct(int id)  throws SQLException;
+	public void deletePhoto(int idImmagine) throws SQLException;
 }
