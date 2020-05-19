@@ -116,22 +116,41 @@
 			</div>
 			<div style="margin: 20px;">
 				<h5>Immagini</h5>
-				<%
-					for (int i = 0; i < product.getImages().size(); i++) {
-				%>
-				<img style="width: 70px;"
-					src="${pageContext.request.contextPath}/getPicture?id=<%=product.getImages().get(i).getId()%>" />
-				<%
-					}
-				%>
+				<div class="wrap-row">
+					<%
+						for (int i = 0; i < product.getImages().size(); i++) {
+					%>
+					<div
+						style="padding: 10px; background-color: rgba(0, 0, 0, 0.1); margin: 10px; display:flex; flex-direction:column; justify-content:flex-end;">
+						<img
+								style="width: 70px; margin-bottom:10px;"
+								src="${pageContext.request.contextPath}/getPicture?id=<%=product.getImages().get(i).getId()%>" />
+						<form method="post"
+							action="${pageContext.request.contextPath}/DeleteImage">
+							<input id="image_id" name="image_id" type="hidden"
+								value="<%=product.getImages().get(i).getId()%>"> 
+							<input type="submit" value="Cancella"/>
+						</form>
+
+					</div>
+
+					<%
+						}
+					%>
+
+				</div>
+
 
 				<form method="post"
 					action="${ pageContext.request.contextPath}/upload"
 					enctype='multipart/form-data'>
-					<input class="file" type="file" name="file" value="Aggiungi immagine"  />
-					<br /> 
-					<input type="hidden" name="product_id" value="<%=product.getId()%>">
-					<input type="submit" value="Carica" class="waves-effect waves-light btn indigo" style="color:white;"/>
+					<input class="file" type="file" name="file"
+						value="Aggiungi immagine" /> <br /> <input type="hidden"
+						name="product_id" value="<%=product.getId()%>"> 
+						
+						<input
+						type="submit" value="carica"
+						class=" btn indigo white-color"  />
 				</form>
 			</div>
 		</div>

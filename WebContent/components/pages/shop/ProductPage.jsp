@@ -12,34 +12,47 @@
 	<%@page import="model.bean.Product"%>
 	<%
 		Product product = (Product) request.getAttribute("product");
+		ArrayList<Product> related  = (ArrayList<Product>) request.getAttribute("related_products");
+
 		ArrayList<Category> productCategories = product.getCategories();
 	%>
+	
+	<script type="text/javascript">
+		function setMainImage(id){
+			 $("#main-product-image").attr("src", "${pageContext.request.contextPath}/getPicture?id="+id);
+		}
+	</script>
+	
 
 	<jsp:include page="Header.jsp" />
 	<div class="container">
 		<div class="row header-section">
 			<div class="col s12 l5">
 				<div class="row">
+					<div style="width:100%; height:300px;" class="center">
 					<%if(product.getImages().size() >0){ %>
 					<img
 						src="${pageContext.request.contextPath}/getPicture?id=<%=product.getImages().get(0).getId()%>"
-						class="main-product-image" />
+						id="main-product-image" class="main-product-image" />
 					<%}else{ %>
 					<img
 						src="${pageContext.request.contextPath}/assets/img/image-not-found.jpg"
-						class="main-product-image" />
+						id="main-product-image" class="main-product-image" />
 					<%} %>
+					
+					</div>
 					
 				</div>
 				<div class="row">
 					<div style="display: flex; flex-wrap: wrap;">
+						<%if(product.getImages().size() >0){
+							for(int i = 0; i <product.getImages().size(); i++){%>
 						<img
-							src="${pageContext.request.contextPath}/assets/img/products/mouse.jpg"
-							class="product-image-thumbnail" /> <img
-							src="${pageContext.request.contextPath}/assets/img/products/mouse.jpg"
-							class="product-image-thumbnail" /> <img
-							src="${pageContext.request.contextPath}/assets/img/products/mouse.jpg"
+							onClick="setMainImage(<%=product.getImages().get(i).getId()%>)"
+							src="${pageContext.request.contextPath}/getPicture?id=<%=product.getImages().get(i).getId()%>"
 							class="product-image-thumbnail" />
+						<%}}%>
+						
 					</div>
 
 				</div>
@@ -79,16 +92,21 @@
 		<h3>Prodotti collegati</h3>
 		<div style="justify-content: space-around;" class="section wrap-row">
 			<%
-				for (int i = 0; i < 5; i++) {
+				int size = related.size() > 5? 5: related.size();
+				for (int i = 0; i < size; i++) {
+					
+				String image = request.getContextPath() + "/assets/img/image-not-found.jpg";
+				if (related.get(i).getImages().size() > 0) {
+					image = request.getContextPath() + "/getPicture?id=" + related.get(i).getImages().get(0).getId();
+				}
 			%>
 
 			<jsp:include page="../../shared/ProductCard.jsp">
-				<jsp:param name="image"
-					value="${pageContext.request.contextPath}/assets/img/products/mouse.jpg" />
-
-				<jsp:param name="title" value="Solito mouse" />
-				<jsp:param name="price" value="15,40" />
-			</jsp:include>
+						<jsp:param name="id" value="<%=related.get(i).getId()%>" />
+						<jsp:param name="title" value="<%=related.get(i).getName()%>" />
+						<jsp:param name="price" value="<%=related.get(i).getPrice()%>" />
+						<jsp:param name="image" value='<%=image%>' />
+					</jsp:include>
 			<%
 				}
 			%>

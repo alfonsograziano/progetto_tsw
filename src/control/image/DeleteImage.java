@@ -35,6 +35,8 @@ public class DeleteImage extends HttpServlet {
 		try {
 			ImageModelDS imageModel = new ImageModelDS();
 			imageModel.deletePhoto(idImmagine);
+			response.sendRedirect((String) request.getHeader("referer"));
+
 			}
 			catch (SQLException e) {
 				e.printStackTrace();

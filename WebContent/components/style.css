@@ -4,9 +4,9 @@
 
 .main-product-image {
 	padding: 10px;
-	border: 1px solid black;
-	width: 100%;
-	max-width: 300px;
+	border: 1px solid gray;
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .product-image-thumbnail {
@@ -43,19 +43,10 @@
 	box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-a{
+a {
 	color: #000000;
 }
 
-.fill img {
-    flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100%
-}
-
-.fill {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden
+.white-color {
+	color: #ffffff;
 }
