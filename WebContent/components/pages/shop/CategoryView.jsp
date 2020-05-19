@@ -17,7 +17,7 @@
 		ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
 	%>
 
-	<div class="container header-section">
+	<div class="container header-section" >
 		<div class="row">
 			<div class="col 4 grey lighten-5">
 				<h4>Categorie</h4>

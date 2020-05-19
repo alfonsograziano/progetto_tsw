@@ -39,7 +39,7 @@ public class ProductModelDS implements ProductModel{
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ProductModelDS.TABLE_NAME
-				+ " (name, description, price) VALUES (?, ?, ?)";
+				+ " (name, description, price, visible) VALUES (?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -47,6 +47,7 @@ public class ProductModelDS implements ProductModel{
 			preparedStatement.setString(1, product.getName());
 			preparedStatement.setString(2, product.getDescription());
 			preparedStatement.setDouble(3, product.getPrice());
+			preparedStatement.setBoolean(4, true);
 
 			preparedStatement.executeUpdate();
 		} finally {
@@ -82,6 +83,8 @@ public class ProductModelDS implements ProductModel{
 				bean.setName(rs.getString("name"));
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
+				bean.setVisible(rs.getBoolean("visible"));
+
 				bean.setCategories(belongsModel.getByProduct(id));
 				bean.setImages(imageModel.getImagesByProduct(id));
 
@@ -99,32 +102,6 @@ public class ProductModelDS implements ProductModel{
 		return bean;
 	}
 	
-	public boolean doDelete(int id) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		int result = 0;
-
-		String deleteSQL = "DELETE FROM " + ProductModelDS.TABLE_NAME + " WHERE id = ?";
-
-		try {
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, id);
-
-			result = preparedStatement.executeUpdate();
-
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
-		return (result != 0);
-	}
 	
 	public ArrayList<Product> get() throws SQLException {
 		Connection connection = null;
@@ -164,35 +141,15 @@ public class ProductModelDS implements ProductModel{
 		return products;
 	}
 
-
-	@Override
-	public ArrayList<Product> getByCategory(String categoryId) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public boolean delete(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setCatalogueVisibility(int id, boolean visibility) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	@Override
 	public void update(Product product) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String updateSQL;
 		
-		updateSQL = "UPDATE product SET name = ?, description = ?, price = ? WHERE id = ?";
+		System.out.println("Imposto visible: " + product.getVisible());
+		
+		updateSQL = "UPDATE product SET name = ?, description = ?, price = ?, visible = ? WHERE id = ?";
 		
 		try {
 			connection = ds.getConnection();
@@ -200,7 +157,9 @@ public class ProductModelDS implements ProductModel{
 			preparedStatement.setString(1, product.getName());
 			preparedStatement.setString(2, product.getDescription());
 			preparedStatement.setDouble(3, product.getPrice());
-			preparedStatement.setInt(4, product.getId());
+			preparedStatement.setBoolean(4, product.getVisible());
+			preparedStatement.setInt(5, product.getId());
+
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -218,5 +177,45 @@ public class ProductModelDS implements ProductModel{
 		}
 
 		
+	}
+
+	@Override
+	public ArrayList<Product> getVisible() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ArrayList<Product>  products = new ArrayList<Product>();
+
+		String selectSQL = "SELECT * FROM " + ProductModelDS.TABLE_NAME + " WHERE visible=true";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Product bean = new Product();
+
+				bean.setId(rs.getInt("id"));
+				bean.setName(rs.getString("name"));
+				bean.setDescription(rs.getString("description"));
+				bean.setPrice(rs.getDouble("price"));
+				bean.setVisible(rs.getBoolean("visible"));
+
+				products.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return products;
+
 	}
 }

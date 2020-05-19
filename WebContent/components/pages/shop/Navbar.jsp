@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
-  <nav class="blue-grey darken-3">
+  <nav class="blue-grey darken-3" style="position:fixed; top:0px; z-index:1000;" id="nav-main">
     <div class="nav-wrapper" style="margin-left:20px; margin-right:20px;">
       <a href="${pageContext.request.contextPath}/home" class="brand-logo" style="display:flex; align-items:center; justify-content:center;">
       		<img src="${pageContext.request.contextPath}/assets/img/logo.png" style="width:50px; margin-right:10px;"/>
@@ -26,4 +26,15 @@
       </ul>
     </div>
   </nav>
+  
+  
+  <div id="nav-margin">
+  </div>
+  
         
+  <script>
+	$(document).ready(function() {
+		$("#nav-margin").height($("#nav-main").height())
+		});
+  	
+  </script>

@@ -136,7 +136,7 @@ public class BelongsModelDS implements BelongsModel{
 
 		String selectSQL = "SELECT * FROM " + BelongsModelDS.TABLE_NAME + 
 				" JOIN category on belongs.category=category.id"+
-				" WHERE product = ?";
+				" WHERE product = ? ";
 
 		try {
 			connection = ds.getConnection();
@@ -180,7 +180,7 @@ public class BelongsModelDS implements BelongsModel{
 
 		String selectSQL = "SELECT * FROM " + BelongsModelDS.TABLE_NAME + 
 				" JOIN product on belongs.product=product.id"+
-				" WHERE category = ?";
+				" WHERE category = ? and visible=true";
 
 		try {
 			connection = ds.getConnection();

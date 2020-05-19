@@ -54,12 +54,15 @@ public class PostUpdateProduct extends HttpServlet {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		Double price = Double.parseDouble(request.getParameter("price"));
+		boolean visible = request.getParameter("visible").equals("true")?true:false;
+		System.out.println(visible);
 		
 		Product product = new Product();
 		product.setId(id);
 		product.setName(name);
 		product.setDescription(description);
 		product.setPrice(price);
+		product.setVisible(visible);
 	
 
 		ProductModelDS productModel = new ProductModelDS();

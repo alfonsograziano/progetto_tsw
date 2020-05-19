@@ -48,15 +48,20 @@ public class ProductPage extends HttpServlet {
 
 			try {
 				Product product = productModel.getById(productId);
-				ArrayList<Category> categories = product.getCategories();
-		        Random random = new Random();
-		        Category cat = categories.get( random.nextInt(categories.size()));
-		        
-		        request.setAttribute("related_products", belongsModel.getByCategory(cat.getId()));				
-				request.setAttribute("product", product);
+				if(product.getVisible()) {
+					ArrayList<Category> categories = product.getCategories();
+			        Random random = new Random();
+			        Category cat = categories.get( random.nextInt(categories.size()));
+			        
+			        request.setAttribute("related_products", belongsModel.getByCategory(cat.getId()));				
+					request.setAttribute("product", product);
+					
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/ProductPage.jsp");
+					dispatcher.forward(request, response);	
+				}else {
+					response.getWriter().append("404 lol");
+				}
 				
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/ProductPage.jsp");
-				dispatcher.forward(request, response);	
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

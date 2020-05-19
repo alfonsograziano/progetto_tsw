@@ -45,13 +45,14 @@
 		
 	}
 	
+	$( document ).ready(function() {
+		$('#visible-select').val("<%=product.getVisible()%>");
+	    $('#visible-select').formSelect();
+
+	});
 	
 	</script>
 
-	<script>
-	console.log('<%=productCategories.toString()%>')
-	
-	</script>
 
 
 
@@ -82,6 +83,14 @@
 					<div class='input-field '>
 						<input type="number" step="0.01" name='price' id="'price'"
 							value="${product.price}"> <label for='password'>Prezzo</label>
+					</div>
+
+					<div class="input-field">
+						<p style="margin-bottom: 0px;">Visibile nel catalogo</p>
+						<select class="browser-default" id="visible-select" name="visible">
+							<option value="true">True</option>
+							<option value="false">False</option>
+						</select>
 					</div>
 
 					<div
@@ -121,15 +130,14 @@
 						for (int i = 0; i < product.getImages().size(); i++) {
 					%>
 					<div
-						style="padding: 10px; background-color: rgba(0, 0, 0, 0.1); margin: 10px; display:flex; flex-direction:column; justify-content:flex-end;">
-						<img
-								style="width: 70px; margin-bottom:10px;"
-								src="${pageContext.request.contextPath}/getPicture?id=<%=product.getImages().get(i).getId()%>" />
+						style="padding: 10px; background-color: rgba(0, 0, 0, 0.1); margin: 10px; display: flex; flex-direction: column; justify-content: flex-end;">
+						<img style="width: 70px; margin-bottom: 10px;"
+							src="${pageContext.request.contextPath}/getPicture?id=<%=product.getImages().get(i).getId()%>" />
 						<form method="post"
 							action="${pageContext.request.contextPath}/DeleteImage">
 							<input id="image_id" name="image_id" type="hidden"
-								value="<%=product.getImages().get(i).getId()%>"> 
-							<input type="submit" value="Cancella"/>
+								value="<%=product.getImages().get(i).getId()%>"> <input
+								type="submit" value="Cancella" />
 						</form>
 
 					</div>
@@ -146,11 +154,8 @@
 					enctype='multipart/form-data'>
 					<input class="file" type="file" name="file"
 						value="Aggiungi immagine" /> <br /> <input type="hidden"
-						name="product_id" value="<%=product.getId()%>"> 
-						
-						<input
-						type="submit" value="carica"
-						class=" btn indigo white-color"  />
+						name="product_id" value="<%=product.getId()%>"> <input
+						type="submit" value="carica" class=" btn indigo white-color" />
 				</form>
 			</div>
 		</div>
