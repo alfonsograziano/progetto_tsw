@@ -1,4 +1,4 @@
-package control.shipping;
+package control.shippingType;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,35 +14,36 @@ import model.bean.Shipping;
 import model.dao.ShippingModelDS;
 
 /**
- * Servlet implementation class AddShipping
+ * Servlet implementation class UpdateShipping
  */
-@WebServlet("/shipping/add")
-public class AddShipping extends HttpServlet {
+@WebServlet("/shipping/update")
+public class UpdateShipping extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddShipping() {
+    public UpdateShipping() {
         super();
         // TODO Auto-generated constructor stub
     }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
 		int days = Integer.parseInt(request.getParameter("days"));
-		double price = Double.parseDouble(request.getParameter("price"));
+		Double price = Double.parseDouble(request.getParameter("price"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		
 		
 		Shipping shipp = new Shipping();
 		shipp.setName(name);
 		shipp.setDays(days);
 		shipp.setPrice(price);
+		shipp.setId(id);
 		
 		ShippingModelDS shippingModel = new ShippingModelDS();
 		
 			try {
-				shippingModel.add(shipp);
+				shippingModel.update(shipp);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -52,7 +53,7 @@ public class AddShipping extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AddShipping.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/UpdateShipping.jsp");
 		dispatcher.forward(request, response);
 	}
 

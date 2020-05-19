@@ -1,4 +1,4 @@
-package control.shipping;
+package control.shippingType;
 
 import java.io.IOException;
 import java.sql.SQLException;
