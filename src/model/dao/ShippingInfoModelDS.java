@@ -34,16 +34,17 @@ public class ShippingInfoModelDS implements ShippingInfoModel {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertSQL = "INSERT INTO " + ShippingInfoModelDS.TABLE_NAME + " (id, address, state, zip_code, city) VALUES (?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + ShippingInfoModelDS.TABLE_NAME + " (address, state, zip_code, city, id_user) VALUES (?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setInt(1, shippinginfo.getId());
-			preparedStatement.setString(2, shippinginfo.getAddress());
-			preparedStatement.setString(3, shippinginfo.getState());
-			preparedStatement.setString(4, shippinginfo.getZipCode());
-			preparedStatement.setString(5, shippinginfo.getCity());
+			preparedStatement.setString(1, shippinginfo.getAddress());
+			preparedStatement.setString(2, shippinginfo.getState());
+			preparedStatement.setString(3, shippinginfo.getZipCode());
+			preparedStatement.setString(4, shippinginfo.getCity());
+			preparedStatement.setInt(5, shippinginfo.getUserId());
+
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());

@@ -6,6 +6,7 @@ public class ShippingInfo {
 	private String state;
 	private String zipCode;
 	private String city;
+	private int userId;
 	public int getId() {
 		return id;
 	}
@@ -35,6 +36,12 @@ public class ShippingInfo {
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 }

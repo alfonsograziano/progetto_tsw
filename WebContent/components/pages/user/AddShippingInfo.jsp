@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-		<form action="" method="post">
+		<form action="${pageContext.request.contextPath}/add" method="post">
 		<input type="hidden" name="action" value="insert"> 
 		
 		<label for="address">Address:</label><br> 
