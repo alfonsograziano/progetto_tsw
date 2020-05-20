@@ -39,7 +39,37 @@ public class UserModelDS implements UserModel {
 	}
 	
 	public User getById(int id) throws SQLException{
-		return new User();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		User bean = new User();
+
+		String selectSQL = "SELECT * FROM " + UserModelDS.TABLE_NAME + " WHERE id= ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, id);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if(rs.next()) {
+				bean.setEmail(rs.getString("email"));
+				bean.setName(rs.getString("name"));
+				bean.setSurname(rs.getString("surname"));
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		
+		return bean;
 	}
 	
 	public void add(User user)  throws SQLException{
@@ -92,8 +122,6 @@ public class UserModelDS implements UserModel {
 		int user_id = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
-		Product bean = new Product();
 
 		String selectSQL = "SELECT * FROM " + UserModelDS.TABLE_NAME + " WHERE email = ? AND password = ?";
 

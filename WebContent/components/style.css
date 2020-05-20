@@ -117,3 +117,18 @@ a {
 .my-float{
 	margin-top:16px;
 }
+
+.checkout-form-section{
+	border: 1px solid #dedede;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.checkout-form-header{
+	background-color:#ebebeb;
+	margin-top:15px;
+	margin-bottom:0px;
+	padding-bottom:10px;
+	padding-top:5px;
+	padding-left:5px;
+}
