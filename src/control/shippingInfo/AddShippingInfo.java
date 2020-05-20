@@ -16,7 +16,7 @@ import model.dao.ShippingModelDS;
 /**
  * Servlet implementation class AddShippingInfo
  */
-@WebServlet("ShippingInfo/AddShippingInfo")
+@WebServlet("/shippinginfo/add")
 public class AddShippingInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

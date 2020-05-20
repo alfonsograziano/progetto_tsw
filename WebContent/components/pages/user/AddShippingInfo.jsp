@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-		<form action="AddShippingInfo" method="post">
+		<form action="" method="post">
 		<input type="hidden" name="action" value="insert"> 
 		
 		<label for="address">Address:</label><br> 
