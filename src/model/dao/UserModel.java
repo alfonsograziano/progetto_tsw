@@ -1,12 +1,13 @@
 package model.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import model.bean.User;
 
 public interface UserModel {
-	public int checkPsw(String email, String password)  throws SQLException; 
+	public ArrayList<Integer> checkPsw(String email, String password)  throws SQLException; 
 	public Collection<User> get() throws SQLException;
 	public User getById(int id) throws SQLException;
 	

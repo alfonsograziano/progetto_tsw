@@ -81,7 +81,7 @@ public class UserModelDS implements UserModel {
 
 
 	@Override
-	public int checkPsw(String email, String password) throws SQLException {
+	public ArrayList<Integer> checkPsw(String email, String password) throws SQLException {
 		/*
 		 * 0 => Non trovato
 		 * 1 => Trovato
@@ -89,6 +89,7 @@ public class UserModelDS implements UserModel {
 		 * n => Altri permessi
 		 */
 		int user = 0; 
+		int user_id = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -105,6 +106,7 @@ public class UserModelDS implements UserModel {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if(rs.next()) {
+				user_id = rs.getInt("id");
 				user = 1;
 				if(rs.getBoolean("is_admin")) {
 					user = 2;
@@ -120,7 +122,10 @@ public class UserModelDS implements UserModel {
 					connection.close();
 			}
 		}
-		return user;
+		ArrayList<Integer> data = new ArrayList<>();
+		data.add(user); //tipo di utente
+		data.add(user_id);
+		return data;
 
 	}
 }

@@ -2,6 +2,7 @@ package control.auth;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +35,10 @@ public class Login extends HttpServlet {
 			UserModelDS userModel = new UserModelDS();
 			int accessCode = 0;
 			try {
-				accessCode = userModel.checkPsw(email, password);
+				ArrayList<Integer> data  = userModel.checkPsw(email, password);
+				accessCode = data.get(0);
+				request.getSession().setAttribute("user_id", data.get(1));
+				System.out.println(request.getSession().getAttribute("user_id"));
 			} catch (SQLException e) {
 				response.getWriter().append("Errore: \n" + e);
 				e.printStackTrace();
