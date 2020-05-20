@@ -1,6 +1,7 @@
 package control.cart;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.ChoosenProduct;
+import model.dao.ShippingModelDS;
 
 
 
@@ -34,12 +36,20 @@ public class Cart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
+		ShippingModelDS shippingModel = new ShippingModelDS();
+
 		if(cart == null) {
 			cart = new ArrayList<ChoosenProduct>();
 		}
-		request.getSession().setAttribute("cart", cart);
+		try {
+			request.setAttribute("shipping_types", shippingModel.get());
+			request.getSession().setAttribute("cart", cart);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/Cart.jsp");
 			dispatcher.forward(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	

@@ -9,8 +9,10 @@
 <body>
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="model.bean.Product"%>
+	<%@page import="model.dao.ShippingModelDS"%>
 	<%@page import="model.bean.User"%>
 	<%@page import="model.bean.ChoosenProduct"%>
+	<%@page import="model.bean.Shipping"%>
 
 	<%
 		ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
@@ -22,6 +24,23 @@
 		for (int i = 0; i < cart.size(); i++) {
 			total += cart.get(i).getProduct().getPrice() * cart.get(i).getQuantity();
 		}
+		
+		int shipping_type_id = -1;
+		ShippingModelDS shippingModel = new ShippingModelDS();
+		Shipping shipping = new Shipping();
+		if(request.getSession().getAttribute("shipping_type_id") != null){
+			shipping_type_id = (int) request.getSession().getAttribute("shipping_type_id");
+			shipping = shippingModel.getById(shipping_type_id);
+		}else{
+			//TODO: implementa pagina d'errore se non imposti la spedizione!
+	        response.sendRedirect("localhost:8080/BetterHome/cart");
+		}
+
+		total += shipping.getPrice();
+		Double iva = (22*total)/100;
+		System.out.println(iva);
+		Double total_iva = total+iva;
+		
 	%>
 
 	<jsp:include page="../Header.jsp" />
@@ -33,6 +52,7 @@
 	<div class="container">
 		<div class="checkout-header"></div>
 		<div class="checkout-content" style="margin-bottom: 100px;">
+			
 			<div class="order">
 				<h3>Riepilogo ordine</h3>
 				<h5 class="checkout-form-header">Prodotti</h5>
@@ -56,13 +76,19 @@
 							<%
 								}
 							%>
+							
+							<tr>
+								<td><b>Spedizione </b><%=shipping.getName()%></td>
+								<td><%=shipping.getPrice()%>&euro;</td>
+							</tr>
 
 						</tbody>
 					</table>
 					<div class="wrap-row"
 						style="justify-content: space-around; align-items: center;">
+						<p>Tasse (iva 22%): <%=iva %></p>
 						<p>
-							Totale <b><%=total%>&euro;</b>
+							Totale <b id="total_iva"><%=total_iva%></b>&euro;
 						</p>
 						<div id="payment-wrapper">
 							<a class="waves-effect waves-light btn amber lighten-3"
@@ -135,6 +161,7 @@
 	<jsp:include page="../Footer.jsp" />
 
 	<script>
+	
 		function openGateway() {
 			if (validateInput()) {
 				const payWindow = window
@@ -159,7 +186,7 @@
 		function validateInput(){
 			var errors = 0
 			var not_null= ["#name", "#surname", "#email", "#state", "#city", "#zip_code", "#address"]
-			not_null.forEach(item => {
+			not_null.forEach(function(item) {
 				if($(item).val() === ""){
 					$(item).css("border", "solid 1px red");
 					errors++

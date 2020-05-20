@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import model.dao.ShippingModelDS;
 import model.dao.UserModelDS;
 import model.bean.User;
 
@@ -41,6 +41,7 @@ public class Checkout extends HttpServlet {
 			int id =  (int) request.getSession().getAttribute("user_id");
 			System.out.println(id);
 			UserModelDS userModel = new UserModelDS();
+			
 			try {
 				User currentUser = (User) userModel.getById(id);
 				System.out.println(currentUser);

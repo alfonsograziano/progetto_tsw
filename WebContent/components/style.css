@@ -132,3 +132,21 @@ a {
 	padding-top:5px;
 	padding-left:5px;
 }
+
+.shipping-container{
+	margin:5px;
+	border: 1px solid #dedede;
+	padding:10px;
+	  cursor:pointer;
+  	
+}
+
+.nomargin{
+	margin:0px;
+}
+
+.selected{
+		border: 1px solid green;
+		background-color:#f5fff5;
+	
+}
