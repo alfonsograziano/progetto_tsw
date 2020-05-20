@@ -71,17 +71,17 @@
 				</div>
 				<p><%=product.getDescription() %></p>
 				<h4><%=product.getPrice() %>&#8364;</h4>
-				<form>
+				<form id="form" action="${pageContext.request.contextPath}/cart/add-to-cart" method="get">
 					<div class="wrap-row center">
 						<div class="input-field">
-							<input value="1" id="quantity" type="number" class="validate"
+							<input value="1" id="quantity" name="quantity" type="number" class="validate"
 								style="max-width: 60px;"> <label for="quantity">Quantity</label>
 						</div>
 						<div class="input-field">
-							<input value="1" id="product" type="hidden" 
+							<input value="<%=product.getId() %>" id="product" name="product" type="hidden" 
 								style="max-width: 60px;">
 						</div>
-						<a href="${pageContext.request.contextPath}/cart/add-to-cart" class="waves-effect btn orange darken-4 buy-button">Acquista
+						<a href="#" class="waves-effect btn orange darken-4 buy-button " onclick="document.getElementById('form').submit();">Acquista
 							ora</a>
 
 					</div>

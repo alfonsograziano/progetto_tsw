@@ -3,6 +3,7 @@ package control.cart;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,13 +32,15 @@ public class DeleteAll extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
-		int id = (int) request.getAttribute("id");
+		int id = Integer.parseInt(request.getParameter("id"));
 		for(int i=0; i<cart.size(); i++) {
 			if(cart.get(i).getProduct().getId() == id) {
 					cart.remove(i);
 			}
 		}
 		request.getSession().setAttribute("cart", cart);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart");
+		dispatcher.forward(request, response);
 	}
 
 	/**
