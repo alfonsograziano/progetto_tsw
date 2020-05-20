@@ -10,8 +10,19 @@
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="model.bean.Product"%>
 	<%@page import="model.bean.User"%>
-	
-	<% %>
+	<%@page import="model.bean.ChoosenProduct"%>
+
+	<%
+		ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
+		if (cart == null) {
+			cart = new ArrayList<ChoosenProduct>();
+		}
+
+		Double total = 0.0;
+		for (int i = 0; i < cart.size(); i++) {
+			total += cart.get(i).getProduct().getPrice() * cart.get(i).getQuantity();
+		}
+	%>
 
 	<jsp:include page="../Header.jsp" />
 	<%
@@ -21,7 +32,7 @@
 
 	<div class="container">
 		<div class="checkout-header"></div>
-		<div class="checkout-content">
+		<div class="checkout-content" style="margin-bottom: 100px;">
 			<div class="order">
 				<h3>Riepilogo ordine</h3>
 				<h5 class="checkout-form-header">Prodotti</h5>
@@ -34,12 +45,34 @@
 							</tr>
 						</thead>
 						<tbody>
+							<%
+								for (int i = 0; i < cart.size(); i++) {
+									Product p = cart.get(i).getProduct();
+							%>
 							<tr>
-								<td>Test<b>&nbsp;X1</b></td>
-								<td>15,90E</td>
+								<td><%=p.getName()%><b>&nbsp;X<%=cart.get(i).getQuantity()%></b></td>
+								<td><%=p.getPrice()%>&euro;</td>
 							</tr>
+							<%
+								}
+							%>
+
 						</tbody>
 					</table>
+					<div class="wrap-row"
+						style="justify-content: space-around; align-items: center;">
+						<p>
+							Totale <b><%=total%>&euro;</b>
+						</p>
+						<div id="payment-wrapper">
+							<a class="waves-effect waves-light btn amber lighten-3"
+								id="payment-button" style="color: black; margin: 20px;"
+								onClick="openGateway()"><i class="material-icons left"
+								style="color: #357ac0;">payment</i><b>Paga ora e conferma
+									ordine</b></a>
+						</div>
+					</div>
+
 				</div>
 			</div>
 			<div>
@@ -49,19 +82,19 @@
 					<div class="checkout-form-section">
 						<div class="row">
 							<div class="input-field col s6">
-								<input id="name" type="text" class="validate" value="<%=user.getName()%>"> <label
-									for="name">Nome</label>
+								<input id="name" type="text" class="validate"
+									value="<%=user.getName()%>"> <label for="name">Nome</label>
 							</div>
 							<div class="input-field col s6">
-								<input id="surname" type="text" class="validate" value="<%=user.getSurname()%>"> <label
-									for="surname">Cognome</label>
+								<input id="surname" type="text" class="validate"
+									value="<%=user.getSurname()%>"> <label for="surname">Cognome</label>
 							</div>
 
 						</div>
 						<div class="row">
 							<div class="input-field">
-								<input id="email" type="text" class="validate" disabled value="<%=user.getEmail()%>"> <label
-									for="email">Email</label>
+								<input id="email" type="text" class="validate" disabled
+									value="<%=user.getEmail()%>"> <label for="email">Email</label>
 							</div>
 						</div>
 					</div>
@@ -73,7 +106,7 @@
 						</div>
 						<div class="input-field col s6">
 							<input id="city" type="text" class="validate"> <label
-								for="city">Citt‡</label>
+								for="city">Citt√†</label>
 						</div>
 						<div class="input-field col s6">
 							<input id="zip_code" type="text" class="validate"> <label
@@ -89,34 +122,55 @@
 					<div class="checkout-form-section">
 						<div class="input-field col s12">
 							<textarea id="details" class="materialize-textarea"></textarea>
-							<label for="details">Dettagli ordine</label>
+							<label for="details">Dettagli ordine (opzionale)</label>
 						</div>
 					</div>
 				</form>
 
 			</div>
-			<div id="payment-wrapper">
-				<a class="waves-effect waves-light btn amber lighten-3"
-					id="payment-button" style="color: black; margin: 20px;"
-					onClick="openGateway()"><i class="material-icons left"
-					style="color: #357ac0;">payment</i><b>Paga ora</b></a>
-			</div>
+
 		</div>
 	</div>
 
 	<jsp:include page="../Footer.jsp" />
 
 	<script>
-		const openGateway = ()=>{
-			const payWindow = window.open("./gateway","Ratting","width=600, height=700,left=150,top=200,toolbar=0,status=0,")
-			payWindow.onbeforeunload = function(){ 
-				const token = window.token
-				if(typeof token !== "undefined"){
-					$("#payment-wrapper").html("<h5 style='margin-bottom:0px;'>Pagamento completato</h5><p  style='margin-top:0px;'>Codice pagamento: "+token+"</p>")
-				}else{
-					alert("Pagamento non riuscito...")
+		function openGateway() {
+			if (validateInput()) {
+				const payWindow = window
+						.open("./gateway", "Ratting",
+								"width=600, height=700,left=150,top=200,toolbar=0,status=0,")
+				payWindow.onbeforeunload = function() {
+					const token = window.token
+					if (typeof token !== "undefined") {
+						$("#payment-wrapper")
+								.html(
+										"<h5 style='margin-bottom:0px;'>Pagamento completato</h5><p  style='margin-top:0px;'>Codice pagamento: "
+												+ token + "</p>")
+					} else {
+						alert("Pagamento non riuscito...")
+					}
 				}
+			}else{
+				alert("Attenzione, sono presenti dei campi non validi")
+			}		
+		}
+		
+		function validateInput(){
+			var errors = 0
+			var not_null= ["#name", "#surname", "#email", "#state", "#city", "#zip_code", "#address"]
+			not_null.forEach(item => {
+				if($(item).val() === ""){
+					$(item).css("border", "solid 1px red");
+					errors++
+				}else{
+					$(item).css("border", "");
+				}
+			})
+			if(errors > 0){
+				return false
 			}
+			return true
 		}
 	</script>
 
