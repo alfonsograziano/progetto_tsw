@@ -51,102 +51,121 @@ a {
 	color: #ffffff;
 }
 
-
 /*Cookie Consent Begin*/
 #cookieConsent {
-    background-color: rgba(20,20,20,0.8);
-    min-height: 26px;
-    font-size: 14px;
-    color: #ccc;
-    line-height: 26px;
-    padding: 8px 0 8px 30px;
-    font-family: "Trebuchet MS",Helvetica,sans-serif;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: none;
-    z-index: 9999;
+	background-color: rgba(20, 20, 20, 0.8);
+	min-height: 26px;
+	font-size: 14px;
+	color: #ccc;
+	line-height: 26px;
+	padding: 8px 0 8px 30px;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: none;
+	z-index: 9999;
 }
+
 #cookieConsent a {
-    color: #4B8EE7;
-    text-decoration: none;
+	color: #4B8EE7;
+	text-decoration: none;
 }
+
 #closeCookieConsent {
-    float: right;
-    display: inline-block;
-    cursor: pointer;
-    height: 20px;
-    width: 20px;
-    margin: -15px 0 0 0;
-    font-weight: bold;
+	float: right;
+	display: inline-block;
+	cursor: pointer;
+	height: 20px;
+	width: 20px;
+	margin: -15px 0 0 0;
+	font-weight: bold;
 }
+
 #closeCookieConsent:hover {
-    color: #FFF;
+	color: #FFF;
 }
+
 #cookieConsent a.cookieConsentOK {
-    background-color: #F1D600;
-    color: #000;
-    display: inline-block;
-    border-radius: 5px;
-    padding: 0 20px;
-    cursor: pointer;
-    float: right;
-    margin: 0 60px 0 10px;
+	background-color: #F1D600;
+	color: #000;
+	display: inline-block;
+	border-radius: 5px;
+	padding: 0 20px;
+	cursor: pointer;
+	float: right;
+	margin: 0 60px 0 10px;
 }
+
 #cookieConsent a.cookieConsentOK:hover {
-    background-color: #E0C91F;
+	background-color: #E0C91F;
 }
 /*Cookie Consent End*/
-
-.float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:#25d366;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-  font-size:30px;
+.float {
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	bottom: 40px;
+	right: 40px;
+	background-color: #25d366;
+	color: #FFF;
+	border-radius: 50px;
+	text-align: center;
+	font-size: 30px;
 	box-shadow: 2px 2px 3px #999;
-  z-index:100;
+	z-index: 100;
 }
 
-.my-float{
-	margin-top:16px;
+.my-float {
+	margin-top: 16px;
 }
 
-.checkout-form-section{
+.checkout-form-section {
 	border: 1px solid #dedede;
-	padding-left:10px;
-	padding-right:10px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
-.checkout-form-header{
-	background-color:#ebebeb;
-	margin-top:15px;
-	margin-bottom:0px;
-	padding-bottom:10px;
-	padding-top:5px;
-	padding-left:5px;
+.checkout-form-header {
+	background-color: #ebebeb;
+	margin-top: 15px;
+	margin-bottom: 0px;
+	padding-bottom: 10px;
+	padding-top: 5px;
+	padding-left: 5px;
 }
 
-.shipping-container{
-	margin:5px;
+.shipping-container {
+	margin: 5px;
 	border: 1px solid #dedede;
-	padding:10px;
-	  cursor:pointer;
-  	
+	padding: 10px;
+	cursor: pointer;
 }
 
-.nomargin{
-	margin:0px;
+.nomargin {
+	margin: 0px;
 }
 
-.selected{
-		border: 1px solid green;
-		background-color:#f5fff5;
-	
+.selected {
+	border: 1px solid green;
+	background-color: #f5fff5;
 }
+
+
+#ex4 .p1[data-count]:after{
+  position:absolute;
+  right:10%;
+  top:8%;
+  content: attr(data-count);
+  font-size:60%;
+  padding:.3em;
+  border-radius:50%;
+  line-height:1em;
+  color: white;
+  background:rgba(255,0,0,.85);
+  text-align:center;
+  min-width: 1em;
+  //font-weight:bold;
+}
+
