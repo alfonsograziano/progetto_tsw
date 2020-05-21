@@ -37,7 +37,7 @@ public class AddShippingInfo extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("user_id", 10);
+		request.getSession().setAttribute("user_id", 1);
 		int user=(int)request.getSession().getAttribute("user_id");
 		String address = request.getParameter("address");
 		String state = request.getParameter("state");
@@ -50,7 +50,7 @@ public class AddShippingInfo extends HttpServlet {
 		x.setState(state);
 		x.setZipCode(zip);
 		x.setCity(city);
-		System.out.println("prova"+x.getUserId());
+		//System.out.println("prova"+x.getUserId());
 
 		ShippingInfoModelDS shippingInfoModel = new ShippingInfoModelDS();
 	

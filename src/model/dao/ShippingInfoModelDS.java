@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import model.bean.Belongs;
 import model.bean.Category;
 import model.bean.ShippingInfo;
 
@@ -239,6 +241,45 @@ public class ShippingInfoModelDS implements ShippingInfoModel {
 			}
 		}
 		return bean;
+		
+		
+		
+	}
+
+	public ArrayList<ShippingInfo> getByUser(int user) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ArrayList<ShippingInfo> shipUser = new ArrayList<ShippingInfo>();
+		String selectSQL = "SELECT * FROM " + ShippingInfoModelDS.TABLE_NAME + " WHERE id_user = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1,user);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ShippingInfo bean=new ShippingInfo();
+				bean.setAddress(rs.getString("address"));
+				bean.setState(rs.getString("state"));
+				bean.setZipCode(rs.getString("zip_code"));
+				bean.setCity(rs.getString("city"));
+				shipUser.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return shipUser;
+		
 	}
 
 	
