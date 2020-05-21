@@ -58,7 +58,7 @@
 
 
 			</li>
-			<li><a href="#"><i class="material-icons">person</i></a></li>
+			<li><a href="${pageContext.request.contextPath}/profile"><i class="material-icons">person</i></a></li>
 		</ul>
 	</div>
 </nav>

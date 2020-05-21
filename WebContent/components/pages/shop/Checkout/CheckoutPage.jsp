@@ -108,11 +108,11 @@
 					<div class="checkout-form-section">
 						<div class="row">
 							<div class="input-field col s6">
-								<input id="name" type="text" class="validate"
+								<input id="name" type="text" class="validate" disabled
 									value="<%=user.getName()%>"> <label for="name">Nome</label>
 							</div>
 							<div class="input-field col s6">
-								<input id="surname" type="text" class="validate"
+								<input id="surname" type="text" class="validate" disabled
 									value="<%=user.getSurname()%>"> <label for="surname">Cognome</label>
 							</div>
 
@@ -174,6 +174,20 @@
 								.html(
 										"<h5 style='margin-bottom:0px;'>Pagamento completato</h5><p  style='margin-top:0px;'>Codice pagamento: "
 												+ token + "</p>")
+							
+						console.log("Richiamo il post")
+						var data ={
+							state: $("#state").val(),
+							city: $("#city").val(),
+							address: $("#address").val(),
+							zip_code: $("#zip_code").val(),
+							details: $("#details").val(),
+							payment_id: token
+						}
+						console.log($.post("<%=request.getContextPath()%>/order/add",data, function(){
+							alert("Ordine completato...");	
+						}))
+												
 					} else {
 						alert("Pagamento non riuscito...")
 					}
@@ -185,7 +199,7 @@
 		
 		function validateInput(){
 			var errors = 0
-			var not_null= ["#name", "#surname", "#email", "#state", "#city", "#zip_code", "#address"]
+			var not_null= ["#email", "#state", "#city", "#zip_code", "#address"]
 			not_null.forEach(function(item) {
 				if($(item).val() === ""){
 					$(item).css("border", "solid 1px red");

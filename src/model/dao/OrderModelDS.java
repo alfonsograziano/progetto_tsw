@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -29,7 +30,7 @@ public class OrderModelDS implements OrderModel{
 
 	private static final String TABLE_NAME = "`order`";
 	
-	public void add(Order order) {
+	public long add(Order order) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -37,8 +38,8 @@ public class OrderModelDS implements OrderModel{
 
 		try {
 			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setTimestamp(1,order.getData());
+			preparedStatement = connection.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement.setTimestamp(1,order.getDate());
 			preparedStatement.setDouble(2, order.getIva());
 			preparedStatement.setString(3,order.getCity());
 			preparedStatement.setString(4,order.getAddress());
@@ -52,7 +53,18 @@ public class OrderModelDS implements OrderModel{
 			preparedStatement.setString(12,order.getPaymentCode());
 			preparedStatement.setInt(13,order.getIdUser());
 			preparedStatement.setInt(14,order.getOrderState());
-			preparedStatement.executeUpdate();
+			int affectedRows = preparedStatement.executeUpdate();
+			
+			 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+		            if (generatedKeys.next()) {
+		                return generatedKeys.getLong(1);
+		            }
+		            else {
+		                throw new SQLException("Creating user failed, no ID obtained.");
+		            }
+		        }
+			
+			
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
@@ -66,6 +78,7 @@ public class OrderModelDS implements OrderModel{
 			}
 
 		}
+		return -1;
 
 	}
 	
@@ -107,7 +120,7 @@ public class OrderModelDS implements OrderModel{
 			while (rs.next()) {
 				Order bean=new Order();
 				bean.setId(rs.getInt("id"));
-				bean.setData(rs.getTimestamp("date"));
+				bean.setDate(rs.getTimestamp("date"));
 				bean.setIva(rs.getDouble("iva"));
 				bean.setCity(rs.getString("city"));
 				bean.setAddress(rs.getString("address"));
@@ -168,7 +181,7 @@ public class OrderModelDS implements OrderModel{
 			while (rs.next()) {
 				Order bean=new Order();
 				bean.setId(rs.getInt("id"));
-				bean.setData(rs.getTimestamp("date"));
+				bean.setDate(rs.getTimestamp("date"));
 				bean.setIva(rs.getDouble("iva"));
 				bean.setCity(rs.getString("city"));
 				bean.setAddress(rs.getString("address"));
@@ -227,7 +240,7 @@ public class OrderModelDS implements OrderModel{
 			while (rs.next()) {
 				Order bean=new Order();
 				bean.setId(rs.getInt("id"));
-				bean.setData(rs.getTimestamp("date"));
+				bean.setDate(rs.getTimestamp("date"));
 				bean.setIva(rs.getDouble("iva"));
 				bean.setCity(rs.getString("city"));
 				bean.setAddress(rs.getString("address"));
@@ -282,9 +295,6 @@ public class OrderModelDS implements OrderModel{
 				preparedStatement.setString(1, newTracking);
 				preparedStatement.setInt(2, id);
 			} 
-	
-			
-
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {

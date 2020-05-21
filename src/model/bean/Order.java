@@ -1,10 +1,18 @@
 package model.bean;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Order {
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", data=" + date + ", iva=" + iva + ", city=" + city + ", address=" + address
+				+ ", state=" + state + ", zipCode=" + zipCode + ", details=" + details + ", track_id=" + track_id
+				+ ", shippingPrice=" + shippingPrice + ", paymentId=" + paymentId + ", shippingTypeId=" + shippingTypeId
+				+ ", paymentCode=" + paymentCode + ", idUser=" + idUser + ", orderState=" + orderState + "]";
+	}
 	private int id;
-	private Timestamp data;
+	private Timestamp date;
 	private double iva;
 	private String city;
 	private String address;
@@ -103,11 +111,12 @@ public class Order {
 	public void setOrderState(int orderState) {
 		this.orderState = orderState;
 	}
-	public Timestamp getData() {
-		return data;
+	public Timestamp getDate() {
+		return date;
 	}
-	public void setData(Timestamp data) {
-		this.data = data;
+	public void setDate(Timestamp date) {
+		this.date = date;
 	}
+
 	
 }

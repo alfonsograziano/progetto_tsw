@@ -222,7 +222,7 @@ public class ContainsModelDS {
 			while (rs.next()) {
 				Order bean = new Order();
 				bean.setId(rs.getInt("id"));
-				bean.setData(rs.getTimestamp("date"));
+				bean.setDate(rs.getTimestamp("date"));
 				bean.setIva(rs.getDouble("iva"));
 				bean.setCity(rs.getString("city"));
 				bean.setAddress(rs.getString("address"));
