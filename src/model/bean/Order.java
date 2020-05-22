@@ -1,6 +1,7 @@
 package model.bean;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
@@ -10,6 +11,13 @@ public class Order {
 				+ ", state=" + state + ", zipCode=" + zipCode + ", details=" + details + ", track_id=" + track_id
 				+ ", shippingPrice=" + shippingPrice + ", paymentId=" + paymentId + ", shippingTypeId=" + shippingTypeId
 				+ ", paymentCode=" + paymentCode + ", idUser=" + idUser + ", orderState=" + orderState + "]";
+	}
+	public ArrayList<ChoosenProduct> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<ChoosenProduct> products) {
+		this.products = products;
 	}
 	private int id;
 	private Timestamp date;
@@ -26,6 +34,13 @@ public class Order {
 	private String paymentCode;
 	private int idUser;
 	private int orderState;
+	
+	private ArrayList<ChoosenProduct> products;
+	
+	public Order() {
+		products = new ArrayList<ChoosenProduct>();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -116,6 +131,14 @@ public class Order {
 	}
 	public void setDate(Timestamp date) {
 		this.date = date;
+	}
+	
+	public String getStringOrderState() {
+		if(this.orderState == 1) return "pending";
+		if(this.orderState == 2) return "sent";
+		if(this.orderState == 3) return "fulfilled";
+		if(this.orderState == 4) return "deleted";
+		return "";
 	}
 
 	

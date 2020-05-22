@@ -55,7 +55,7 @@
 						</td>
 						<td>
 							<div style="display:flex; flex-direction:column;">
-								<a href="${pageContext.request.contextPath}/orders?id=<%=o.getId()%>">Mostra dettagli</a>
+								<a href="${pageContext.request.contextPath}/order/details?id=<%=o.getId()%>">Mostra dettagli</a>
 								<a href="${pageContext.request.contextPath}/orders/update?id=<%=o.getId()%>">Modifica</a>
 							</div>
 						</td>

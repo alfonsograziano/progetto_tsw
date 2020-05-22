@@ -11,7 +11,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import model.bean.ChoosenProduct;
 import model.bean.Order;
+import model.bean.Product;
 
 public class OrderModelDS implements OrderModel{
 	private static DataSource ds;
@@ -105,7 +108,7 @@ public class OrderModelDS implements OrderModel{
 	
 	
 	public ArrayList<Order> get(){
-		
+	
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -344,6 +347,144 @@ public class OrderModelDS implements OrderModel{
 			}
 
 		}
+	}
+
+
+	@Override
+	public Order getById(int id) throws SQLException {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Order order = new Order();
+		String selectSQL = "SELECT * FROM " + OrderModelDS.TABLE_NAME + " WHERE  id = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				order.setId(rs.getInt("id"));
+				order.setDate(rs.getTimestamp("date"));
+				order.setIva(rs.getDouble("iva"));
+				order.setCity(rs.getString("city"));
+				order.setAddress(rs.getString("address"));
+				order.setState(rs.getString("state"));
+				order.setZipCode(rs.getString("zip_code"));
+				order.setDetails(rs.getString("details"));
+				order.setTrack_id(rs.getString("track_id"));
+				order.setShippingPrice(rs.getDouble("shipping_price"));
+				order.setPaymentId(rs.getString("payment_id"));
+				order.setShippingTypeId(rs.getInt("shipping_type_id"));
+				order.setPaymentCode(rs.getString("payment_code"));
+				order.setIdUser(rs.getInt("id_user"));
+				order.setOrderState(rs.getInt("order_state"));
+			}
+
+		}catch (SQLException e) {
+			System.out.println("Error:" + e.getMessage());
+		}
+		
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			}catch (SQLException e) {
+				System.out.println("Error:" + e.getMessage());
+			}
+			finally {
+				if (connection != null)
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		}
+		return order;
+
+	}
+
+
+	public Order getCompleteOrderById(int id) throws SQLException {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Order order = new Order();
+		String selectSQL = "SELECT * FROM " + OrderModelDS.TABLE_NAME + " WHERE  id = ?";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				order.setId(rs.getInt("id"));
+				order.setDate(rs.getTimestamp("date"));
+				order.setIva(rs.getDouble("iva"));
+				order.setCity(rs.getString("city"));
+				order.setAddress(rs.getString("address"));
+				order.setState(rs.getString("state"));
+				order.setZipCode(rs.getString("zip_code"));
+				order.setDetails(rs.getString("details"));
+				order.setTrack_id(rs.getString("track_id"));
+				order.setShippingPrice(rs.getDouble("shipping_price"));
+				order.setPaymentId(rs.getString("payment_id"));
+				order.setShippingTypeId(rs.getInt("shipping_type_id"));
+				order.setPaymentCode(rs.getString("payment_code"));
+				order.setIdUser(rs.getInt("id_user"));
+				order.setOrderState(rs.getInt("order_state"));
+			}
+			
+			String selectSQLContains = "SELECT * FROM contains JOIN product on product_id=id WHERE  order_id = ?";
+			preparedStatement = connection.prepareStatement(selectSQLContains);
+			preparedStatement.setInt(1, id);
+			
+			rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				Product bean = new Product();
+				bean.setId(rs.getInt("id"));
+				bean.setName(rs.getString("name"));
+				bean.setDescription(rs.getString("description"));
+				bean.setPrice(rs.getDouble("price")); //TODO: verifica cosa succede se il prezzo cambia
+				bean.setVisible(rs.getBoolean("visible"));
+				
+				ChoosenProduct cp = new ChoosenProduct();
+				cp.setProduct(bean);
+				cp.setQuantity(rs.getInt("quantity"));
+				order.getProducts().add(cp);
+			}
+
+			
+
+		}catch (SQLException e) {
+			System.out.println("Error:" + e.getMessage());
+		}
+		
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			}catch (SQLException e) {
+				System.out.println("Error:" + e.getMessage());
+			}
+			finally {
+				if (connection != null)
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		}
+		return order;
+
 	}
 
 }

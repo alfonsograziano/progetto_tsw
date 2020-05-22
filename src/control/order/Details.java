@@ -10,41 +10,50 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.Order;
+import model.bean.User;
 import model.dao.OrderModelDS;
+import model.dao.UserModelDS;
 
 /**
- * Servlet implementation class Update
+ * Servlet implementation class Details
  */
-@WebServlet("/orders/update")
-public class UpdateOrder extends HttpServlet {
+@WebServlet("/order/details")
+public class Details extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateOrder() {
+    public Details() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		OrderModelDS orderModel = new OrderModelDS();
+		UserModelDS userModel = new UserModelDS();
 		try {
-			request.setAttribute("order", orderModel.getById(id));
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/UpdateOrder.jsp"); 
+			Order order = orderModel.getCompleteOrderById(id);
+			User user = userModel.getById(order.getIdUser());
+			request.setAttribute("user", user);
+			request.setAttribute("order", order);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/OrderDetails.jsp"); 
 			dispatcher.forward(request, response); 
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
-	
+		
+		
 	}
 
+	
 
 }
