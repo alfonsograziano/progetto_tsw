@@ -3,17 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-<!-- Compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<jsp:include page="../HeaderData.jsp"></jsp:include>
 
 </head>
 <body>
@@ -24,14 +14,15 @@
 			    response.sendRedirect(redirectURL);
 		}
 	%>
+			<jsp:include page="../shop/Header.jsp" />
+	
 	<div class="section"></div>
+	
 	<div style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
 
-		<img class="responsive-img" style="width: 250px;"
-			src="https://i.imgur.com/ax0NCsK.gif" />
-		<div class="section"></div>
+		<div style="margin-top:50px;"></div>
 
-		<h5 class="indigo-text">Please, login into your account</h5>
+		<h5 class="indigo-text">Effettua il login!</h5>
 		<div class="section"></div>
 
 		<div class="container" style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
@@ -66,6 +57,8 @@
 				</form>
 			</div>
 		</div>
+					Non hai un account? <a href="${pageContext.request.contextPath}/signup">Iscriviti</a>
+		
 
 	</div>
 

@@ -26,7 +26,8 @@ public class AdminDashboard extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminDashboard.jsp");
+		request.setAttribute("pageName", "/components/pages/admin/AdminDashboard.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 		dispatcher.forward(request, response);
 	}
 

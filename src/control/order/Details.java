@@ -43,8 +43,10 @@ public class Details extends HttpServlet {
 			User user = userModel.getById(order.getIdUser());
 			request.setAttribute("user", user);
 			request.setAttribute("order", order);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/OrderDetails.jsp"); 
-			dispatcher.forward(request, response); 
+			request.setAttribute("pageName", "/components/pages/admin/OrderDetails.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+			dispatcher.forward(request, response);
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

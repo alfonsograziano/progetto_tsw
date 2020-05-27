@@ -100,9 +100,7 @@
 
 	</div>
 	
-	<a href="https://api.whatsapp.com/send?phone=3899098485 class="float" target="_blank">
-		<i class="fa fa-whatsapp my-float"></i>
-	</a>
+	
 	
 
 	<jsp:include page="Footer.jsp" />

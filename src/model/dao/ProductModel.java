@@ -14,4 +14,6 @@ public interface ProductModel {
 	public void add(Product product)  throws SQLException;
 	public void update(Product product)  throws SQLException;
 	
+	public ArrayList<Product> search(String name) throws SQLException;
+	
 }

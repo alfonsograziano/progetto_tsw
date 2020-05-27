@@ -2,8 +2,8 @@ package control.product;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.ProductModelDS;
 
 /**
- * Servlet implementation class Product
+ * Servlet implementation class Search
  */
-@WebServlet("/admin/dashboard/products")
-public class Product extends HttpServlet {
+@WebServlet("/product/search")
+public class Search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Product() {
+    public Search() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +31,21 @@ public class Product extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String name = request.getParameter("name");
 		ProductModelDS productModel = new ProductModelDS();
+		ArrayList<model.bean.Product> products;
 		try {
-			request.setAttribute("products",productModel.get());
-			request.setAttribute("pageName", "/components/pages/admin/Products.jsp");
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
-			dispatcher.forward(request, response);
+			products = productModel.search(name);
+			response.getWriter().append(products.toString());
+
 		} catch (SQLException e) {
-			response.getWriter().append("Error: \n"+ e);
-			e.printStackTrace();
+			response.getWriter().append("Errore: "+e);
+
 		}
+		
+		
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

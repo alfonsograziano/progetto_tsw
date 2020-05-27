@@ -34,7 +34,7 @@ public class ProfilePage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(request.getSession().getAttribute("user_id") == null) {
-			response.getWriter().append("Errore, non sei loggato, non puoi accedere a questa pagina... ricchiò <3");
+			response.sendRedirect(request.getContextPath()+"/login");
 		}else {
 			int id = (int) request.getSession().getAttribute("user_id");
 			OrderModelDS orderModel = new OrderModelDS();

@@ -51,8 +51,9 @@ public class UpdateProduct extends HttpServlet {
 				request.setAttribute("product", product);
 				request.setAttribute("categories", categories);
 				
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/UpdateProduct.jsp");
-				dispatcher.forward(request, response);	
+				request.setAttribute("pageName", "/components/pages/admin/UpdateProduct.jsp");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+				dispatcher.forward(request, response);
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

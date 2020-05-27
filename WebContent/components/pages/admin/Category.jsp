@@ -1,27 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<jsp:include page="../HeaderData.jsp"></jsp:include>
-<title>Insert title here</title>
 
-</head>
-<body>
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="model.bean.Category"%>
-
-	<%
-		Boolean admin = (Boolean) session.getAttribute("isAdmin");
-		if ((admin == null) || (admin == false)) {
-			response.sendRedirect(request.getContextPath() + "/login");
-		}
-	%>
 	<%
 		ArrayList<Category> products = (ArrayList<Category>) request.getAttribute("categories");
 	%>
-
-	<jsp:include page="VNav.jsp" />
 
 
 	<div
@@ -69,15 +53,11 @@
 			<a style="margin-top: 30px;"
 				href="${pageContext.request.contextPath}/category/add"
 				class="waves-effect waves-light btn"><i
-				class="material-icons right">add</i>Aggiungi prodotto</a> <a
+				class="material-icons right">add</i>Aggiungi categoria</a> <a
 				style="margin-top: 30px;"
 				href="${pageContext.request.contextPath}/category/update"
 				class="waves-effect waves-light btn"><i
-				class="material-icons right">edit</i>Modifica prodotto</a>
+				class="material-icons right">edit</i>Modifica categoria</a>
 
 		</div>
 	</div>
-
-
-</body>
-</html>

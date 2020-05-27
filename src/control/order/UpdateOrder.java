@@ -36,8 +36,9 @@ public class UpdateOrder extends HttpServlet {
 		OrderModelDS orderModel = new OrderModelDS();
 		try {
 			request.setAttribute("order", orderModel.getById(id));
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/UpdateOrder.jsp"); 
-			dispatcher.forward(request, response); 
+			request.setAttribute("pageName", "/components/pages/admin/UpdateOrder.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+			dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

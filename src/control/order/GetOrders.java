@@ -35,8 +35,10 @@ public class GetOrders extends HttpServlet {
 		OrderModelDS orderModel = new OrderModelDS();
 		ArrayList<Order> orders = orderModel.get();
 		request.setAttribute("orders", orders);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/OrderList.jsp"); 
+		request.setAttribute("pageName", "/components/pages/admin/OrderList.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 		dispatcher.forward(request, response);
+		
 	}
 
 }

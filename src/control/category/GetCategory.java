@@ -35,7 +35,8 @@ public class GetCategory extends HttpServlet {
 		CategoryModelDS categoryModel = new CategoryModelDS();
 		try {
 			request.setAttribute("categories",categoryModel.get());
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/Category.jsp");
+			request.setAttribute("pageName", "/components/pages/admin/Category.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			response.getWriter().append("Error: \n"+ e);
