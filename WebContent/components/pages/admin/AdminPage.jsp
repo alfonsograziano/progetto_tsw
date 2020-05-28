@@ -9,14 +9,13 @@
 </head>
 <body>
 
-<style>
-
-html, body{
-height:100%;
+	<style>
+html, body {
+	height: 100%;
 }
 
 .admin-container {
-	height:100%;
+	height: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -25,7 +24,9 @@ height:100%;
 .main {
 	width: 100%;
 	overflow-y: scroll;
-	padding-bottom:100px;
+	padding-bottom: 100px;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.05);
 }
 </style>
 
