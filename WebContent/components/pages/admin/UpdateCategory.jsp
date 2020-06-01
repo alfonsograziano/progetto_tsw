@@ -4,6 +4,7 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
+<script type="text/javascript" src="js/validation/validaUpdateCategory.js"></script>
 
 <title>Aggiorna Categoria</title>
 </head>
@@ -22,7 +23,7 @@
 		<h4>Modifica una categoria...</h4>
 		<form class="col s12" method="post"
 			style="width: 100%; max-width: 500px;"
-			action="${pageContext.request.contextPath}/category/update">
+			 name="invio">
 			<div class='input-field col s12'>
 				<input class='validate' type='text' name='name' id='name' /> <label
 					for='email'>Nome della categoria</label>
@@ -39,7 +40,7 @@
 			</div>
 
 			<button type='submit' name='btn_login'
-				class='col s12 btn btn-large waves-effect indigo'>Modifica</button>
+				class='col s12 btn btn-large waves-effect indigo' onclick=valida()>Modifica</button>
 		</form>
 	</div>
 

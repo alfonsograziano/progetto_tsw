@@ -4,6 +4,7 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
+<script type="text/javascript" src="js/validation/validaUpdateShipping.js"></script>
 
 <title>Aggiorna Spedizione</title>
 </head>
