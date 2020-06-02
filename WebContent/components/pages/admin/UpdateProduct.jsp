@@ -6,7 +6,7 @@
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
 <title>Insert title here</title>
-
+<script type="text/javascript" src="../../../components/pages/admin/js/validation/validaUpdateProduct.js"></script>
 </head>
 <body>
 	<%@page import="java.util.ArrayList"%>
@@ -64,8 +64,7 @@
 			<div>
 
 				<h4>Modifica prodotto</h4>
-				<form style="width: 100%; max-width: 500px;" method="post"
-					action="${pageContext.request.contextPath}/admin/dashboard/products/update2">
+				<form style="width: 100%; max-width: 500px;" method="get" name="invio">
 					<input id="id" name="id" type="hidden" value="${product.id}">
 
 					<div class='input-field '>
@@ -81,7 +80,7 @@
 					</div>
 
 					<div class='input-field '>
-						<input type="number" step="0.01" name='price' id="'price'"
+						<input type="number" step="0.01" name='price' id="price"
 							value="${product.price}"> <label for='password'>Prezzo</label>
 					</div>
 
@@ -119,7 +118,7 @@
 
 					</div>
 
-					<button onClick="updateProduct()" name='btn_login'
+					<button onClick="updateProduct(); valida()" name='btn_login'
 						class='col s12 btn btn-large waves-effect indigo'>Aggiorna</button>
 				</form>
 			</div>

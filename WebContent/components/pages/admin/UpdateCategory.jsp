@@ -4,7 +4,7 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
-<script type="text/javascript" src="js/validation/validaUpdateCategory.js"></script>
+<script type="text/javascript" src="../components/pages/admin/js/validation/validaUpdateCategory.js"></script>
 
 <title>Aggiorna Categoria</title>
 </head>
@@ -21,7 +21,7 @@
 		<div class="section"></div>
 
 		<h4>Modifica una categoria...</h4>
-		<form class="col s12" method="post"
+		<form class="col s12" method="get"
 			style="width: 100%; max-width: 500px;"
 			 name="invio">
 			<div class='input-field col s12'>

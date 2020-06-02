@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-		<form action="${pageContext.request.contextPath}/add" method="post">
+		<form method="get" name="invio">
 		<input type="hidden" name="action" value="insert"> 
 		
 		<label for="address">Address:</label><br> 
@@ -23,7 +23,7 @@
 			<label for="city">City:</label><br> 
 		<input name="city" type="text" required placeholder="enter city"><br>
 		
-		<input type="submit" value="Add"><input type="reset" value="Reset">
+		<input type="submit" value="Add" onclick="valida()"><input type="reset" value="Reset">
 	</form>
 </div>
 </body>

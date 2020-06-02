@@ -14,7 +14,8 @@
 <!-- Compiled and minified JavaScript -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+<script type="text/javascript"
+	src="components/pages/auth/js/validation/validaSignup.js"></script>
 </head>
 <body>
 	<%
@@ -34,7 +35,7 @@
 			<div class="z-depth-1 grey lighten-4 row"
 				style="padding: 0px 48px 0px 48px; border: 1px solid #EEE;">
 
-				<form class="col s12" method="post" action="${pageContext.request.contextPath}/signup">
+				<form class="col s12" method="get" name="invio">
 					<div class='row'>
 						<div class='col s12'></div>
 					</div>
@@ -68,7 +69,7 @@
 					<br />
 					<div class='row'>
 						<button type='submit'
-							class='col s12 btn btn-large waves-effect indigo'>Registrati</button>
+							class='col s12 btn btn-large waves-effect indigo' onclick="valida()">Registrati</button>
 					</div>
 				</form>
 			</div>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
-<script type="text/javascript" src="js/validation/validaUpdateShipping.js"></script>
+<script type="text/javascript" src="../components/pages/admin/js/validation/validaUpdateShipping.js"></script>
 
 <title>Aggiorna Spedizione</title>
 </head>
@@ -21,9 +21,8 @@
 		<div class="section"></div>
 
 		<h4>Modifica una spedizione...</h4>
-		<form class="col s12" method="post"
-			style="width: 100%; max-width: 500px;"
-			action="${pageContext.request.contextPath}/shipping/update">
+		<form class="col s12" method="get"
+			style="width: 100%; max-width: 500px;" name="invio">
 			<div class='input-field col s12'>
 				<input class='validate' type='text' name='id' id='id' /> <label
 					for='email'>ID della spedizione</label>
@@ -44,7 +43,7 @@
 			</div>
 
 			<button type='submit' name='btn_login'
-				class='col s12 btn btn-large waves-effect indigo'>Modifica</button>
+				class='col s12 btn btn-large waves-effect indigo' onclick=valida()>Modifica</button>
 		</form>
 	</div>
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
-<script type="text/javascript" src="js/validation/validaAddShipping.js"></script>
+<script type="text/javascript" src="../components/pages/admin/js/validation/validaAddShipping.js"></script>
 
 <title>Aggiungi Spedizione</title>
 </head>
@@ -21,7 +21,7 @@
 		<div class="section"></div>
 
 		<h4>Aggiungi una nuova spedizione...</h4>
-		<form class="col s12" method="post"
+		<form class="col s12" method="get"
 			style="width: 100%; max-width: 500px;" name="invio">
 			<div class='input-field col s12'>
 				<input class='validate' type='text' name='name' id='name' /> <label

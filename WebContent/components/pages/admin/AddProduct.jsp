@@ -5,7 +5,7 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
-<script type="text/javascript" src="js/validation/validaAddProduct.js"></script>
+<script type="text/javascript" src="../components/pages/admin/js/validation/validaAddProduct.js"></script>
 <title>Aggiungi Prodotto</title>
 
 </head>
@@ -24,7 +24,7 @@
 			<div class="section"></div>
 		
 		<h4>Aggiungi un nuovo prodotto...</h4>
-		<form class="col s12" method="post" style="width:100%; max-width:500px;"
+		<form class="col s12" method="get" style="width:100%; max-width:500px;"
 			 name="invio">
 			<div class='input-field col s12'>
 				<input class='validate' type='text' name='name' id='name' /> <label
@@ -38,7 +38,7 @@
 			</div>
 
 			<div class='input-field col s12'>
-				<input type="number" step="0.01" name='price' id="'price'">
+				<input type="number" step="0.01" name='price' id="price">
 				<label for='password'>Prezzo</label>
 			</div>
 
