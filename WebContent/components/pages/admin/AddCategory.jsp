@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
 <script type="text/javascript" src="../components/pages/admin/js/validation/validaAddCategory.js"></script>
-=======
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> refs/remotes/origin/master
+
+
+
+
 
 	<div
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -34,11 +34,11 @@
 				class='col s12 btn btn-large waves-effect indigo' onclick="valida()">Aggiungi</button>
 		</form>
 	</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 </body>
 </html>
-=======
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> refs/remotes/origin/master
+
+
+
+

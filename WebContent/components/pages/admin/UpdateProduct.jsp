@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +41,7 @@
 		  array.push(checkboxes[i].value)
 		}
 		
-		console.log(array)
+		console.log(array);
 		
 	}
 	
@@ -54,7 +52,7 @@
 	});
 	
 	</script>
-=======
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.bean.Category"%>
 <%@page import="model.bean.Product"%>
@@ -63,8 +61,8 @@
 	Product product = (Product) request.getAttribute("product");
 	ArrayList<Category> productCategories = product.getCategories();
 %>
->>>>>>> refs/remotes/origin/master
-=======
+
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.bean.Category"%>
 <%@page import="model.bean.Product"%>
@@ -73,7 +71,7 @@
 	Product product = (Product) request.getAttribute("product");
 	ArrayList<Category> productCategories = product.getCategories();
 %>
->>>>>>> refs/remotes/origin/master
+
 
 
 
@@ -98,23 +96,22 @@
 					<label for="textarea1">Descrizione del prodotto</label>
 				</div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 				<h4>Modifica prodotto</h4>
 				<form style="width: 100%; max-width: 500px;" method="get" name="invio">
 					<input id="id" name="id" type="hidden" value="${product.id}">
-=======
+
 				<div class='input-field '>
 					<input type="number" step="0.01" name='price' id="'price'"
 						value="${product.price}"> <label for='password'>Prezzo</label>
 				</div>
->>>>>>> refs/remotes/origin/master
-=======
+
+
 				<div class='input-field '>
 					<input type="number" step="0.01" name='price' id="'price'"
 						value="${product.price}"> <label for='password'>Prezzo</label>
 				</div>
->>>>>>> refs/remotes/origin/master
+
 
 				<div class="input-field">
 					<p style="margin-bottom: 0px;">Visibile nel catalogo</p>
@@ -128,22 +125,22 @@
 					style="display: flex; flex-direction: column; margin-top: 20px; margin-bottom: 30px;">
 					<h5>Categorie</h5>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 					<div class='input-field '>
 						<input type="number" step="0.01" name='price' id="price"
 							value="${product.price}"> <label for='password'>Prezzo</label>
 					</div>
-=======
+
 					<%
 						for (int i = 0; i < categories.size(); i++) {
 					%>
->>>>>>> refs/remotes/origin/master
-=======
+
+
 					<%
 						for (int i = 0; i < categories.size(); i++) {
 					%>
->>>>>>> refs/remotes/origin/master
+
 
 					<label> <input type="checkbox"
 						id="<%=categories.get(i).getId()%>" name="categories"
@@ -154,8 +151,8 @@
 					}
 				}%> />
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 							<span><%=categories.get(i).getName()%></span>
 						</label>
 
@@ -187,14 +184,14 @@
 						</form>
 
 					</div>
-=======
+
 						<span><%=categories.get(i).getName()%></span>
 					</label>
->>>>>>> refs/remotes/origin/master
-=======
+
+
 						<span><%=categories.get(i).getName()%></span>
 					</label>
->>>>>>> refs/remotes/origin/master
+
 
 					<%
 						}

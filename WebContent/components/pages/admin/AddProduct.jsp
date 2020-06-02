@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,10 +21,10 @@
 	<jsp:include page="VNav.jsp" />
 
 
-=======
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> refs/remotes/origin/master
+
+
+
+
 	<div
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 			<div class="section"></div>
