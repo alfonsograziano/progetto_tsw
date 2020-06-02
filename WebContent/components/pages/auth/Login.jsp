@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,12 +18,12 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script type="text/javascript"
 	src="components/pages/auth/js/validation/validaLogin.js"></script>
-=======
+
 <jsp:include page="../HeaderData.jsp"></jsp:include>
->>>>>>> refs/remotes/origin/master
-=======
+
+
 <jsp:include page="../HeaderData.jsp"></jsp:include>
->>>>>>> refs/remotes/origin/master
+
 
 </head>
 <body>
@@ -37,34 +37,34 @@
 			<jsp:include page="../shop/Header.jsp" />
 	
 	<div class="section"></div>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 	<div
 		style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-=======
-=======
->>>>>>> refs/remotes/origin/master
+
+
+
 	
 	<div style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
->>>>>>> refs/remotes/origin/master
+
 
 		<div style="margin-top:50px;"></div>
-<<<<<<< HEAD
+
 
 		<h5 class="indigo-text">Effettua il login!</h5>
 		<div class="section"></div>
-=======
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
+
+
+
 		<div class="container"
 			style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-=======
+
 		<h5 class="indigo-text">Effettua il login!</h5>
 		<div class="section"></div>
 
 		<div class="container" style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
->>>>>>> refs/remotes/origin/master
+
 			<div class="z-depth-1 grey lighten-4 row"
 				style="display: inline-block; padding: 0px 48px 0px 48px; border: 1px solid #EEE;">
 
