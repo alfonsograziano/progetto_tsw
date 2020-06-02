@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -18,6 +19,8 @@
 <script type="text/javascript"
 	src="components/pages/auth/js/validation/validaSignup.js"></script>
 =======
+=======
+>>>>>>> refs/remotes/origin/master
 <head><jsp:include page="../HeaderData.jsp"></jsp:include>
 
 >>>>>>> refs/remotes/origin/master
@@ -40,7 +43,12 @@
 				style="padding: 0px 48px 0px 48px; border: 1px solid #EEE;">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<form class="col s12" method="get" name="invio">
+=======
+				<form class="col s12" method="post"
+					action="${pageContext.request.contextPath}/signup">
+>>>>>>> refs/remotes/origin/master
 =======
 				<form class="col s12" method="post"
 					action="${pageContext.request.contextPath}/signup">

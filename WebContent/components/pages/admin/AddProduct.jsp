@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,8 @@
 	<jsp:include page="VNav.jsp" />
 
 
+=======
+>>>>>>> refs/remotes/origin/master
 =======
 >>>>>>> refs/remotes/origin/master
 	<div
