@@ -86,9 +86,9 @@
 					</table>
 					<div class="wrap-row"
 						style="justify-content: space-around; align-items: center;">
-						<p>Tasse (iva 22%): <%=iva %></p>
+						<p>Tasse (iva 22%): <%=String.format("%.2f", iva) %></p>
 						<p>
-							Totale <b id="total_iva"><%=total_iva%></b>&euro;
+							Totale <b id="total_iva"><%=String.format("%.2f", total_iva)%></b>&euro;
 						</p>
 						<div id="payment-wrapper">
 							<a class="waves-effect waves-light btn amber lighten-3"

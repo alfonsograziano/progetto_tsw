@@ -218,4 +218,46 @@ public class ProductModelDS implements ProductModel{
 		return products;
 
 	}
+
+	@Override
+	public ArrayList<Product> search(String name) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ArrayList<Product>  products = new ArrayList<Product>();
+
+		String selectSQL = "SELECT * FROM " + ProductModelDS.TABLE_NAME + " WHERE name LIKE ? ";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, "%"+name+"%");
+			System.out.println(preparedStatement);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Product bean = new Product();
+
+				bean.setId(rs.getInt("id"));
+				bean.setName(rs.getString("name"));
+				bean.setDescription(rs.getString("description"));
+				bean.setPrice(rs.getDouble("price"));
+				bean.setVisible(rs.getBoolean("visible"));
+
+				products.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return products;
+
+	}
 }

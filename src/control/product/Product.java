@@ -34,7 +34,8 @@ public class Product extends HttpServlet {
 		ProductModelDS productModel = new ProductModelDS();
 		try {
 			request.setAttribute("products",productModel.get());
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/Products.jsp");
+			request.setAttribute("pageName", "/components/pages/admin/Products.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLException e) {
 			response.getWriter().append("Error: \n"+ e);

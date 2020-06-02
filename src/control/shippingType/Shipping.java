@@ -34,8 +34,10 @@ public class Shipping extends HttpServlet {
 		ShippingModelDS shippingModel = new ShippingModelDS();
 		try {
 			request.setAttribute("shipping_types", shippingModel.get());
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/Shipping_type.jsp");
+			request.setAttribute("pageName", "/components/pages/admin/Shipping_type.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 			dispatcher.forward(request, response);
+			
 		} catch (SQLException e) {
 			response.getWriter().append("Error: \n"+ e);
 			e.printStackTrace();

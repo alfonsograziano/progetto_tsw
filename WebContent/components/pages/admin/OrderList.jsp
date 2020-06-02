@@ -1,28 +1,13 @@
-><%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<jsp:include page="../HeaderData.jsp"></jsp:include>
-<title>Insert title here</title>
 
-</head>
-<body>
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="model.bean.Order"%>
 
-	<%
-		Boolean admin = (Boolean) session.getAttribute("isAdmin");
-		if ((admin == null) || (admin == false)) {
-			response.sendRedirect(request.getContextPath() + "/login");
-		}
-	%>
+
 	<%
 		ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
 	%>
-
-	<jsp:include page="VNav.jsp" />
-
 
 	<div
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -65,11 +50,6 @@
 					%>
 				</tbody>
 			</table>
-
 		
 		</div>
 	</div>
-
-
-</body>
-</html>

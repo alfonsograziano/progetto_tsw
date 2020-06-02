@@ -47,8 +47,10 @@ public class AddCategory extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AddCategory.jsp");
+		request.setAttribute("pageName", "/components/pages/admin/AddCategory.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 		dispatcher.forward(request, response);
+		
 	}
 
 }

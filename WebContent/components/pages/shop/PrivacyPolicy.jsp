@@ -15,7 +15,7 @@
 
 		<p>This Privacy Policy describes how your personal information is
 			collected, used, and shared when you visit or make a purchase from
-			www.betterhome.it (the “Site”).</p>
+			www.betterhome.it (the "Site").</p>
 
 		<h4>PERSONAL INFORMATION WE COLLECT</h4>
 		<p>When you visit the Site, we automatically collect certain
@@ -25,15 +25,15 @@
 			collect information about the individual web pages or products that
 			you view, what websites or search terms referred you to the Site, and
 			information about how you interact with the Site. We refer to this
-			automatically-collected information as “Device Information.” We
+			automatically-collected information as "Device Information." We
 			collect Device Information using the following technologies: -
-			“Cookies” are data files that are placed on your device or computer
+			"Cookies" are data files that are placed on your device or computer
 			and often include an anonymous unique identifier. For more
 			information about cookies, and how to disable cookies, visit
-			http://www.allaboutcookies.org. - “Log files” track actions occurring
+			http://www.allaboutcookies.org. - "Log files" track actions occurring
 			on the Site, and collect data including your IP address, browser
 			type, Internet service provider, referring/exit pages, and date/time
-			stamps. - “Web beacons,” “tags,” and “pixels” are electronic files
+			stamps. - "Web beacons," "tags," and "pixels" are electronic files
 			used to record information about how you browse the Site. [[INSERT
 			DESCRIPTIONS OF OTHER TYPES OF TRACKING TECHNOLOGIES USED]]
 
@@ -42,9 +42,9 @@
 			your name, billing address, shipping address, payment information
 			(including credit card numbers [[INSERT ANY OTHER PAYMENT TYPES
 			ACCEPTED]]), email address, and phone number. We refer to this
-			information as “Order Information.” [[INSERT ANY OTHER INFORMATION
+			information as "Order Information." [[INSERT ANY OTHER INFORMATION
 			YOU COLLECT: OFFLINE DATA, PURCHASED MARKETING DATA/LISTS]] When we
-			talk about “Personal Information” in this Privacy Policy, we are
+			talk about "Personal Information" in this Privacy Policy, we are
 			talking both about Device Information and Order Information.</p>
 
 		<h4>HOW DO WE USE YOUR PERSONAL INFORMATION?</h4>
@@ -83,7 +83,7 @@
 			you with targeted advertisements or marketing communications we
 			believe may be of interest to you. For more information about how
 			targeted advertising works, you can visit the Network Advertising
-			Initiative’s (“NAI”) educational page at
+			Initiative's ("NAI") educational page at
 			http://www.networkadvertising.org/understanding-online-advertising/how-does-it-work.
 
 			You can opt out of targeted advertising by: [[ INCLUDE OPT-OUT LINKS
@@ -92,10 +92,10 @@
 			https://www.google.com/settings/ads/anonymous BING -
 			https://advertise.bingads.microsoft.com/en-us/resources/policies/personalized-ads
 			]] Additionally, you can opt out of some of these services by
-			visiting the Digital Advertising Alliance’s opt-out portal at:
+			visiting the Digital Advertising Alliance's opt-out portal at:
 			http://optout.aboutads.info/.</p>
 		<h4>DO NOT TRACK</h4>
-		<p>Please note that we do not alter our Site’s data collection and
+		<p>Please note that we do not alter our Site's data collection and
 			use practices when we see a Do Not Track signal from your browser.
 			[[INCLUDE IF LOCATED IN OR IF STORE HAS CUSTOMERS IN EUROPE]] YOUR
 			RIGHTS If you are a European resident, you have the right to access

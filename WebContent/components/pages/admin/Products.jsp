@@ -1,25 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<jsp:include page="../HeaderData.jsp"></jsp:include>
-<title>Insert title here</title>
 
-</head>
-<body>
 	<%@page import="java.util.ArrayList"%>
-	<%@page import="model.bean.Product"%>
-
-	<%
-		Boolean admin = (Boolean) session.getAttribute("isAdmin");
-		if ((admin == null) || (admin == false)) {
-			response.sendRedirect(request.getContextPath() + "/login");
-		}
-	%>
+	<%@page import="model.bean.Product"%>	
 	<%ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products"); %>
-	
-	<jsp:include page="VNav.jsp" />
 
 
 	<div
@@ -69,7 +53,3 @@
 		
 		</div>
 	</div>
-
-
-</body>
-</html>

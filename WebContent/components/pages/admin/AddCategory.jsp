@@ -1,21 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
 <script type="text/javascript" src="../components/pages/admin/js/validation/validaAddCategory.js"></script>
+=======
+>>>>>>> refs/remotes/origin/master
 
-<title>Aggiungi Categoria</title>
-</head>
-<body>
-	<%
-		Boolean admin = (Boolean) session.getAttribute("isAdmin");
-		if ((admin == null) || (admin == false)) {
-			response.sendRedirect(request.getContextPath() + "/login");
-		}
-	%>
-	<jsp:include page="VNav.jsp" />
 	<div
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 		<div class="section"></div>
@@ -38,5 +31,8 @@
 				class='col s12 btn btn-large waves-effect indigo' onclick="valida()">Aggiungi</button>
 		</form>
 	</div>
+<<<<<<< HEAD
 </body>
 </html>
+=======
+>>>>>>> refs/remotes/origin/master
