@@ -3,16 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
-	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<title>Benvenuto</title>
+	<jsp:include page="./HeaderData.jsp"></jsp:include>
 	
-	<!-- Compiled and minified JavaScript -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-		
 </head>
 <body>
 	<div class="section"></div>

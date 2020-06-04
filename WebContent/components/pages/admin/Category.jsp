@@ -6,7 +6,16 @@
 	<%
 		ArrayList<Category> products = (ArrayList<Category>) request.getAttribute("categories");
 	%>
-
+<style>
+button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+</style>
 
 	<div
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">

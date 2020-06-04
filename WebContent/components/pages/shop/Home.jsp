@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>BetterHome</title>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
-<title></title>
-
 </head>
 <body>
 
@@ -99,9 +98,9 @@
 
 
 	</div>
-	
-	
-	
+
+
+
 
 	<jsp:include page="Footer.jsp" />
 	<script>

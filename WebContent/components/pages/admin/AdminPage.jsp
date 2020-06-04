@@ -54,5 +54,7 @@ html, body {
 
 	</div>
 
+	<p style="position:fixed; bottom:20px; right:40px; color:gray;">Copyright - BetterHome 2020</p>
+
 </body>
 </html>

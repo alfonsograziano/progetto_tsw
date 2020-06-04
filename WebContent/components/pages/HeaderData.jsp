@@ -17,7 +17,5 @@
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
 	crossorigin="anonymous"></script>
 
-<meta charset="utf-8" />
-
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">

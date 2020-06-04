@@ -4,7 +4,8 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
-<title>Insert title here</title>
+<title>Carrello</title>
+
 
 </head>
 <body>
@@ -34,6 +35,7 @@
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom:300px;">
 		<div style="width:90%; max-width:600px;">
 		<h1>Carrello</h1>
+		<%if(cart.size()>0){ %>
 		<table>
 			<thead>
 				<tr>
@@ -123,6 +125,12 @@
 			class="waves-effect waves-light btn"><i class="material-icons right">check</i>Procedi all'acquisto</a>
 
 		</div>
+		<%}else{ %>
+		<h3>Non hai elementi nel carrello</h3>
+		<button onClick="window.location='${pageContext.request.contextPath}/home'" class="btn btn-large">Torna allo shop</button>
+		<%} %>
+		
+	</div>
 	</div>
 
 	<jsp:include page="Footer.jsp" />

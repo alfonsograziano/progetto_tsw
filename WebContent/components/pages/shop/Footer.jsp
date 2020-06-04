@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <footer class="page-footer blue-grey darken-3">
 
+<!-- Cookie consent (volendolo attivare bisogna impostare il cookie così che non compaia su ogni pagine)
 	<div id="cookieConsent">
 		<div id="closeCookieConsent">x</div>
 		Questo sito utilizza i cookie <a
@@ -18,7 +19,7 @@
 			});
 		});
 	</script>
-	
+	-->
 
 <a href="https://api.whatsapp.com/send?phone=+39 3899098485" class="float" target="_blank">
 		<i class="fa fa-whatsapp my-float"></i>

@@ -28,7 +28,7 @@
 
 <style>
 .box {
-	border-radius: 20px;
+	border-radius: 10px;
 	background-color: white;
 	max-width: 400px;
 	padding: 20px;

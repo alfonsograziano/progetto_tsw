@@ -4,7 +4,7 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
-<title></title>
+<title>Profilo</title>
 
 </head>
 <body>
