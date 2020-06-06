@@ -262,6 +262,7 @@ public class ShippingInfoModelDS implements ShippingInfoModel {
 
 			while (rs.next()) {
 				ShippingInfo bean=new ShippingInfo();
+				bean.setId(rs.getInt("id"));
 				bean.setAddress(rs.getString("address"));
 				bean.setState(rs.getString("state"));
 				bean.setZipCode(rs.getString("zip_code"));
