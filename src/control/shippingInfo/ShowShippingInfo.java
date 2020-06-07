@@ -26,24 +26,16 @@ public class ShowShippingInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			request.getSession().setAttribute("user_id", 1);
-			ShippingInfoModelDS shippingInfoModel = new ShippingInfoModelDS();
-			int user = (int) request.getSession().getAttribute("user_id");
-			try {
-				ArrayList<ShippingInfo> ship = shippingInfoModel.getByUser(user);
-				for (int i = 0; i < ship.size(); i++) {
-					System.out.println(ship.get(i).getAddress());
-				}
-				request.setAttribute("shipInfo", shippingInfoModel.getByUser(user));
-				RequestDispatcher dispatcher = getServletContext()
-						.getRequestDispatcher("/components/pages/user/ShowShippingInfo.jsp");
-				dispatcher.forward(request, response);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
-			response.setStatus(400);
-			response.getWriter().append("Errore");
+			ArrayList<ShippingInfo> ship = shippingInfoModel.getByUser(user);
+			/*for(int i=0; i<ship.size();i++) {
+				System.out.println("vediamo: "+ ship.get(i).getId());
+			}*/
+			request.setAttribute("shipInfo",shippingInfoModel.getByUser(user));
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/user/ShowShippingInfo.jsp");
+			dispatcher.forward(request, response);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 	}
