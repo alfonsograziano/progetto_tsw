@@ -21,41 +21,44 @@ import model.dao.UserModelDS;
 @WebServlet("/order/details")
 public class Details extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Details() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Integer id = Integer.parseInt(request.getParameter("id"));
-		OrderModelDS orderModel = new OrderModelDS();
-		UserModelDS userModel = new UserModelDS();
-		try {
-			Order order = orderModel.getCompleteOrderById(id);
-			User user = userModel.getById(order.getIdUser());
-			request.setAttribute("user", user);
-			request.setAttribute("order", order);
-			request.setAttribute("pageName", "/components/pages/admin/OrderDetails.jsp");
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
-			dispatcher.forward(request, response);
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+	public Details() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			OrderModelDS orderModel = new OrderModelDS();
+			UserModelDS userModel = new UserModelDS();
+			try {
+				Order order = orderModel.getCompleteOrderById(id);
+				User user = userModel.getById(order.getIdUser());
+				request.setAttribute("user", user);
+				request.setAttribute("order", order);
+				request.setAttribute("pageName", "/components/pages/admin/OrderDetails.jsp");
+				RequestDispatcher dispatcher = getServletContext()
+						.getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+				dispatcher.forward(request, response);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
+		}
+
+	}
 
 }

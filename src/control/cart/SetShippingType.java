@@ -26,23 +26,14 @@ public class SetShippingType extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-        Enumeration<String> parameterNames = request.getParameterNames();
-        while (parameterNames.hasMoreElements()) {
-            String paramName = parameterNames.nextElement();
-            System.out.println(paramName);
-            String paramValue = request.getParameter(paramName);
-            System.out.println(paramValue);
-        }
- 		*/
-        int id = Integer.parseInt(request.getParameter("shipping_type_id"));
-
-		request.getSession().setAttribute("shipping_type_id", id);
-		response.sendRedirect((String) request.getHeader("referer"));
+		try {
+	        int id = Integer.parseInt(request.getParameter("shipping_type_id"));
 	
-		
-		
-
+			request.getSession().setAttribute("shipping_type_id", id);
+			response.sendRedirect((String) request.getHeader("referer"));
+		}catch(Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
+		}
 	}
-
 }

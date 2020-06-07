@@ -18,35 +18,41 @@ import model.dao.CategoryModelDS;
 @WebServlet("/category/update")
 public class UpdateCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateCategory() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
-		String id = request.getParameter("id");
-		String newId = request.getParameter("newId");
-		
-		
-		Category category = new Category();
-		category.setName(name);
-		category.setId(id);
-		
-		CategoryModelDS categoryModel = new CategoryModelDS();
-		
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UpdateCategory() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			String name = request.getParameter("name");
+			String id = request.getParameter("id");
+			String newId = request.getParameter("newId");
+
+			Category category = new Category();
+			category.setName(name);
+			category.setId(id);
+
+			CategoryModelDS categoryModel = new CategoryModelDS();
+
 			categoryModel.update(category, newId);
 			response.sendRedirect(request.getContextPath() + "/admin/dashboard/categories");
-
+		} catch (Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
+		}
 	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setAttribute("pageName", "/components/pages/admin/UpdateCategory.jsp");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+		RequestDispatcher dispatcher = getServletContext()
+				.getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 		dispatcher.forward(request, response);
 	}
 

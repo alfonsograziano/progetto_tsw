@@ -38,6 +38,7 @@ public class ProductPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		
 		String id = request.getParameter("id");
 		System.out.println(id);
 		if(id != null && !id.isEmpty()) {
@@ -59,7 +60,7 @@ public class ProductPage extends HttpServlet {
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/ProductPage.jsp");
 					dispatcher.forward(request, response);	
 				}else {
-					response.getWriter().append("404 lol");
+					 response.sendRedirect(request.getContextPath() + "/404");
 				}
 				
 				
@@ -69,7 +70,7 @@ public class ProductPage extends HttpServlet {
 			}
 
 		} else {
-			//response.sendRedirect(request.getContextPath() + "/home");
+			 response.sendRedirect(request.getContextPath() + "/404");
 
 		}
 		

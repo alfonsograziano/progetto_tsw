@@ -34,25 +34,32 @@ public class AddToCart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProductModelDS pmds = new ProductModelDS();
-		ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
-		if(cart == null) {
-			cart = new ArrayList<ChoosenProduct>();
-		}
-		ChoosenProduct bean = new ChoosenProduct();
-		Product prod=null;
+		
 		try {
-			prod = pmds.getById(Integer.parseInt(request.getParameter("product")));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ProductModelDS pmds = new ProductModelDS();
+			ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
+			if(cart == null) {
+				cart = new ArrayList<ChoosenProduct>();
+			}
+			ChoosenProduct bean = new ChoosenProduct();
+			Product prod=null;
+			try {
+				prod = pmds.getById(Integer.parseInt(request.getParameter("product")));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			bean.setProduct(prod);
+			bean.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+			cart.add(bean);
+			request.getSession().setAttribute("cart", cart);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/home");
+			dispatcher.forward(request, response);
+		}catch(Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
 		}
-		bean.setProduct(prod);
-		bean.setQuantity(Integer.parseInt(request.getParameter("quantity")));
-		cart.add(bean);
-		request.getSession().setAttribute("cart", cart);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/home");
-		dispatcher.forward(request, response);
+		
 	}
 
 	/**

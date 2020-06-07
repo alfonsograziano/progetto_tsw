@@ -41,61 +41,65 @@ public class PostUpdateProduct extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArrayList<String> categories;
-		String[] fetchedCategories = request.getParameterValues("categories");
-		if(fetchedCategories != null && fetchedCategories.length >0) {
-			categories = new ArrayList<String>(Arrays.asList(fetchedCategories));
-		}else {
-			categories = new ArrayList<String>();
-
-		}
-
-		Integer id = Integer.parseInt(request.getParameter("id"));
-		String name = request.getParameter("name");
-		String description = request.getParameter("description");
-		Double price = Double.parseDouble(request.getParameter("price"));
-		boolean visible = request.getParameter("visible").equals("true")?true:false;
-		System.out.println(visible);
-		
-		Product product = new Product();
-		product.setId(id);
-		product.setName(name);
-		product.setDescription(description);
-		product.setPrice(price);
-		product.setVisible(visible);
-	
-
-		ProductModelDS productModel = new ProductModelDS();
-		BelongsModelDS belongsModel = new BelongsModelDS();
 		try {
-			
-			//Aggiorno il prodotto
-			productModel.update(product);
-			
-			//Aggiorno le categorie
-			ArrayList<Category> oldCategories = belongsModel.getByProduct(id);
-			ArrayList<String> toAdd = findCategoriesToAdd(categories, oldCategories);
-			ArrayList<String> toRemove = findCategoriesToRemove(categories, oldCategories);
-			
-			//System.out.println(toAdd);
-			//System.out.println(toRemove);
-			
-			for(int i = 0; i < toAdd.size(); i++) {
-				Belongs belongs = new Belongs();
-				belongs.setCategory(toAdd.get(i));
-				belongs.setProduct(id);
-				belongsModel.add(belongs);
-			}
-			
-			for(int i = 0; i < toRemove.size(); i++) {
-				belongsModel.delete(toRemove.get(i), id);
-			}
-			
-			response.sendRedirect((String) request.getHeader("referer"));
+			ArrayList<String> categories;
+			String[] fetchedCategories = request.getParameterValues("categories");
+			if (fetchedCategories != null && fetchedCategories.length > 0) {
+				categories = new ArrayList<String>(Arrays.asList(fetchedCategories));
+			} else {
+				categories = new ArrayList<String>();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			}
+
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			String name = request.getParameter("name");
+			String description = request.getParameter("description");
+			Double price = Double.parseDouble(request.getParameter("price"));
+			boolean visible = request.getParameter("visible").equals("true") ? true : false;
+			System.out.println(visible);
+
+			Product product = new Product();
+			product.setId(id);
+			product.setName(name);
+			product.setDescription(description);
+			product.setPrice(price);
+			product.setVisible(visible);
+
+			ProductModelDS productModel = new ProductModelDS();
+			BelongsModelDS belongsModel = new BelongsModelDS();
+			try {
+
+				// Aggiorno il prodotto
+				productModel.update(product);
+
+				// Aggiorno le categorie
+				ArrayList<Category> oldCategories = belongsModel.getByProduct(id);
+				ArrayList<String> toAdd = findCategoriesToAdd(categories, oldCategories);
+				ArrayList<String> toRemove = findCategoriesToRemove(categories, oldCategories);
+
+				// System.out.println(toAdd);
+				// System.out.println(toRemove);
+
+				for (int i = 0; i < toAdd.size(); i++) {
+					Belongs belongs = new Belongs();
+					belongs.setCategory(toAdd.get(i));
+					belongs.setProduct(id);
+					belongsModel.add(belongs);
+				}
+
+				for (int i = 0; i < toRemove.size(); i++) {
+					belongsModel.delete(toRemove.get(i), id);
+				}
+
+				response.sendRedirect((String) request.getHeader("referer"));
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
 		}
 	}
 

@@ -19,28 +19,29 @@ import model.dao.ShippingModelDS;
 @WebServlet("/shipping/add")
 public class AddShipping extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddShipping() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
-		int days = Integer.parseInt(request.getParameter("days"));
-		double price = Double.parseDouble(request.getParameter("price"));
-		
-		
-		Shipping shipp = new Shipping();
-		shipp.setName(name);
-		shipp.setDays(days);
-		shipp.setPrice(price);
-		
-		ShippingModelDS shippingModel = new ShippingModelDS();
-		
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AddShipping() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			String name = request.getParameter("name");
+			int days = Integer.parseInt(request.getParameter("days"));
+			double price = Double.parseDouble(request.getParameter("price"));
+
+			Shipping shipp = new Shipping();
+			shipp.setName(name);
+			shipp.setDays(days);
+			shipp.setPrice(price);
+
+			ShippingModelDS shippingModel = new ShippingModelDS();
+
 			try {
 				shippingModel.add(shipp);
 			} catch (SQLException e) {
@@ -49,11 +50,17 @@ public class AddShipping extends HttpServlet {
 			}
 			response.sendRedirect(request.getContextPath() + "/admin/dashboard/shipping_type");
 
+		} catch (Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
+		}
 	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setAttribute("pageName", "/components/pages/admin/AddShipping.jsp");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+		RequestDispatcher dispatcher = getServletContext()
+				.getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 		dispatcher.forward(request, response);
 	}
 

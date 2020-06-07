@@ -43,6 +43,7 @@ public class CreateOrder extends HttpServlet {
 		
 		//Controllo se l'utente è loggato
 		if(request.getSession().getAttribute("user_id") == null) {
+			response.setStatus(301);
 			response.getWriter().append("Errore, non sei loggato, non puoi effettuare l'acquisto");
 		}else {
 			Integer user_id = (Integer) request.getSession().getAttribute("user_id");
@@ -51,6 +52,7 @@ public class CreateOrder extends HttpServlet {
 				//Controllo se nel carrello ci sono elementi
 				ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
 				if (cart == null) {
+					response.setStatus(400);
 					response.getWriter().append("Errore, non hai elementi nel carrello");
 				}else {
 					int shipping_type_id = -1;

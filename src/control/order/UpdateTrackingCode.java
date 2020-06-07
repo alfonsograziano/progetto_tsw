@@ -17,26 +17,28 @@ import model.dao.OrderModelDS;
 @WebServlet("/orders/updateTrackingCode")
 public class UpdateTrackingCode extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateTrackingCode() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-    
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UpdateTrackingCode() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer orderId = Integer.parseInt(request.getParameter("order_id"));
-		String trackingId = (String) request.getParameter("tracking_id");
-		
-		//TODO: Gestisci il metodo updateTracking con il try catch nell'utilizzatore e non nel metodo
-		OrderModelDS orderModel = new OrderModelDS();
-		orderModel.updateTracking(orderId, trackingId);
-		response.sendRedirect((String) request.getHeader("referer"));
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			Integer orderId = Integer.parseInt(request.getParameter("order_id"));
+			String trackingId = (String) request.getParameter("tracking_id");
+
+			OrderModelDS orderModel = new OrderModelDS();
+			orderModel.updateTracking(orderId, trackingId);
+			response.sendRedirect((String) request.getHeader("referer"));
+		} catch (Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
+		}
 	}
 
 }

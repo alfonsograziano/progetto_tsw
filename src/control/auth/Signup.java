@@ -38,28 +38,31 @@ public class Signup extends HttpServlet {
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
-		//TODO: fai la validazione dei parametri
-		
-		User user = new User();
-		user.setEmail(email);
-		user.setPassword(password);
-		user.setName(name);
-		user.setSurname(surname);
-		
-		//TODO: Usa l'hash della password al posto della password in chiaro per salvare
-		//TODO: Prima di eseguire il salvataggio controlla se la mail è già stata utilizzata
-		UserModelDS userModel = new UserModelDS();
-		
-		try {
-			userModel.add(user);
-			response.sendRedirect(request.getContextPath() + "/welcome");
-		} catch (SQLException e) {
-			response.getWriter().append("Errore nella creazione dell'utente \n"+e);
-			e.printStackTrace();
-		}
-		
-		
+		if(email == null || password == null || name == null || surname == null ||
+				email.isEmpty() || password.isEmpty() || name.isEmpty() || surname.isEmpty()) {
+			response.setStatus(400);
+			response.getWriter().append("Inserisci tutti i campi richiesti: email, password, nome e cognome");
+			
+		}else {
+			//if(isAlreadyUsed(email))
+			//TODO: Prima di eseguire il salvataggio controlla se la mail è già stata utilizzata
+
+			User user = new User();
+			user.setEmail(email);
+			user.setPassword(password);
+			user.setName(name);
+			user.setSurname(surname);
+			
+			UserModelDS userModel = new UserModelDS();
+			
+			try {
+				userModel.add(user);
+				response.sendRedirect(request.getContextPath() + "/welcome");
+			} catch (SQLException e) {
+				response.getWriter().append("Errore nella creazione dell'utente \n"+e);
+				e.printStackTrace();
+			}
+		}		
 		
 	}
-
 }

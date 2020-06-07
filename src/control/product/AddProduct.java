@@ -19,42 +19,49 @@ import model.dao.ProductModelDS;
 @WebServlet("/product/add")
 public class AddProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
- 
-    public AddProduct() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+	public AddProduct() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
-		String description = request.getParameter("description");
-		Double price = Double.parseDouble(request.getParameter("price"));
-		
-		Product product = new Product();
-		product.setName(name);
-		product.setDescription(description);
-		product.setPrice(price);
-		
-		ProductModelDS productModel = new ProductModelDS();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-			productModel.add(product);
-			response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+			String name = request.getParameter("name");
+			String description = request.getParameter("description");
+			Double price = Double.parseDouble(request.getParameter("price"));
 
-		} catch (SQLException e) {
-			response.getWriter().append("Error: \n"+e);
-			e.printStackTrace();
+			Product product = new Product();
+			product.setName(name);
+			product.setDescription(description);
+			product.setPrice(price);
+
+			ProductModelDS productModel = new ProductModelDS();
+			try {
+				productModel.add(product);
+				response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+
+			} catch (SQLException e) {
+				response.getWriter().append("Error: \n" + e);
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
 		}
-		//TODO: fai il controllo dei parametri etc
 	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setAttribute("pageName", "/components/pages/admin/AddProduct.jsp");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+		RequestDispatcher dispatcher = getServletContext()
+				.getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 		dispatcher.forward(request, response);
 	}
 

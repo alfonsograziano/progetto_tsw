@@ -51,9 +51,11 @@ public class Login extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/home");
 
 			}else {
+				response.setStatus(400);
 				response.getWriter().append("Dati d'accesso errati...");
 			}	
 		}else {
+			response.setStatus(400);
 			response.getWriter().append("Compila tutti i campi nel login!");
 		}	
 		

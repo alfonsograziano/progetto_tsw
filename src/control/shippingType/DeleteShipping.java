@@ -18,21 +18,22 @@ import model.dao.ShippingModelDS;
 @WebServlet("/shipping/delete")
 public class DeleteShipping extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteShipping() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
- protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int id = Integer.parseInt(request.getParameter("id"));
-		
-		ShippingModelDS shippingModel = new ShippingModelDS();
-		
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public DeleteShipping() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			int id = Integer.parseInt(request.getParameter("id"));
+
+			ShippingModelDS shippingModel = new ShippingModelDS();
+
 			try {
 				shippingModel.delete(id);
 			} catch (SQLException e) {
@@ -40,12 +41,17 @@ public class DeleteShipping extends HttpServlet {
 				e.printStackTrace();
 			}
 			response.sendRedirect(request.getContextPath() + "/admin/dashboard/shipping_type");
-
+		} catch (Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
+		}
 	}
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setAttribute("pageName", "/components/pages/admin/DeleteShipping.jsp");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+		RequestDispatcher dispatcher = getServletContext()
+				.getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 		dispatcher.forward(request, response);
 	}
 

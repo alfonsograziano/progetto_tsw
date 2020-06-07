@@ -32,15 +32,22 @@ public class DeleteAll extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
-		int id = Integer.parseInt(request.getParameter("id"));
-		for(int i=0; i<cart.size(); i++) {
-			if(cart.get(i).getProduct().getId() == id) {
-					cart.remove(i);
+		
+		try {
+			int id = Integer.parseInt(request.getParameter("id"));
+			for(int i=0; i<cart.size(); i++) {
+				if(cart.get(i).getProduct().getId() == id) {
+						cart.remove(i);
+				}
 			}
+			request.getSession().setAttribute("cart", cart);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart");
+			dispatcher.forward(request, response);
+		}catch(Exception e) {
+			response.setStatus(400);
+			response.getWriter().append("Errore");
 		}
-		request.getSession().setAttribute("cart", cart);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart");
-		dispatcher.forward(request, response);
+		
 	}
 
 	/**
