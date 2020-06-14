@@ -55,7 +55,8 @@ public class AddShippingInfo extends HttpServlet {
 		x.setCity(city);
 		//System.out.println("prova"+x.getUserId());
 		System.out.println("ciao");
-
+		ShippingInfoModelDS shippingInfoModel = new ShippingInfoModelDS();
+		try {
 			shippingInfoModel.add(x);
 		} catch (Exception e) {
 			response.setStatus(400);
