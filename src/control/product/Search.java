@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,8 +40,11 @@ public class Search extends HttpServlet {
 			ArrayList<model.bean.Product> products;
 			try {
 				products = productModel.search(name);
-				response.getWriter().append(products.toString());
-
+				request.setAttribute("search", products);
+				
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/SearchResults.jsp");
+				dispatcher.forward(request, response);
+				
 			} catch (SQLException e) {
 				response.getWriter().append("Errore: " + e);
 

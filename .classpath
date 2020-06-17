@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
@@ -14,17 +14,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/barcodes-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/font-asian-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/forms-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/hyph-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/io-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/kernel-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/layout-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/pdfa-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/pdftest-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/sign-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/styled-xml-parser-7.1.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ivanc/Desktop/Università/web/itext/svg-7.1.11.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

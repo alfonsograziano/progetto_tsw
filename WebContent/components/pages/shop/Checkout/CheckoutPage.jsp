@@ -184,8 +184,7 @@
 							details: $("#details").val(),
 							payment_id: token
 						}
-						console.log($.post("<%=request.getContextPath()%>
-		/order/add",
+						console.log($.post("<%=request.getContextPath()%>/order/add",
 								data, function() {
 									alert("Ordine completato...");
 								}))

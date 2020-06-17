@@ -235,6 +235,7 @@ public class ProductModelDS implements ProductModel{
 			System.out.println(preparedStatement);
 
 			ResultSet rs = preparedStatement.executeQuery();
+			ImageModelDS imageModel = new ImageModelDS();
 
 			while (rs.next()) {
 				Product bean = new Product();
@@ -244,6 +245,7 @@ public class ProductModelDS implements ProductModel{
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
 				bean.setVisible(rs.getBoolean("visible"));
+				bean.setImages(imageModel.getImagesByProduct(bean.getId()));
 
 				products.add(bean);
 			}
