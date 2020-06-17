@@ -144,6 +144,55 @@ public class ContainsModelDS {
 		
 	}
 	
+	public Contains getByOrderProduct(int IdOrder,int IdProduct) throws SQLException {
+		Connection connection = null;
+		Contains bean=new Contains();
+		PreparedStatement preparedStatement = null;
+		String selectSQL = "SELECT * FROM " + ContainsModelDS.TABLE_NAME + 
+				" WHERE order_id = ? and product_id=?";
+	
+			try {
+				connection = ds.getConnection();
+				preparedStatement = connection.prepareStatement(selectSQL);
+				preparedStatement.setInt(1, IdOrder);
+				preparedStatement.setInt(2, IdProduct);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			
+			try {
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				bean.setOrderId(rs.getInt("order_id"));
+				bean.setProductId(rs.getInt("product_id"));
+				bean.setPrice(rs.getDouble("price"));
+				bean.setQuantity(rs.getInt("quantity"));
+				
+			}
+
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+			}
+
+		return bean;
+		
+		
+		
+		
+	}
+
+	
 	public ArrayList<Product> getByOrder(int IdOrder) {
 		
 		Connection connection = null;

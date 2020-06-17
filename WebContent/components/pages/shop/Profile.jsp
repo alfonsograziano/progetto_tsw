@@ -39,12 +39,12 @@
 					<p class="nomargin">Codice di spedizione:<%=o.getTrack_id() %> </p>
 				<%} %>
 			</div>
-			
+			<%if(o.getOrderState() != 4){ //if aggiunto perchè se stampo i dettagli di un ordine deleted, crasha a causa di puntatori null%>
 			<form method="get" action="${pageContext.request.contextPath}/order">
 				<input type="hidden" value="<%=o.getId() %>" name="id" />
 				<button type="submit" class="waves-effect waves-light btn  blue-grey lighten-5" style="margin:20px; color:black;">Vedi dettagli</button>
 			</form>
-			
+			<%} %>
 		</div>
 		<br/>
 	<%} %>

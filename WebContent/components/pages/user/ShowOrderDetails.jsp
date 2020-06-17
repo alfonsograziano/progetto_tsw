@@ -3,62 +3,78 @@
 
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="model.bean.Order"%>
+	<%@page import="model.bean.Product"%>
+	<%@page import="model.bean.Contains"%>
 	<jsp:include page="../HeaderData.jsp"></jsp:include>
+		<jsp:include page="../shop/Header.jsp" />
+	
 	
 
 
 	<%
+		ArrayList<Product> products= (ArrayList<Product>) request.getAttribute("products");
 		Order order = (Order) request.getAttribute("order");
+		ArrayList<Contains> contains= (ArrayList<Contains>) request.getAttribute("contains");
 	%>
 
 	<div
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 		<div style="width: 90%; max-width: 600px;">
 			<h1>Dettagli Ordine</h1>
+			<h6 class="order-header">Ordine n:#<%=order.getId() %></h6>
+				<div>
 			<table>
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>Data</th>
-						<th>Iva</th>
-						<th>City</th>
-						<th>Address</th>
-						<th>State</th>
-						<th>zipCode</th>
-						<th>Details</th>
-						<th>TrackId</th>
-						<th>ShippingPrice</th>
-						<th>PaymentCode</th>
-						<th>OrderState</th>
+						<th>Name</th>
+						<th>Description</th>
+						<th>SinglePrice</th>
+						<th>Quantity</th>
+						<th>TotalPrice</th>
+						
+						
 						
 						
 						
 					<tr>
 				</thead>
 				<tbody>
+				<%for(int i =  products.size()-1; i >= 0; i--){%>
 					<tr>
-						<td><%=order.getId()%></td>
-						<td><%=order.getDate().getDate()+"/"+order.getDate().getMonth()+"/"+order.getDate().getYear() %></td>
-						<td><%=order.getIva()%></td>
-						<td><%=order.getCity()%></td>
-						<td><%=order.getAddress()%></td>
-						<td><%=order.getState()%></td>
-						<td><%=order.getZipCode()%></td>
-						<td><%=order.getDetails()%></td>
-						<td><%=order.getTrack_id()%></td>
-						<td><%=order.getShippingPrice()%></td>
-						<td><%=order.getPaymentCode()%></td>					
+						<td><%=products.get(i).getName()%></td>
+						<td><%=products.get(i).getDescription()%></td>
+						<td><%=products.get(i).getPrice()%></td>	
+						<td><%=contains.get(i).getQuantity()%></td>	
+						<td><%=contains.get(i).getPrice()%></td>	
+						
+									
 						<td>
-						<%
-							if(order.getOrderState() == 1) out.print("<span class='nomargin order-pending'>pending</span>");
-							if(order.getOrderState() == 2) out.print("<span class='nomargin order-sent'>sent</span>");
-							if(order.getOrderState() == 3) out.print("<span class='nomargin order-fulfilled'>fulfilled</span>");
-							if(order.getOrderState() == 4) out.print("<span class='nomargin order-deleted'>deleted</span>");
-						%>
-						</td>
 					</tr>
+														<%} %>
+					
 				</tbody>
 			</table>
-		
+			</div>
+			
+							<p class="nomargin">indirizzo di spedizione:<%=order.getAddress()+","+order.getCity()+","+order.getZipCode()+","
+							+order.getState()%> </p>
+							<p class="nomargin">dettagli ordine:<%=order.getDetails()%> </p>
+							<p class="nomargin">tracking:<%=order.getTrack_id()%> </p>
+							<p class="nomargin">prezzo spedizione:<%=order.getShippingPrice()%> </p>
+							<p class="nomargin">codice pagamento:<%=order.getPaymentCode()%> </p>
 		</div>
+		<div>
+		</div>
+			<a style="margin-top: 30px;"
+				href="${pageContext.request.contextPath}/components/pages/user/servletfattura.java"
+				class="waves-effect waves-light btn"><i
+				class="material-icons right">add</i>Stampa Fattura</a> 
 	</div>
+		</div>
+		
+	</div>
+	
+	
+	
+	
+	

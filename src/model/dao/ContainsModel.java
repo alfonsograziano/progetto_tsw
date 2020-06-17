@@ -12,4 +12,5 @@ public interface ContainsModel {
 	public ArrayList<Contains> get() throws SQLException;
 	public ArrayList<Product> getByOrder(int IdOrder) throws SQLException;
 	public ArrayList<Order> getByProduct(int IdProduct) throws SQLException;
+	public Contains getByOrderProduct(int IdOrder,int IdProduct)throws SQLException;
 }

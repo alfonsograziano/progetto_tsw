@@ -5,6 +5,8 @@
 <head>
 
 <jsp:include page="../HeaderData.jsp"></jsp:include>
+<script type="text/javascript"
+	src="components/pages/auth/js/validation/validaLogin.js"></script>
 
 
 </head>
