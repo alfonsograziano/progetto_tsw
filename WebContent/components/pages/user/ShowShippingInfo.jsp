@@ -8,6 +8,8 @@
 
 <title>spedizioni utente</title>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
+	<jsp:include page="../shop/Header.jsp" />
+
 
 <div
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -69,7 +71,10 @@
 			<a style="margin-top: 30px;"
 				href="${pageContext.request.contextPath}/components/pages/user/AddShippingInfo.jsp"
 				class="waves-effect waves-light btn"><i
-				class="material-icons right">add</i>Aggiungi indirizzo spedizione</a> 
+				class="material-icons right">add</i>Aggiungi indirizzo spedizione</a> 				
 	</div>
+	
+						<jsp:include page="../shop/Footer.jsp" />
+	
 							
 							

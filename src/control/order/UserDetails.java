@@ -70,7 +70,8 @@ public class UserDetails extends HttpServlet {
 			request.setAttribute("products", products);
 			Order order = orderModel.getCompleteOrderById(id);
 			request.setAttribute("order", order);
-			System.out.println("prodotto 1: "+ products.get(0).getName());
+			//System.out.println("prodotto 1: "+ products.get(0).getName());
+	
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/user/ShowOrderDetails.jsp");
 			dispatcher.forward(request, response);
 

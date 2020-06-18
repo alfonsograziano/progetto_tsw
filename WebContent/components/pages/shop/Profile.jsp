@@ -12,17 +12,27 @@
 
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="model.bean.Order"%>
+	<%@page import="model.bean.User"%>
+	
+	
 
 	<jsp:include page="Header.jsp" />
-	
-	<div class="container">
-		<h3>Riepilogo ordini</h3>
 	<%
 		ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
+		User user=(User) request.getAttribute("user");
+		request.setAttribute("user_id",user.getId());
+		Order o=orders.get(orders.size()-1);
 	%>
+	<div class="container" style="align-items:left">
+	<h4>Ciao <%out.print(user.getName()); %> <%out.print(user.getSurname());%></h4>
+	<h6 >email: <%out.print(user.getEmail());%></h6>
+	</div>
 	
-	<%for(int i =  orders.size()-1; i >= 0; i--){
-		Order o = orders.get(i);%>
+	<div class="container" style="align-items:center">
+	
+	
+		<h3>ultimo ordine</h3>
+	
 		<h6 class="order-header">Ordine n:#<%=o.getId() %></h6>
 		<div class="order-section" style="align-items:center;">
 			<div>
@@ -47,8 +57,24 @@
 			<%} %>
 		</div>
 		<br/>
-	<%} %>
+
 	</div>
+	<div>
+				
+				<a style="margin-top: 30px;"
+				href="${pageContext.request.contextPath}/GetUserOrders"
+				class="waves-effect waves-light btn">Mostra tutti gli ordini</a> 
+
+	
+	</div>
+	<div>
+				<a style="margin-top: 30px;"
+				href="${pageContext.request.contextPath}/ShowShippingInfo"
+				class="waves-effect waves-light btn">Mostra indirizzi spedizione</a> 
+
+	
+	</div>
+	
 	
 
 

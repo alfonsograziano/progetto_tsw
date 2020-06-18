@@ -27,6 +27,7 @@ public class ShowShippingInfo extends HttpServlet {
 			throws ServletException, IOException {
 		ShippingInfoModelDS shippingInfoModel = new ShippingInfoModelDS();
 		int user=(int) request.getSession().getAttribute("user_id");
+		
 		try {
 			ArrayList<ShippingInfo> ship = shippingInfoModel.getByUser(user);
 			/*for(int i=0; i<ship.size();i++) {

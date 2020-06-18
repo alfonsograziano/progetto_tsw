@@ -4,7 +4,8 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
-<script type="text/javascript" src=".../components/pages/user/js/validation/validaShipping.js"></script>
+<script type="text/javascript"src="components/pages/user/js/validation/validaShipping.js"></script>
+<jsp:include page="../shop/Header.jsp" />
 
 
 <title>Insert title here</title>
@@ -34,6 +35,8 @@
 		<input type="reset" class='col s12 btn btn-large waves-effect indigo' value="Reset">
 	</form>
 </div>
+	<jsp:include page="../shop/Footer.jsp" />
+
 </html>
 
 

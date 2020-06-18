@@ -11,6 +11,8 @@
 <html>
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
+<jsp:include page="../shop/Header.jsp" />
+
 
 
 
@@ -58,3 +60,5 @@
 			
 		</form>
 	</div>
+						<jsp:include page="../shop/Footer.jsp" />
+	

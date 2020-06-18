@@ -1,6 +1,7 @@
 package control.user;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Order;
 import model.dao.OrderModelDS;
+import model.dao.UserModelDS;
 
 /**
  * Servlet implementation class ProfilePage
@@ -38,6 +40,13 @@ public class ProfilePage extends HttpServlet {
 		}else {
 			int id = (int) request.getSession().getAttribute("user_id");
 			OrderModelDS orderModel = new OrderModelDS();
+			UserModelDS userModel=new UserModelDS();
+			try {
+				request.setAttribute("user", userModel.getById(id));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ArrayList<Order> orders = orderModel.getByUser(id);
 			request.setAttribute("orders", orders);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/Profile.jsp"); 
