@@ -1,68 +1,77 @@
 package model;
 
-import model.bean.Order;
-import model.bean.User;
-
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 
+import model.bean.Contains;
+import model.bean.Order;
+import model.bean.User;
+
 public class Invoice {
-	public Order o;
-	public User user;
-	public Invoice(Order o, User u) {
+	private Order o;
+	private User user;
+	private String pathIn;
+	private String pathOut;
+	private ArrayList<Contains> contains;
+	
+	public Invoice(Order o, User u, String pathIn, String pathOut) {
 		this.o = o;
 		this.user = u;
+		this.pathIn = pathIn;
+		this.pathOut = pathOut;
 	}
 	
 	public void print() {
 		try {
+			File f = new File(pathOut);
+			f.createNewFile();
 			PdfDocument pdfDoc =
-				    new PdfDocument(new PdfReader(""), new PdfWriter("prova"));
+				    new PdfDocument(new PdfReader(pathIn), new PdfWriter(pathOut));
 			PdfCanvas canvas = new PdfCanvas(pdfDoc.getFirstPage());
 			canvas.beginText().setFontAndSize(
 			        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-			        .moveText(59, 857)
-			        .showText(user.getName()+" "+user.getSurname()+"\n"+o.getAddress()+"\n"+o.getCity()+" "+o.getZipCode()+" "+o.getState())
+			        .moveText(44, 620)
+			        .showText(user.getName()+" "+user.getSurname()+", "+o.getAddress()+", "+o.getCity()+" "+o.getZipCode()+", "+o.getState())
 			        .endText();
 			canvas.beginText().setFontAndSize(
 			        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-			        .moveText(59, 654)
+			        .moveText(44, 474)
 			        .showText(String.valueOf(o.getId()))
 			        .endText();
 			canvas.beginText().setFontAndSize(
 			        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-			        .moveText(59, 579)
+			        .moveText(44, 424)
 			        .showText(o.getDate().toString())
 			        .endText();
 			double total=0;
 			for(int i=0; i<o.getProducts().size(); i++) {
 				canvas.beginText().setFontAndSize(
 				        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-				        .moveText(246, (686-(i*38)))
+				        .moveText(184, (495-(i*25)))
 				        .showText(o.getProducts().get(i).getProduct().getName())
 				        .endText();
 				canvas.beginText().setFontAndSize(
 				        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-				        .moveText(534, (686-(i*38)))
+				        .moveText(394, (495-(i*25)))
 				        .showText(String.valueOf(o.getProducts().get(i).getProduct().getPrice()))
 				        .endText();
 				canvas.beginText().setFontAndSize(
 				        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-				        .moveText(641, (686-(i*38)))
+				        .moveText(470, (495-(i*25)))
 				        .showText(String.valueOf(o.getProducts().get(i).getQuantity()))
 				        .endText();
 				canvas.beginText().setFontAndSize(
 				        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-				        .moveText(246, (686-(i*38)))
+				        .moveText(528, (495-(i*25)))
 				        .showText(String.valueOf(o.getProducts().get(i).getProduct().getPrice()*o.getProducts().get(i).getQuantity()))
 				        .endText();
 				total = total + o.getProducts().get(i).getProduct().getPrice()*o.getProducts().get(i).getQuantity();
@@ -70,22 +79,22 @@ public class Invoice {
 			double subTotal = (total*78)/100;
 			canvas.beginText().setFontAndSize(
 			        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-			        .moveText(738, 387)
+			        .moveText(523, 277)
 			        .showText(String.valueOf(subTotal))
 			        .endText();
 			canvas.beginText().setFontAndSize(
 			        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-			        .moveText(738, 362)
+			        .moveText(523, 262)
 			        .showText("0")
 			        .endText();
 			canvas.beginText().setFontAndSize(
 			        PdfFontFactory.createFont(FontConstants.HELVETICA), 12)
-			        .moveText(738, 312)
+			        .moveText(523, 222)
 			        .showText(String.valueOf(total-subTotal))
 			        .endText();
 			canvas.beginText().setFontAndSize(
 			        PdfFontFactory.createFont(FontConstants.HELVETICA), 20)
-			        .moveText(638, 207)
+			        .moveText(465, 147)
 			        .showText(String.valueOf(total))
 			        .endText();
 			pdfDoc.close();
@@ -96,5 +105,9 @@ public class Invoice {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void deleteInvoice() {
+		File f = new File(pathOut);
+		f.delete();
 	}
 }

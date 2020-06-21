@@ -65,10 +65,6 @@
 		</div>
 		<div>
 		</div>
-			<a style="margin-top: 30px;"
-				href="${pageContext.request.contextPath}/components/pages/user/servletfattura.java"
-				class="waves-effect waves-light btn"><i
-				class="material-icons right">add</i>Stampa Fattura</a> 
 	</div>
 		</div>
 		

@@ -42,6 +42,10 @@
 				<input type="hidden" value="<%=o.getId() %>" name="id" />
 				<button type="submit" class="waves-effect waves-light btn  blue-grey lighten-5" style="margin:20px; color:black;">Vedi dettagli</button>
 			</form>
+			<form method="get" action="${pageContext.request.contextPath}/PrintOrder">
+				<input type="hidden" value="<%=o.getId() %>" name="order" />
+				<button type="submit" class="waves-effect waves-light btn  blue-grey lighten-5" style="margin:20px; color:black;">Stampa Fattura</button>
+			</form>
 			<%} %>
 		</div>
 		<br/>
