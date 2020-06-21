@@ -40,7 +40,8 @@ public class AddOne extends HttpServlet {
 				}
 			}
 			request.getSession().setAttribute("cart", cart);
-			response.getWriter().append("Operazione completata");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart");
+			dispatcher.forward(request, response);
 		}catch(Exception e) {
 			response.setStatus(400);
 			response.getWriter().append("Errore");

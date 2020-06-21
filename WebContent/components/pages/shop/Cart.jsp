@@ -56,13 +56,13 @@
 						<td><%=cart.get(i).getProduct().getName()%></td>
 						<td><%=cart.get(i).getProduct().getPrice()%></td>
 						<td>
-							<div style="display: inline-block;">
+							<div class="wrap-row">
 
 								<form method="post"
 									action="${pageContext.request.contextPath}/cart/delete-one">
 									<input type="hidden" name="id"
 										value="<%=cart.get(i).getProduct().getId()%>">
-									<button type='submit'>
+									<button type='submit' class="transparent-btn">
 										<i class="material-icons tiny" style="color: #455a64;">exposure_neg_1</i>
 									</button>
 
@@ -71,7 +71,7 @@
 									action="${pageContext.request.contextPath}/cart/delete-all">
 									<input type="hidden" name="id"
 										value="<%=cart.get(i).getProduct().getId()%>">
-									<button type='submit'>
+									<button type='submit' class="transparent-btn">
 										<i class="material-icons tiny" style="color: #455a64;">delete</i>
 									</button>
 
@@ -80,7 +80,7 @@
 									action="${pageContext.request.contextPath}/cart/add-one">
 									<input type="hidden" name="id"
 										value="<%=cart.get(i).getProduct().getId()%>">
-									<button type='submit'>
+									<button type='submit' class="transparent-btn">
 										<i class="material-icons tiny" style="color: #455a64;">exposure_plus_1</i>
 									</button>
 
@@ -120,10 +120,14 @@
 		
 		<h3>Totale</h3>
 		<p><%=total%></p>
+		<%if(shipping_type_id > 0){ %>
 		<a style="margin-top:30px;"
 			href="${pageContext.request.contextPath}/checkout" 
 			class="waves-effect waves-light btn"><i class="material-icons right">check</i>Procedi all'acquisto</a>
-
+		<%} else{%>
+		<h5 >Non puoi ancora completare l'ordine</h5>
+		<p class="nomargin">Assicurati di selezionare un tipo di spedizione.</p>
+		<%} %>
 		</div>
 		<%}else{ %>
 		<h3>Non hai elementi nel carrello</h3>
