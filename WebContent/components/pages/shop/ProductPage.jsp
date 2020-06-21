@@ -29,7 +29,7 @@
 		<div class="row header-section">
 			<div class="col s12 l5">
 				<div class="row">
-					<div style="width:100%; height:300px;" class="center">
+					<div style="width:100%; height:300px;" class="center" id="main-product-image-box">
 					<%if(product.getImages().size() >0){ %>
 					<img
 						src="${pageContext.request.contextPath}/getPicture?id=<%=product.getImages().get(0).getId()%>"
@@ -117,6 +117,17 @@
 
 
 	<jsp:include page="Footer.jsp" />
+
+	<script>
+	$("#main-product-image").hover(function() {
+		console.log("Eccomi")
+	    $(this).css({"transform":"scale(1.2)", "transition":"transform .5s"});
+
+	}, function() {
+	    $(this).css({"transform":"scale(1)", "transition":"transform .5s"});
+
+	})
+	</script>
 
 </body>
 </html>
