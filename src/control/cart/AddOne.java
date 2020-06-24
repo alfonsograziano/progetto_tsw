@@ -37,11 +37,10 @@ public class AddOne extends HttpServlet {
 			for(int i=0; i<cart.size(); i++) {
 				if(cart.get(i).getProduct().getId() == id) {
 					cart.get(i).setQuantity(cart.get(i).getQuantity()+1);
+					System.out.println("Quantità "+cart.get(i).getQuantity());
 				}
 			}
 			request.getSession().setAttribute("cart", cart);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart");
-			dispatcher.forward(request, response);
 		}catch(Exception e) {
 			response.setStatus(400);
 			response.getWriter().append("Errore");

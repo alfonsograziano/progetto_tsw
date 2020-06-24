@@ -74,7 +74,7 @@
 				<form id="form" action="${pageContext.request.contextPath}/cart/add-to-cart" method="get">
 					<div class="wrap-row center">
 						<div class="input-field">
-							<input value="1" id="quantity" name="quantity" type="number" class="validate"
+							<input value="1" id="quantity" name="quantity" type="number" min="1" class="validate"
 								style="max-width: 60px;"> <label for="quantity">Quantity</label>
 						</div>
 						<div class="input-field">

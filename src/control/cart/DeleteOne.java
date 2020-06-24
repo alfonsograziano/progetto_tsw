@@ -43,8 +43,6 @@ public class DeleteOne extends HttpServlet {
 				}
 			}
 			request.getSession().setAttribute("cart", cart);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart");
-			dispatcher.forward(request, response);
 		}catch(Exception e) {
 			response.setStatus(400);
 			response.getWriter().append("Errore");
