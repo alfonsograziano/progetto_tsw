@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,9 +17,9 @@ import model.bean.ChoosenProduct;
 import model.bean.Order;
 import model.bean.Product;
 
-public class OrderModelDS implements OrderModel{
+public class OrderModelDS implements OrderModel {
 	private static DataSource ds;
-	
+
 	public OrderModelDS() {
 		try {
 			Context initCtx = new InitialContext();
@@ -32,42 +33,41 @@ public class OrderModelDS implements OrderModel{
 	}
 
 	private static final String TABLE_NAME = "`order`";
-	
+
 	public long add(Order order) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertSQL = "INSERT INTO " + OrderModelDS.TABLE_NAME + " (date, iva, city, address, state, zip_code, details, track_id, shipping_price, payment_id, shipping_type_id, payment_code, id_user, order_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + OrderModelDS.TABLE_NAME
+				+ " (date, iva, city, address, state, zip_code, details, track_id, shipping_price, payment_id, shipping_type_id, payment_code, id_user, order_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
-			preparedStatement.setTimestamp(1,order.getDate());
+			preparedStatement.setTimestamp(1, order.getDate());
 			preparedStatement.setDouble(2, order.getIva());
-			preparedStatement.setString(3,order.getCity());
-			preparedStatement.setString(4,order.getAddress());
-			preparedStatement.setString(5,order.getState());
-			preparedStatement.setString(6,order.getZipCode());
-			preparedStatement.setString(7,order.getDetails());
-			preparedStatement.setString(8,order.getTrack_id());
-			preparedStatement.setDouble(9,order.getShippingPrice());
-			preparedStatement.setString(10,order.getPaymentId());
-			preparedStatement.setInt(11,order.getShippingTypeId());
-			preparedStatement.setString(12,order.getPaymentCode());
-			preparedStatement.setInt(13,order.getIdUser());
-			preparedStatement.setInt(14,order.getOrderState());
+			preparedStatement.setString(3, order.getCity());
+			preparedStatement.setString(4, order.getAddress());
+			preparedStatement.setString(5, order.getState());
+			preparedStatement.setString(6, order.getZipCode());
+			preparedStatement.setString(7, order.getDetails());
+			preparedStatement.setString(8, order.getTrack_id());
+			preparedStatement.setDouble(9, order.getShippingPrice());
+			preparedStatement.setString(10, order.getPaymentId());
+			preparedStatement.setInt(11, order.getShippingTypeId());
+			preparedStatement.setString(12, order.getPaymentCode());
+			preparedStatement.setInt(13, order.getIdUser());
+			preparedStatement.setInt(14, order.getOrderState());
 			int affectedRows = preparedStatement.executeUpdate();
-			
-			 try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-		            if (generatedKeys.next()) {
-		                return generatedKeys.getLong(1);
-		            }
-		            else {
-		                throw new SQLException("Creating user failed, no ID obtained.");
-		            }
-		        }
-			
-			
+
+			try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+				if (generatedKeys.next()) {
+					return generatedKeys.getLong(1);
+				} else {
+					throw new SQLException("Creating user failed, no ID obtained.");
+				}
+			}
+
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
@@ -84,8 +84,7 @@ public class OrderModelDS implements OrderModel{
 		return -1;
 
 	}
-	
-	
+
 	public boolean delete(int id) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -105,23 +104,26 @@ public class OrderModelDS implements OrderModel{
 			return false;
 		}
 	}
-	
-	
-	public ArrayList<Order> get(){
-	
+
+	public ArrayList<Order> getByDates(Date startDate, Date endDate) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		ArrayList<Order> orders = new ArrayList<Order>();
-		String selectSQL = "SELECT * FROM " + OrderModelDS.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + OrderModelDS.TABLE_NAME + " WHERE date BETWEEN ? and ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setDate(1, new java.sql.Date(startDate.getTime()));
+			preparedStatement.setDate(2, new java.sql.Date(endDate.getTime()));
+
+			System.out.println(preparedStatement);
+			
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				Order bean=new Order();
+				Order bean = new Order();
 				bean.setId(rs.getInt("id"));
 				bean.setDate(rs.getTimestamp("date"));
 				bean.setIva(rs.getDouble("iva"));
@@ -140,18 +142,17 @@ public class OrderModelDS implements OrderModel{
 				orders.add(bean);
 			}
 
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-		
+
 		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
-			}catch (SQLException e) {
+			} catch (SQLException e) {
 				System.out.println("Error:" + e.getMessage());
-			}
-			finally {
+			} finally {
 				if (connection != null)
 					try {
 						connection.close();
@@ -162,12 +163,66 @@ public class OrderModelDS implements OrderModel{
 			}
 		}
 		return orders;
-		
 	}
 
-	
-	
-	public ArrayList<Order> getByUser(int idUser)  {
+	public ArrayList<Order> get() {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ArrayList<Order> orders = new ArrayList<Order>();
+		String selectSQL = "SELECT * FROM " + OrderModelDS.TABLE_NAME;
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Order bean = new Order();
+				bean.setId(rs.getInt("id"));
+				bean.setDate(rs.getTimestamp("date"));
+				bean.setIva(rs.getDouble("iva"));
+				bean.setCity(rs.getString("city"));
+				bean.setAddress(rs.getString("address"));
+				bean.setState(rs.getString("state"));
+				bean.setZipCode(rs.getString("zip_code"));
+				bean.setDetails(rs.getString("details"));
+				bean.setTrack_id(rs.getString("track_id"));
+				bean.setShippingPrice(rs.getDouble("shipping_price"));
+				bean.setPaymentId(rs.getString("payment_id"));
+				bean.setShippingTypeId(rs.getInt("shipping_type_id"));
+				bean.setPaymentCode(rs.getString("payment_code"));
+				bean.setIdUser(rs.getInt("id_user"));
+				bean.setOrderState(rs.getInt("order_state"));
+				orders.add(bean);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error:" + e.getMessage());
+		}
+
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Error:" + e.getMessage());
+			} finally {
+				if (connection != null)
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		}
+		return orders;
+
+	}
+
+	public ArrayList<Order> getByUser(int idUser) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -177,12 +232,12 @@ public class OrderModelDS implements OrderModel{
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1,idUser);
+			preparedStatement.setInt(1, idUser);
 
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				Order bean=new Order();
+				Order bean = new Order();
 				bean.setId(rs.getInt("id"));
 				bean.setDate(rs.getTimestamp("date"));
 				bean.setIva(rs.getDouble("iva"));
@@ -201,18 +256,17 @@ public class OrderModelDS implements OrderModel{
 				orderUser.add(bean);
 			}
 
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-		
+
 		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
-			}catch (SQLException e) {
+			} catch (SQLException e) {
 				System.out.println("Error:" + e.getMessage());
-			}
-			finally {
+			} finally {
 				if (connection != null)
 					try {
 						connection.close();
@@ -223,11 +277,11 @@ public class OrderModelDS implements OrderModel{
 			}
 		}
 		return orderUser;
-		
+
 	}
-	
-	public ArrayList<Order> getByState(int idUser){
-		
+
+	public ArrayList<Order> getByState(int idUser) {
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -237,11 +291,11 @@ public class OrderModelDS implements OrderModel{
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1,idUser);
+			preparedStatement.setInt(1, idUser);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				Order bean=new Order();
+				Order bean = new Order();
 				bean.setId(rs.getInt("id"));
 				bean.setDate(rs.getTimestamp("date"));
 				bean.setIva(rs.getDouble("iva"));
@@ -260,18 +314,17 @@ public class OrderModelDS implements OrderModel{
 				orderUser.add(bean);
 			}
 
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-		
+
 		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
-			}catch (SQLException e) {
+			} catch (SQLException e) {
 				System.out.println("Error:" + e.getMessage());
-			}
-			finally {
+			} finally {
 				if (connection != null)
 					try {
 						connection.close();
@@ -281,15 +334,15 @@ public class OrderModelDS implements OrderModel{
 					}
 			}
 		}
-		return orderUser;	
+		return orderUser;
 	}
-	
+
 	public void updateTracking(int id, String newTracking) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String updateSQL;
-			updateSQL = "UPDATE `order` SET track_id = ? WHERE id = ?";
-			//System.out.println(newTracking);
+		updateSQL = "UPDATE `order` SET track_id = ? WHERE id = ?";
+		// System.out.println(newTracking);
 
 		try {
 			connection = ds.getConnection();
@@ -297,7 +350,7 @@ public class OrderModelDS implements OrderModel{
 			if (!newTracking.isEmpty()) {
 				preparedStatement.setString(1, newTracking);
 				preparedStatement.setInt(2, id);
-			} 
+			}
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -315,22 +368,21 @@ public class OrderModelDS implements OrderModel{
 		}
 
 	}
-	
-	
+
 	public void updateOrderState(int id, int newOrderState) {
-		
+
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String updateSQL;
-			updateSQL = "UPDATE `order` SET order_state = ? WHERE id = ?";
+		updateSQL = "UPDATE `order` SET order_state = ? WHERE id = ?";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
-			if (newOrderState==1 || newOrderState==2 || newOrderState==3 || newOrderState==4) {
+			if (newOrderState == 1 || newOrderState == 2 || newOrderState == 3 || newOrderState == 4) {
 				preparedStatement.setInt(1, newOrderState);
 				preparedStatement.setInt(2, id);
-			} 
+			}
 
 			preparedStatement.executeUpdate();
 
@@ -348,7 +400,6 @@ public class OrderModelDS implements OrderModel{
 
 		}
 	}
-
 
 	@Override
 	public Order getById(int id) throws SQLException {
@@ -383,18 +434,17 @@ public class OrderModelDS implements OrderModel{
 				order.setOrderState(rs.getInt("order_state"));
 			}
 
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-		
+
 		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
-			}catch (SQLException e) {
+			} catch (SQLException e) {
 				System.out.println("Error:" + e.getMessage());
-			}
-			finally {
+			} finally {
 				if (connection != null)
 					try {
 						connection.close();
@@ -407,7 +457,6 @@ public class OrderModelDS implements OrderModel{
 		return order;
 
 	}
-
 
 	public Order getCompleteOrderById(int id) throws SQLException {
 
@@ -440,40 +489,37 @@ public class OrderModelDS implements OrderModel{
 				order.setIdUser(rs.getInt("id_user"));
 				order.setOrderState(rs.getInt("order_state"));
 			}
-			
+
 			String selectSQLContains = "SELECT * FROM contains JOIN product on product_id=id WHERE  order_id = ?";
 			preparedStatement = connection.prepareStatement(selectSQLContains);
 			preparedStatement.setInt(1, id);
-			
+
 			rs = preparedStatement.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				Product bean = new Product();
 				bean.setId(rs.getInt("id"));
 				bean.setName(rs.getString("name"));
 				bean.setDescription(rs.getString("description"));
-				bean.setPrice(rs.getDouble("price")); //TODO: verifica cosa succede se il prezzo cambia
+				bean.setPrice(rs.getDouble("price")); // TODO: verifica cosa succede se il prezzo cambia
 				bean.setVisible(rs.getBoolean("visible"));
-				
+
 				ChoosenProduct cp = new ChoosenProduct();
 				cp.setProduct(bean);
 				cp.setQuantity(rs.getInt("quantity"));
 				order.getProducts().add(cp);
 			}
 
-			
-
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-		
+
 		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
-			}catch (SQLException e) {
+			} catch (SQLException e) {
 				System.out.println("Error:" + e.getMessage());
-			}
-			finally {
+			} finally {
 				if (connection != null)
 					try {
 						connection.close();

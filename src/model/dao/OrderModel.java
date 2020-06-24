@@ -2,6 +2,7 @@ package model.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import model.bean.Order;
 
@@ -14,6 +15,8 @@ public interface OrderModel {
 
 	
 	public ArrayList<Order> getByUser(int idUser) throws SQLException ; //tutti gli ordini di un utente(admin)
+	public ArrayList<Order> getByDates(Date startDate, Date endDate) throws SQLException ;
+
 	public ArrayList<Order> getByState(int id) throws SQLException ;  //tutti gli ordini di un utente con codice di stato diverso da 4
 	public void updateTracking(int id, String newTracking) throws SQLException;
 	public void updateOrderState(int id, int newOrderState) throws SQLException;

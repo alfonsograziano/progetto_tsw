@@ -35,7 +35,39 @@ public class UserModelDS implements UserModel {
 	
 	
 	public Collection<User> get() throws SQLException{
-		return new ArrayList<User>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		ArrayList<User>  users = new ArrayList<User>();
+
+		String selectSQL = "SELECT * FROM " + TABLE_NAME;
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				User bean = new User();
+
+				bean.setId(rs.getInt("id"));
+				bean.setName(rs.getString("name"));
+				bean.setEmail(rs.getString("email"));
+				
+				users.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return users;
 	}
 	
 	public User getById(int id) throws SQLException{
