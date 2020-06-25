@@ -22,64 +22,55 @@ import model.dao.UserModelDS;
 @WebServlet("/order")
 public class UserDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public UserDetails() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	public UserDetails() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-		/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			System.out.println("ok fra");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			Integer id = Integer.parseInt(request.getParameter("id"));
 
-			try {
-				Integer id = Integer.parseInt(request.getParameter("id"));
-				OrderModelDS orderModel = new OrderModelDS();
-				UserModelDS userModel = new UserModelDS();
-				try {
-					Order order = orderModel.getCompleteOrderById(id);
-					User user = userModel.getById(order.getIdUser());
-					request.setAttribute("user", user);
-					request.setAttribute("order", order);
-					request.setAttribute("pageName", "/components/pages/admin/OrderDetails.jsp");
+			OrderModelDS orderModel = new OrderModelDS();
+			Order order;
+
+			order = orderModel.getCompleteOrderById(id);
+
+			request.setAttribute("order", order);
+
+			
+			if(null == request.getSession().getAttribute("user_id")) {
+				response.sendRedirect(request.getContextPath()+"/login");
+			}else {
+				int userId = (Integer) request.getSession().getAttribute("user_id");
+				
+				if (order.getIdUser() == userId) {
+					ContainsModelDS containsModel = new ContainsModelDS();
+
+					ArrayList<Product> products = containsModel.getByOrder(id);
+					ArrayList<Contains> contains = new ArrayList<Contains>();
+					for (int i = 0; i < products.size(); i++) {
+						contains.add(containsModel.getByOrderProduct(id, products.get(i).getId()));
+					}
+					request.setAttribute("contains", contains);
+					request.setAttribute("products", products);
+
 					RequestDispatcher dispatcher = getServletContext()
-							.getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+							.getRequestDispatcher("/components/pages/user/ShowOrderDetails.jsp");
 					dispatcher.forward(request, response);
 
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} else {
+					response.sendRedirect(request.getContextPath()+"/page-not-found");
 				}
-			} catch (Exception e) {
-				response.setStatus(400);
-				response.getWriter().append("Errore");
 			}
-
-		}*/
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer id = Integer.parseInt(request.getParameter("id"));
-		OrderModelDS orderModel = new OrderModelDS();
-		ContainsModelDS containsModel=new ContainsModelDS();
-		try {
-			ArrayList<Product> products=containsModel.getByOrder(id);
-			ArrayList<Contains> contains=new ArrayList<Contains>();
-			for(int i=0;i<products.size();i++) {
-				contains.add(containsModel.getByOrderProduct(id,products.get(i).getId()));
-			}
-			request.setAttribute("contains", contains);
-			request.setAttribute("products", products);
-			Order order = orderModel.getCompleteOrderById(id);
-			request.setAttribute("order", order);
-			//System.out.println("prodotto 1: "+ products.get(0).getName());
-	
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/user/ShowOrderDetails.jsp");
-			dispatcher.forward(request, response);
-
+			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
-	}
-
+}

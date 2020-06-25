@@ -37,6 +37,7 @@ public class AdminDashboard extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		try {
 			CategoryModelDS categoryModel = new CategoryModelDS();
 			ArrayList<Category> categories = categoryModel.get();

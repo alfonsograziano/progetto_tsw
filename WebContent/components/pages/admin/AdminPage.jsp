@@ -33,13 +33,11 @@ html, body {
 	<div class="admin-container">
 
 		<%
-			Boolean admin = (Boolean) session.getAttribute("isAdmin");
-			if ((admin == null) || (admin == false)) {
-				response.sendRedirect(request.getContextPath() + "/login");
-			}
-		%>
-
-		<%
+		Boolean admin = (Boolean) session.getAttribute("isAdmin");
+		if ((admin == null) || (admin == false)) {
+			response.sendRedirect(request.getContextPath() + "/login");
+		}
+		
 			String pageName = (String) request.getAttribute("pageName");
 			if (pageName == null || pageName.isEmpty()) {
 				pageName = "";
