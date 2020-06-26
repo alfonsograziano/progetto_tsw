@@ -35,7 +35,6 @@
 
 					<td>
 						<div style="display: inline-block;">
-
 							<form method="post"
 								action="${pageContext.request.contextPath}/shipping/delete">
 								<input type="hidden" name="id"
@@ -45,7 +44,15 @@
 								</button>
 
 							</form>
+							<form method="get"
+								action="${pageContext.request.contextPath}/shipping/update">
+								<input type="hidden" name="id"
+									value="<%=shipping_types.get(i).getId()%>">
+								<button type='submit'>
+									<i class="material-icons tiny" style="color: #455a64;">edit</i>
+								</button>
 
+							</form>
 
 						</div>
 					</td>
@@ -59,11 +66,6 @@
 		<a style="margin-top: 30px;"
 			href="${pageContext.request.contextPath}/shipping/add"
 			class="waves-effect waves-light btn"><i
-			class="material-icons right">add</i>Aggiungi tipo di spedizione</a> <a
-			style="margin-top: 30px;"
-			href="${pageContext.request.contextPath}/shipping/update"
-			class="waves-effect waves-light btn"><i
-			class="material-icons right">edit</i>Modifica tipo di spedizione</a>
-
+			class="material-icons right">add</i>Aggiungi tipo di spedizione</a> 
 	</div>
 </div>

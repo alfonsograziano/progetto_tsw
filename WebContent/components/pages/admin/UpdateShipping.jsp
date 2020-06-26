@@ -7,8 +7,10 @@
 <head>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
 <script type="text/javascript" src="../components/pages/admin/js/validation/validaUpdateShipping.js"></script>
-
-
+<%@page import="model.bean.Shipping"%>
+	<%
+		Shipping shipp = (Shipping) request.getAttribute("shipp");
+	%>
 
 
 
@@ -20,21 +22,21 @@
 		<form class="col s12" method="get"
 			style="width: 100%; max-width: 500px;" name="invio">
 			<div class='input-field col s12'>
-				<input class='validate' type='text' name='id' id='id' /> <label
+				<input class='validate' type='text' value='<%=shipp.getId() %>' name='id' id='id' /> <label
 					for='email'>ID della spedizione</label>
 			</div>
 			<div class='input-field col s12'>
-				<input class='validate' type='text' name='name' id='name' /> <label
+				<input class='validate' type='text' value='<%=shipp.getName() %>' name='name' id='name' /> <label
 					for='email'>Nome della spedizione</label>
 			</div>
 
 			<div class="input-field col s12">
-				<input class='validate' type='number' name='days' id='days' /> <label
+				<input class='validate' type='number' value='<%=shipp.getDays() %>' step="1.00" name='days' id='days' /> <label
 					for='email'>Giorni della spedizione</label>
 			</div>
 			
 			<div class="input-field col s12">
-				<input class='validate' type='text' name='price' id='price' /> <label
+				<input class='validate' type='number' value='<%=shipp.getPrice() %>' step="0.01" name='price' id='price' /> <label
 					for='email'>Prezzo</label>
 			</div>
 

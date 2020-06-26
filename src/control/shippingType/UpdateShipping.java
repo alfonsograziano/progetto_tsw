@@ -59,9 +59,19 @@ public class UpdateShipping extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		ShippingModelDS sm = new ShippingModelDS();
+		Shipping ship= new Shipping();
+		try {
+			ship = sm.getById(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("shipp", ship);
+		
 		request.setAttribute("pageName", "/components/pages/admin/UpdateShipping.jsp");
-		RequestDispatcher dispatcher = getServletContext()
-				.getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/admin/AdminPage.jsp");
 		dispatcher.forward(request, response);
 	}
 
