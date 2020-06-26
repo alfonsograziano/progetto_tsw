@@ -25,12 +25,12 @@
 			</div>
 
 			<div class="input-field col s12">
-				<input class='validate' type="number" name='days' id='days' /> <label
-					for='email'>Numero di Giorni</label>
+				<input class='validate' type="number" step="1.00" name='days' id='days' /> <label
+					for='password'>Numero di Giorni</label>
 			</div>
 			<div class="input-field col s12">
-				<input class='validate' type="text" name='price' id='price' /> <label
-					for='email'>Prezzo</label>
+				<input class='validate' type="number" step="0.01" name='price' id='price' /> <label
+					for='password'>Prezzo</label>
 			</div>
 
 			<button type='submit' name='btn_login'
