@@ -1,4 +1,4 @@
-package control;
+package control.checkout;
 
 import java.io.IOException;
 import java.sql.SQLException;

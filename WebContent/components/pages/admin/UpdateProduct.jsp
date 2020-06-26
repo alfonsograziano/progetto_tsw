@@ -17,13 +17,10 @@
 	%>
 	<%
 		ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
-	%>
-	<%
 		Product product = (Product) request.getAttribute("product");
-	%>
-	<%
 		ArrayList<Category> productCategories = product.getCategories();
 	%>
+
 
 
 	<script>
@@ -49,7 +46,7 @@
 
 
 	<div style="width: 100%; margin-left: 150px;" class="container">
-		<div style="display: flex; flex-direction: column;">
+		<div class="wrap-row" style="justify-content:space-around;">
 			<div>
 
 				<h4>Modifica prodotto</h4>
@@ -73,7 +70,7 @@
 						<input type="number" step="0.01" name='price' id="'price'"
 							value="${product.price}"> <label for='password'>Prezzo</label>
 					</div>
-					
+
 					<div class='input-field '>
 						<input type="number" step="1.00" name='iva' id="iva"
 							value="${product.iva}"> <label for='password'>Iva</label>
@@ -117,7 +114,7 @@
 						class='col s12 btn btn-large waves-effect indigo'>Aggiorna</button>
 				</form>
 			</div>
-			<div style="margin: 20px;">
+			<div>
 				<h5>Immagini</h5>
 				<div class="wrap-row">
 					<%

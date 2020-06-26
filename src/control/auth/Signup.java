@@ -3,6 +3,7 @@ package control.auth;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.SendEmail;
 import model.bean.User;
 import model.dao.UserModelDS;
 
@@ -56,11 +58,17 @@ public class Signup extends HttpServlet {
 			UserModelDS userModel = new UserModelDS();
 			
 			try {
+				SendEmail emailControl = new SendEmail();
+				emailControl.send(email, "Nuovo utente registrato", "Benvenuto in BetterHome, grazie per esserti registrato!");
+				
 				userModel.add(user);
 				response.sendRedirect(request.getContextPath() + "/welcome");
 			} catch (SQLException e) {
 				response.getWriter().append("Errore nella creazione dell'utente \n"+e);
 				e.printStackTrace();
+			}
+			 catch (MessagingException e) {
+					response.getWriter().append("Errore: \n"+e);
 			}
 		}		
 		

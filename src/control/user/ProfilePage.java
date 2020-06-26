@@ -49,6 +49,8 @@ public class ProfilePage extends HttpServlet {
 			}
 			ArrayList<Order> orders = orderModel.getByUser(id);
 			request.setAttribute("orders", orders);
+			
+
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/shop/Profile.jsp"); 
 			dispatcher.forward(request, response);
 

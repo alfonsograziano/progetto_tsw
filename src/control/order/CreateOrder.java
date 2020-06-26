@@ -1,4 +1,4 @@
-package control;
+package control.order;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,8 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.sql.Timestamp;
 
+import model.SendEmail;
 import model.bean.ChoosenProduct;
 import model.bean.Contains;
 import model.bean.Order;
@@ -28,57 +30,56 @@ import model.dao.UserModelDS;
 @WebServlet("/order/add")
 public class CreateOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreateOrder() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CreateOrder() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("Chiamo la servlet di creazione dell'ordine....");
-		
-		//Controllo se l'utente è loggato
-		if(request.getSession().getAttribute("user_id") == null) {
+
+		// Controllo se l'utente è loggato
+		if (request.getSession().getAttribute("user_id") == null) {
 			response.setStatus(301);
 			response.getWriter().append("Errore, non sei loggato, non puoi effettuare l'acquisto");
-		}else {
+		} else {
 			Integer user_id = (Integer) request.getSession().getAttribute("user_id");
 			try {
-				
-				//Controllo se nel carrello ci sono elementi
+
+				// Controllo se nel carrello ci sono elementi
 				ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
 				if (cart == null) {
 					response.setStatus(400);
 					response.getWriter().append("Errore, non hai elementi nel carrello");
-				}else {
+				} else {
 					int shipping_type_id = -1;
 					ShippingModelDS shippingModel = new ShippingModelDS();
 					Shipping shipping = new Shipping();
-					//Verifico se ho impostato un tipo di spedizione
-					if(request.getSession().getAttribute("shipping_type_id") == null){
+					// Verifico se ho impostato un tipo di spedizione
+					if (request.getSession().getAttribute("shipping_type_id") == null) {
 						response.getWriter().append("Errore, non hai impostato il tipo di spedizione");
 
-					}else{
+					} else {
 						shipping_type_id = (int) request.getSession().getAttribute("shipping_type_id");
 						shipping = shippingModel.getById(shipping_type_id);
-						
-						//Inizio a prendere tutti gli attributi
+
+						// Inizio a prendere tutti gli attributi
 						Date date = new Date();
 						Timestamp time = new Timestamp(date.getTime());
-						 
+
 						String state = request.getParameter("state");
 						String city = request.getParameter("city");
 						String address = request.getParameter("address");
 						String zipCode = request.getParameter("zip_code");
 						String details = request.getParameter("details");
-						String track_id = null; //non ho ancora spedito
+						String track_id = null; // non ho ancora spedito
 						String paymentId = (String) request.getParameter("payment_id");
 
-											
 						Order o = new Order();
 						o.setDate(time);
 						o.setCity(city);
@@ -93,15 +94,15 @@ public class CreateOrder extends HttpServlet {
 						o.setIdUser(user_id);
 						o.setPaymentCode(null);
 						o.setOrderState(1);
-						
+
 						System.out.println(o);
 
 						OrderModelDS orderModel = new OrderModelDS();
 						int id = (int) orderModel.add(o);
 						System.out.println("Ordine con id: " + id + " creato!");
-						
+
 						ContainsModelDS containsModel = new ContainsModelDS();
-						for(int i = 0; i < cart.size(); i++) {
+						for (int i = 0; i < cart.size(); i++) {
 							Contains prd = new Contains();
 							prd.setIva(cart.get(i).getProduct().getIva());
 							prd.setOrderId(id);
@@ -109,25 +110,30 @@ public class CreateOrder extends HttpServlet {
 							prd.setProductId(cart.get(i).getProduct().getId());
 							prd.setQuantity(cart.get(i).getQuantity());
 							containsModel.add(prd);
-							
+
 						}
-						
+
 						response.getWriter().append("Ordine creato...");
-						
-						//Riazzero il carrello
-						request.getSession().setAttribute("cart",new ArrayList<ChoosenProduct>());
+
+						// Riazzero il carrello
+						request.getSession().setAttribute("cart", new ArrayList<ChoosenProduct>());
+
+						SendEmail emailControl = new SendEmail();
+						String email = (String) request.getSession().getAttribute("user_email");
+						emailControl.send(email, "Nuovo ordine confermato","Grazie per il tuo ordine!" + 
+						"\nEcco dove puoi trovarlo => http://localhost:8080" + request.getContextPath()+ "/order?id=" + id
+						+ "\nAttenzione, l'ordine può essere visualizzato solo se sei loggato");
 
 					}
 				}
-				
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 			
-			
+			}
+
 		}
-		
+
 	}
 
 }

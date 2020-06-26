@@ -1,4 +1,4 @@
-package control;
+package model;
 
 import java.util.*;
 import javax.mail.*;
@@ -18,6 +18,14 @@ public class SendEmail {
 		this.email = email;
 		this.password = password;
 	}
+	
+	public SendEmail() {
+		this.host = "smtp.gmail.com";
+		this.port = "587";
+		this.email = "betterhome.website@gmail.com";
+		this.password = "poleseInfame";
+	}
+
 
 	public void send(String to, String subject, String text) throws MessagingException {
 		// Set up the SMTP server.

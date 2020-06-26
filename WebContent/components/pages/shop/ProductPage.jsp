@@ -75,7 +75,10 @@
 
 				</div>
 				<p><%=product.getDescription() %></p>
+				<div class="wrap-row" style="align-items:flex-end;">
 				<h4><%=df.format(price)%>&#8364;</h4>
+				<p style="margin-left:10px;">/iva inclusa</p>
+				</div>
 				<form id="form" action="${pageContext.request.contextPath}/cart/add-to-cart" method="get">
 					<div class="wrap-row center">
 						<div class="input-field">
