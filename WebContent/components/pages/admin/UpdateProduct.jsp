@@ -73,6 +73,11 @@
 						<input type="number" step="0.01" name='price' id="'price'"
 							value="${product.price}"> <label for='password'>Prezzo</label>
 					</div>
+					
+					<div class='input-field '>
+						<input type="number" step="1.00" name='iva' id="iva"
+							value="${product.iva}"> <label for='password'>Iva</label>
+					</div>
 
 					<div class="input-field">
 						<p style="margin-bottom: 0px;">Visibile nel catalogo</p>

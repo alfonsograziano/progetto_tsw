@@ -69,8 +69,7 @@ public class CreateOrder extends HttpServlet {
 						//Inizio a prendere tutti gli attributi
 						Date date = new Date();
 						Timestamp time = new Timestamp(date.getTime());
-						Integer iva = 22; 
-						
+						 
 						String state = request.getParameter("state");
 						String city = request.getParameter("city");
 						String address = request.getParameter("address");
@@ -82,7 +81,6 @@ public class CreateOrder extends HttpServlet {
 											
 						Order o = new Order();
 						o.setDate(time);
-						o.setIva(iva);
 						o.setCity(city);
 						o.setAddress(address);
 						o.setState(state);
@@ -105,6 +103,7 @@ public class CreateOrder extends HttpServlet {
 						ContainsModelDS containsModel = new ContainsModelDS();
 						for(int i = 0; i < cart.size(); i++) {
 							Contains prd = new Contains();
+							prd.setIva(cart.get(i).getProduct().getIva());
 							prd.setOrderId(id);
 							prd.setPrice(cart.get(i).getProduct().getPrice());
 							prd.setProductId(cart.get(i).getProduct().getId());

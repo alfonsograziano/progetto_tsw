@@ -7,7 +7,7 @@ import java.util.Date;
 public class Order {
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", data=" + date + ", iva=" + iva + ", city=" + city + ", address=" + address
+		return "Order [id=" + id + ", data=" + date + ", city=" + city + ", address=" + address
 				+ ", state=" + state + ", zipCode=" + zipCode + ", details=" + details + ", track_id=" + track_id
 				+ ", shippingPrice=" + shippingPrice + ", paymentId=" + paymentId + ", shippingTypeId=" + shippingTypeId
 				+ ", paymentCode=" + paymentCode + ", idUser=" + idUser + ", orderState=" + orderState + "]";
@@ -21,7 +21,6 @@ public class Order {
 	}
 	private int id;
 	private Timestamp date;
-	private double iva;
 	private String city;
 	private String address;
 	private String state;
@@ -46,13 +45,6 @@ public class Order {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	
-	public double getIva() {
-		return iva;
-	}
-	public void setIva(double iva) {
-		this.iva = iva;
 	}
 	public String getCity() {
 		return city;

@@ -39,7 +39,7 @@ public class ProductModelDS implements ProductModel{
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ProductModelDS.TABLE_NAME
-				+ " (name, description, price, visible) VALUES (?, ?, ?, ?)";
+				+ " (name, description, price, visible, iva) VALUES (?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -48,6 +48,7 @@ public class ProductModelDS implements ProductModel{
 			preparedStatement.setString(2, product.getDescription());
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setBoolean(4, true);
+			preparedStatement.setInt(5, product.getIva());
 
 			preparedStatement.executeUpdate();
 		} finally {
@@ -84,7 +85,7 @@ public class ProductModelDS implements ProductModel{
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
 				bean.setVisible(rs.getBoolean("visible"));
-
+				bean.setIva(rs.getInt("iva"));
 				bean.setCategories(belongsModel.getByProduct(id));
 				bean.setImages(imageModel.getImagesByProduct(id));
 
@@ -125,6 +126,7 @@ public class ProductModelDS implements ProductModel{
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
 				bean.setVisible(rs.getBoolean("visible"));
+				bean.setIva(rs.getInt("iva"));
 
 				products.add(bean);
 			}
@@ -149,7 +151,7 @@ public class ProductModelDS implements ProductModel{
 		
 		System.out.println("Imposto visible: " + product.getVisible());
 		
-		updateSQL = "UPDATE product SET name = ?, description = ?, price = ?, visible = ? WHERE id = ?";
+		updateSQL = "UPDATE product SET name = ?, description = ?, price = ?, visible = ?, iva = ? WHERE id = ?";
 		
 		try {
 			connection = ds.getConnection();
@@ -158,7 +160,8 @@ public class ProductModelDS implements ProductModel{
 			preparedStatement.setString(2, product.getDescription());
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setBoolean(4, product.getVisible());
-			preparedStatement.setInt(5, product.getId());
+			preparedStatement.setInt(5, product.getIva());
+			preparedStatement.setInt(6, product.getId());
 
 			preparedStatement.executeUpdate();
 
@@ -201,6 +204,7 @@ public class ProductModelDS implements ProductModel{
 				bean.setName(rs.getString("name"));
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
+				bean.setIva(rs.getInt("iva"));
 				bean.setVisible(rs.getBoolean("visible"));
 
 				products.add(bean);
@@ -244,6 +248,7 @@ public class ProductModelDS implements ProductModel{
 				bean.setName(rs.getString("name"));
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
+				bean.setIva(rs.getInt("iva"));
 				bean.setVisible(rs.getBoolean("visible"));
 				bean.setImages(imageModel.getImagesByProduct(bean.getId()));
 

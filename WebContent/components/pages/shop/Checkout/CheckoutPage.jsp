@@ -20,9 +20,11 @@
 			cart = new ArrayList<ChoosenProduct>();
 		}
 
-		Double total = 0.0;
+		double total = 0.0;
+		double iva = 0;
 		for (int i = 0; i < cart.size(); i++) {
 			total += cart.get(i).getProduct().getPrice() * cart.get(i).getQuantity();
+			iva += ((cart.get(i).getProduct().getPrice() * cart.get(i).getProduct().getIva()) / 100)*cart.get(i).getQuantity();
 		}
 
 		int shipping_type_id = -1;
@@ -37,7 +39,6 @@
 		}
 
 		total += shipping.getPrice();
-		Double iva = (22 * total) / 100;
 		System.out.println(iva);
 		Double total_iva = total + iva;
 	%>
@@ -138,8 +139,8 @@
 						<div class="wrap-row"
 							style="justify-content: space-around; align-items: center;">
 							<p>
-								Tasse (iva 22%):
-								<%=String.format("%.2f", iva)%></p>
+								Tasse:
+								<%=String.format("%.2f", iva)%>&euro;</p>
 								<br/>
 							<p>
 								Totale <b id="total_iva"><%=String.format("%.2f", total_iva)%></b>&euro;

@@ -39,7 +39,7 @@ public class ContainsModelDS {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertSQL = "INSERT INTO " + ContainsModelDS.TABLE_NAME + " (order_id, product_id, price, quantity) VALUES (?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + ContainsModelDS.TABLE_NAME + " (order_id, product_id, price, quantity, iva) VALUES (?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -48,6 +48,7 @@ public class ContainsModelDS {
 			preparedStatement.setInt(2, contains.getProductId());
 			preparedStatement.setDouble(3,contains.getPrice());
 			preparedStatement.setInt(4,contains.getQuantity());
+			preparedStatement.setInt(5, contains.getIva());
 
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -121,6 +122,7 @@ public class ContainsModelDS {
 				bean.setProductId(rs.getInt("product_id"));
 				bean.setPrice(rs.getDouble("price"));
 				bean.setQuantity(rs.getInt("quantity"));
+				bean.setIva(rs.getInt("iva"));
 				
 				contains.add(bean);
 			}
@@ -171,7 +173,7 @@ public class ContainsModelDS {
 				bean.setProductId(rs.getInt("product_id"));
 				bean.setPrice(rs.getDouble("price"));
 				bean.setQuantity(rs.getInt("quantity"));
-				
+				bean.setIva(rs.getInt("iva"));
 			}
 
 
@@ -220,6 +222,7 @@ public class ContainsModelDS {
 				bean.setName(rs.getString("name"));
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price"));
+				bean.setIva(rs.getInt("iva"));
 				bean.setImages(imageModel.getImagesByProduct(bean.getId()));
 				products.add(bean);
 			}
@@ -272,7 +275,6 @@ public class ContainsModelDS {
 				Order bean = new Order();
 				bean.setId(rs.getInt("id"));
 				bean.setDate(rs.getTimestamp("date"));
-				bean.setIva(rs.getDouble("iva"));
 				bean.setCity(rs.getString("city"));
 				bean.setAddress(rs.getString("address"));
 				bean.setState(rs.getString("state"));

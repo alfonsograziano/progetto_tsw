@@ -5,6 +5,13 @@ public class Contains {
 	private int ProductId;
 	private double price;
 	private int quantity;
+	private int iva;
+	public int getIva() {
+		return iva;
+	}
+	public void setIva(int iva) {
+		this.iva = iva;
+	}
 	public int getOrderId() {
 		return orderId;
 	}

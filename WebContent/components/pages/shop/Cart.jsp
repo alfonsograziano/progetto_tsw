@@ -12,6 +12,8 @@
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="model.bean.ChoosenProduct"%>
 	<%@page import="model.bean.Shipping"%>
+	<%@page import="java.text.DecimalFormat"%>
+	<%@page import="java.math.RoundingMode"%>
 
 	<%
 		ArrayList<ChoosenProduct> cart = (ArrayList<ChoosenProduct>) request.getSession().getAttribute("cart");
@@ -26,6 +28,8 @@
 		if (request.getSession().getAttribute("shipping_type_id") != null) {
 			shipping_type_id = (int) request.getSession().getAttribute("shipping_type_id");
 		}
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setRoundingMode(RoundingMode.CEILING);
 	%>
 
 	<jsp:include page="Header.jsp" />
@@ -52,7 +56,8 @@
 				<tbody id="table1">
 					<%
 						for (int i = 0; i < cart.size(); i++) {
-								double productTotal = (cart.get(i).getProduct().getPrice() * cart.get(i).getQuantity());
+								double price = cart.get(i).getProduct().getPrice() + ((cart.get(i).getProduct().getPrice() * cart.get(i).getProduct().getIva()) / 100);
+								double productTotal = (price * cart.get(i).getQuantity());
 								total = total + productTotal;
 					%>
 					<tr id="<%=cart.get(i).getProduct().getId()%>">
@@ -61,28 +66,30 @@
 							src="${pageContext.request.contextPath}/getPicture?id=<%=cart.get(i).getProduct().getImages().get(0).getId()%>"
 							id="main-product-image" class="product-image-thumbnail" /></td>
 						<td><%=cart.get(i).getProduct().getName()%></td>
-						<td><%=cart.get(i).getProduct().getPrice()%></td>
+						<td><%=df.format(price)%>&#8364;</td>
 						<td>
 							<div class="wrap-row">
 
-									<button id="subButton" type='submit' class="transparent-btn" onclick="deleteOne(<%=cart.get(i).getProduct().getId()%>, <%=cart.get(i).getProduct().getPrice()%>)">
-										<i class="material-icons tiny" style="color: #455a64;">exposure_neg_1</i>
-									</button>
+								<button id="subButton" type='submit' class="transparent-btn"
+									onclick="deleteOne(<%=cart.get(i).getProduct().getId()%>, <%=cart.get(i).getProduct().getPrice()%>)">
+									<i class="material-icons tiny" style="color: #455a64;">exposure_neg_1</i>
+								</button>
 
-									<button type='submit' class="transparent-btn" onclick="deleteAll(<%=cart.get(i).getProduct().getId()%>)">
-										<i class="material-icons tiny" style="color: #455a64;">delete</i>
-									</button>
+								<button type='submit' class="transparent-btn"
+									onclick="deleteAll(<%=cart.get(i).getProduct().getId()%>)">
+									<i class="material-icons tiny" style="color: #455a64;">delete</i>
+								</button>
 
-								
-									<button id="addButton" type='submit' class="transparent-btn"
-										onclick="addOne(<%=cart.get(i).getProduct().getId()%>, <%=cart.get(i).getProduct().getPrice()%>)">
-										<i class="material-icons tiny" style="color: #455a64;">exposure_plus_1</i>
-									</button>
+
+								<button id="addButton" type='submit' class="transparent-btn"
+									onclick="addOne(<%=cart.get(i).getProduct().getId()%>, <%=cart.get(i).getProduct().getPrice()%>)">
+									<i class="material-icons tiny" style="color: #455a64;">exposure_plus_1</i>
+								</button>
 
 
 							</div>
 						</td>
-						<td><b id="p<%=cart.get(i).getProduct().getId()%>"><%=productTotal%></b></td>
+						<td><b id="p<%=cart.get(i).getProduct().getId()%>"><%=df.format(productTotal)%></b><b>&#8364;</b></td>
 
 					</tr>
 					<%
@@ -126,7 +133,7 @@
 			</div>
 
 			<h3>Totale</h3>
-			<h4 id="total"><%=total%></h4>
+			<h4><b id="total"><%=df.format(total)%></b><b>&#8364;</b></h4>
 			<%
 				if (shipping_type_id > 0) {
 			%>

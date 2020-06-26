@@ -10,11 +10,16 @@
 	<%@page import="java.util.ArrayList"%>
 	<%@page import="model.bean.Category"%>
 	<%@page import="model.bean.Product"%>
+	<%@page import="java.text.DecimalFormat"%>
+	<%@page import="java.math.RoundingMode"%>
 	<%
 		Product product = (Product) request.getAttribute("product");
 		ArrayList<Product> related  = (ArrayList<Product>) request.getAttribute("related_products");
 
 		ArrayList<Category> productCategories = product.getCategories();
+		Double price = product.getPrice()+((product.getPrice()*product.getIva())/100);
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setRoundingMode(RoundingMode.CEILING);
 	%>
 	
 	<script type="text/javascript">
@@ -70,7 +75,7 @@
 
 				</div>
 				<p><%=product.getDescription() %></p>
-				<h4><%=product.getPrice() %>&#8364;</h4>
+				<h4><%=df.format(price)%>&#8364;</h4>
 				<form id="form" action="${pageContext.request.contextPath}/cart/add-to-cart" method="get">
 					<div class="wrap-row center">
 						<div class="input-field">

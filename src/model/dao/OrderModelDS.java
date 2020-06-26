@@ -39,25 +39,24 @@ public class OrderModelDS implements OrderModel {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + OrderModelDS.TABLE_NAME
-				+ " (date, iva, city, address, state, zip_code, details, track_id, shipping_price, payment_id, shipping_type_id, payment_code, id_user, order_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " (date, city, address, state, zip_code, details, track_id, shipping_price, payment_id, shipping_type_id, payment_code, id_user, order_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setTimestamp(1, order.getDate());
-			preparedStatement.setDouble(2, order.getIva());
-			preparedStatement.setString(3, order.getCity());
-			preparedStatement.setString(4, order.getAddress());
-			preparedStatement.setString(5, order.getState());
-			preparedStatement.setString(6, order.getZipCode());
-			preparedStatement.setString(7, order.getDetails());
-			preparedStatement.setString(8, order.getTrack_id());
-			preparedStatement.setDouble(9, order.getShippingPrice());
-			preparedStatement.setString(10, order.getPaymentId());
-			preparedStatement.setInt(11, order.getShippingTypeId());
-			preparedStatement.setString(12, order.getPaymentCode());
-			preparedStatement.setInt(13, order.getIdUser());
-			preparedStatement.setInt(14, order.getOrderState());
+			preparedStatement.setString(2, order.getCity());
+			preparedStatement.setString(3, order.getAddress());
+			preparedStatement.setString(4, order.getState());
+			preparedStatement.setString(5, order.getZipCode());
+			preparedStatement.setString(6, order.getDetails());
+			preparedStatement.setString(7, order.getTrack_id());
+			preparedStatement.setDouble(8, order.getShippingPrice());
+			preparedStatement.setString(9, order.getPaymentId());
+			preparedStatement.setInt(10, order.getShippingTypeId());
+			preparedStatement.setString(11, order.getPaymentCode());
+			preparedStatement.setInt(12, order.getIdUser());
+			preparedStatement.setInt(13, order.getOrderState());
 			int affectedRows = preparedStatement.executeUpdate();
 
 			try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
@@ -126,7 +125,6 @@ public class OrderModelDS implements OrderModel {
 				Order bean = new Order();
 				bean.setId(rs.getInt("id"));
 				bean.setDate(rs.getTimestamp("date"));
-				bean.setIva(rs.getDouble("iva"));
 				bean.setCity(rs.getString("city"));
 				bean.setAddress(rs.getString("address"));
 				bean.setState(rs.getString("state"));
@@ -182,7 +180,6 @@ public class OrderModelDS implements OrderModel {
 				Order bean = new Order();
 				bean.setId(rs.getInt("id"));
 				bean.setDate(rs.getTimestamp("date"));
-				bean.setIva(rs.getDouble("iva"));
 				bean.setCity(rs.getString("city"));
 				bean.setAddress(rs.getString("address"));
 				bean.setState(rs.getString("state"));
@@ -240,7 +237,6 @@ public class OrderModelDS implements OrderModel {
 				Order bean = new Order();
 				bean.setId(rs.getInt("id"));
 				bean.setDate(rs.getTimestamp("date"));
-				bean.setIva(rs.getDouble("iva"));
 				bean.setCity(rs.getString("city"));
 				bean.setAddress(rs.getString("address"));
 				bean.setState(rs.getString("state"));
@@ -298,7 +294,6 @@ public class OrderModelDS implements OrderModel {
 				Order bean = new Order();
 				bean.setId(rs.getInt("id"));
 				bean.setDate(rs.getTimestamp("date"));
-				bean.setIva(rs.getDouble("iva"));
 				bean.setCity(rs.getString("city"));
 				bean.setAddress(rs.getString("address"));
 				bean.setState(rs.getString("state"));
@@ -419,7 +414,6 @@ public class OrderModelDS implements OrderModel {
 			if (rs.next()) {
 				order.setId(rs.getInt("id"));
 				order.setDate(rs.getTimestamp("date"));
-				order.setIva(rs.getDouble("iva"));
 				order.setCity(rs.getString("city"));
 				order.setAddress(rs.getString("address"));
 				order.setState(rs.getString("state"));
@@ -475,7 +469,6 @@ public class OrderModelDS implements OrderModel {
 			if (rs.next()) {
 				order.setId(rs.getInt("id"));
 				order.setDate(rs.getTimestamp("date"));
-				order.setIva(rs.getDouble("iva"));
 				order.setCity(rs.getString("city"));
 				order.setAddress(rs.getString("address"));
 				order.setState(rs.getString("state"));
@@ -502,6 +495,7 @@ public class OrderModelDS implements OrderModel {
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price")); // TODO: verifica cosa succede se il prezzo cambia
 				bean.setVisible(rs.getBoolean("visible"));
+				bean.setIva(rs.getInt("iva"));
 
 				ChoosenProduct cp = new ChoosenProduct();
 				cp.setProduct(bean);

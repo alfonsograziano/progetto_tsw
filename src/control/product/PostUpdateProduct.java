@@ -55,6 +55,7 @@ public class PostUpdateProduct extends HttpServlet {
 			String name = request.getParameter("name");
 			String description = request.getParameter("description");
 			Double price = Double.parseDouble(request.getParameter("price"));
+			int iva = Integer.parseInt(request.getParameter("iva"));
 			boolean visible = request.getParameter("visible").equals("true") ? true : false;
 			System.out.println(visible);
 
@@ -63,6 +64,7 @@ public class PostUpdateProduct extends HttpServlet {
 			product.setName(name);
 			product.setDescription(description);
 			product.setPrice(price);
+			product.setIva(iva);
 			product.setVisible(visible);
 
 			ProductModelDS productModel = new ProductModelDS();
@@ -99,7 +101,8 @@ public class PostUpdateProduct extends HttpServlet {
 			}
 		} catch (Exception e) {
 			response.setStatus(400);
-			response.getWriter().append("Errore");
+			response.getWriter().append("Errore\n");
+			e.printStackTrace();
 		}
 	}
 

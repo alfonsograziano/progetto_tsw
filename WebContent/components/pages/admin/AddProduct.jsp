@@ -18,13 +18,6 @@
 			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	%>
-	<jsp:include page="VNav.jsp" />
-
-
-
-
-
-
 	<div
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 			<div class="section"></div>
@@ -47,7 +40,11 @@
 				<input type="number" step="0.01" name='price' id="price">
 				<label for='password'>Prezzo</label>
 			</div>
-
+			
+			<div class='input-field col s12'>
+				<input class='validate' type='number' step="1.00" name='iva' id='iva' /> <label
+					for='password'>Iva</label>
+			</div>
 			<button type='submit' name='btn_login'
 				class='col s12 btn btn-large waves-effect indigo' onclick=valida()>Aggiungi</button>
 		</form>

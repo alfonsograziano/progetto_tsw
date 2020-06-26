@@ -13,8 +13,17 @@ public class Product {
 	private double price;
 	private String description;
 	private boolean visible;
+	private int iva;
+	
 	
 
+	public int getIva() {
+		return iva;
+	}
+
+	public void setIva(int iva) {
+		this.iva = iva;
+	}
 	private ArrayList<Image> images;
 	public ArrayList<Image> getImages() {
 		return images;

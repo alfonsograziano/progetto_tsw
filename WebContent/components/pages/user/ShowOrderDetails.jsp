@@ -5,6 +5,8 @@
 <%@page import="model.bean.Order"%>
 <%@page import="model.bean.Product"%>
 <%@page import="model.bean.Contains"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.math.RoundingMode"%>
 <jsp:include page="../HeaderData.jsp"></jsp:include>
 <jsp:include page="../shop/Header.jsp" />
 
@@ -15,6 +17,8 @@
 	ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
 	Order order = (Order) request.getAttribute("order");
 	ArrayList<Contains> contains = (ArrayList<Contains>) request.getAttribute("contains");
+	DecimalFormat df = new DecimalFormat("#.##");
+	df.setRoundingMode(RoundingMode.CEILING);
 %>
 
 <div class="container">
@@ -37,13 +41,14 @@
 				<tbody>
 					<%
 						for (int i = products.size() - 1; i >= 0; i--) {
+						double price = products.get(i).getPrice() + ((products.get(i).getPrice() * products.get(i).getIva()) / 100);
 					%>
 					<tr>
 						<td><%=products.get(i).getName()%></td>
 						<!--<td><%=products.get(i).getDescription()%></td>  -->
-						<td><%=products.get(i).getPrice()%></td>
+						<td><%=df.format(price)%>&#8364;</td>
 						<td><%=contains.get(i).getQuantity()%></td>
-						<td><%=contains.get(i).getPrice()%></td>
+						<td><%=df.format(price*contains.get(i).getQuantity())%>&#8364;</td>
 
 
 						<td>

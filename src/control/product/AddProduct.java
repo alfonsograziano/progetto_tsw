@@ -35,8 +35,10 @@ public class AddProduct extends HttpServlet {
 			String name = request.getParameter("name");
 			String description = request.getParameter("description");
 			Double price = Double.parseDouble(request.getParameter("price"));
+			int iva = Integer.parseInt(request.getParameter("iva"));
 
 			Product product = new Product();
+			product.setIva(iva);
 			product.setName(name);
 			product.setDescription(description);
 			product.setPrice(price);
