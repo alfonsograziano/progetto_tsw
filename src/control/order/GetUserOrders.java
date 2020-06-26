@@ -27,7 +27,7 @@ public class GetUserOrders extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		OrderModelDS orderModel = new OrderModelDS();
-		ArrayList<Order> orders = orderModel.getByUser(1);
+		ArrayList<Order> orders = orderModel.getByUser((int) request.getSession().getAttribute("user_id"));
 		request.setAttribute("orders", orders);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/components/pages/user/ShowOrders.jsp");
 		dispatcher.forward(request, response);
