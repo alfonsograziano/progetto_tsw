@@ -99,31 +99,36 @@ public class CreateOrder extends HttpServlet {
 
 						OrderModelDS orderModel = new OrderModelDS();
 						int id = (int) orderModel.add(o);
-						System.out.println("Ordine con id: " + id + " creato!");
+						if(id != -1) {
+							System.out.println("Ordine con id: " + id + " creato!");
 
-						ContainsModelDS containsModel = new ContainsModelDS();
-						for (int i = 0; i < cart.size(); i++) {
-							Contains prd = new Contains();
-							prd.setIva(cart.get(i).getProduct().getIva());
-							prd.setOrderId(id);
-							prd.setPrice(cart.get(i).getProduct().getPrice());
-							prd.setProductId(cart.get(i).getProduct().getId());
-							prd.setQuantity(cart.get(i).getQuantity());
-							containsModel.add(prd);
+							ContainsModelDS containsModel = new ContainsModelDS();
+							for (int i = 0; i < cart.size(); i++) {
+								Contains prd = new Contains();
+								prd.setIva(cart.get(i).getProduct().getIva());
+								prd.setOrderId(id);
+								prd.setPrice(cart.get(i).getProduct().getPrice());
+								prd.setProductId(cart.get(i).getProduct().getId());
+								prd.setQuantity(cart.get(i).getQuantity());
+								containsModel.add(prd);
 
+							}
+
+							response.getWriter().append("Ordine creato...");
+
+							// Riazzero il carrello
+							request.getSession().setAttribute("cart", new ArrayList<ChoosenProduct>());
+
+							SendEmail emailControl = new SendEmail();
+							String email = (String) request.getSession().getAttribute("user_email");
+							emailControl.send(email, "Nuovo ordine confermato","Grazie per il tuo ordine!" + 
+							"\nEcco dove puoi trovarlo => http://localhost:8080" + request.getContextPath()+ "/order?id=" + id
+							+ "\nAttenzione, l'ordine può essere visualizzato solo se sei loggato");
+
+						}else {
+							response.getWriter().append("Errore nella creazione dell'ordine... Riprova più tardi");
 						}
-
-						response.getWriter().append("Ordine creato...");
-
-						// Riazzero il carrello
-						request.getSession().setAttribute("cart", new ArrayList<ChoosenProduct>());
-
-						SendEmail emailControl = new SendEmail();
-						String email = (String) request.getSession().getAttribute("user_email");
-						emailControl.send(email, "Nuovo ordine confermato","Grazie per il tuo ordine!" + 
-						"\nEcco dove puoi trovarlo => http://localhost:8080" + request.getContextPath()+ "/order?id=" + id
-						+ "\nAttenzione, l'ordine può essere visualizzato solo se sei loggato");
-
+						
 					}
 				}
 
