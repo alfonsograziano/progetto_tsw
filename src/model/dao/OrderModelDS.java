@@ -495,6 +495,7 @@ public class OrderModelDS implements OrderModel {
 				bean.setDescription(rs.getString("description"));
 				bean.setPrice(rs.getDouble("price")); // TODO: verifica cosa succede se il prezzo cambia
 				bean.setVisible(rs.getBoolean("visible"));
+				bean.setIva(rs.getInt("iva"));
 
 				ChoosenProduct cp = new ChoosenProduct();
 				cp.setProduct(bean);
