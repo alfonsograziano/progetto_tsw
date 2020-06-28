@@ -24,7 +24,8 @@
 		double iva = 0;
 		for (int i = 0; i < cart.size(); i++) {
 			total += cart.get(i).getProduct().getPrice() * cart.get(i).getQuantity();
-			iva += ((cart.get(i).getProduct().getPrice() * cart.get(i).getProduct().getIva()) / 100)*cart.get(i).getQuantity();
+			iva += ((cart.get(i).getProduct().getPrice() * cart.get(i).getProduct().getIva()) / 100)
+					* cart.get(i).getQuantity();
 		}
 
 		int shipping_type_id = -1;
@@ -49,119 +50,157 @@
 		System.out.println(user);
 	%>
 
-		<div class="checkout-content" style="margin-bottom: 100px;">
-			<div class="wrap-row" style="justify-content:center;">
-							<div>
-					<h3>Dati di fatturazione</h3>
-					<form>
-						<h5 class="checkout-form-header">Informazioni personali</h5>
-						<div class="checkout-form-section">
-							<div class="row">
-								<div class="input-field col s6">
-									<input id="name" type="text" class="validate" disabled
-										value="<%=user.getName()%>"> <label for="name">Nome</label>
-								</div>
-								<div class="input-field col s6">
-									<input id="surname" type="text" class="validate" disabled
-										value="<%=user.getSurname()%>"> <label for="surname">Cognome</label>
-								</div>
-
-							</div>
-							<div class="row">
-								<div class="input-field">
-									<input id="email" type="text" class="validate" disabled
-										value="<%=user.getEmail()%>"> <label for="email">Email</label>
-								</div>
-							</div>
-						</div>
-						<h5 class="checkout-form-header">Dati di spedizione</h5>
-						<div class="checkout-form-section">
-							<div class="input-field col s6">
-								<input id="state" type="text" class="validate"> <label
-									for="state">Stato</label>
-							</div>
-							<div class="input-field col s6">
-								<input id="city" type="text" class="validate"> <label
-									for="city">Città</label>
-							</div>
-							<div class="input-field col s6">
-								<input id="zip_code" type="text" class="validate"> <label
-									for="zip_code">ZIP Code</label>
-							</div>
-							<div class="input-field col s6">
-								<input id="address" type="text" class="validate"> <label
-									for="address">Indirizzo</label>
-							</div>
-						</div>
-
-						<h5 class="checkout-form-header">Vuoi comunicarci qualcosa?</h5>
-						<div class="checkout-form-section">
-							<div class="input-field col s12">
-								<textarea id="details" class="materialize-textarea"></textarea>
-								<label for="details">Dettagli ordine (opzionale)</label>
-							</div>
-						</div>
-					</form>
-
-				</div>
-			
-				<div class="order">
-					<h3>Riepilogo ordine</h3>
-					<h5 class="checkout-form-header">Prodotti</h5>
+	<div class="checkout-content" style="margin-bottom: 100px;">
+		<div class="wrap-row" style="justify-content: center;">
+			<div>
+				<h3>Dati di fatturazione</h3>
+				<form>
+					<h5 class="checkout-form-header">Informazioni personali</h5>
 					<div class="checkout-form-section">
-						<table>
-							<thead>
-								<tr>
-									<th>Prodotto</th>
-									<th>Subtotale</th>
-								</tr>
-							</thead>
-							<tbody>
-								<%
-									for (int i = 0; i < cart.size(); i++) {
-										Product p = cart.get(i).getProduct();
-								%>
-								<tr>
-									<td><%=p.getName()%><b>&nbsp;X<%=cart.get(i).getQuantity()%></b></td>
-									<td><%=p.getPrice()%>&euro;</td>
-								</tr>
-								<%
-									}
-								%>
+						<div class="row">
+							<div class="input-field col s6">
+								<input id="name" type="text" class="validate" disabled
+									value="<%=user.getName()%>"> <label for="name">Nome</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="surname" type="text" class="validate" disabled
+									value="<%=user.getSurname()%>"> <label for="surname">Cognome</label>
+							</div>
 
-								<tr>
-									<td><b>Spedizione </b><%=shipping.getName()%></td>
-									<td><%=shipping.getPrice()%>&euro;</td>
-								</tr>
-
-							</tbody>
-						</table>
-						<div class="wrap-row"
-							style="justify-content: space-around; align-items: center;">
-							<p>
-								Tasse:
-								<%=String.format("%.2f", iva)%>&euro;</p>
-								<br/>
-							<p>
-								Totale <b id="total_iva"><%=String.format("%.2f", total_iva)%></b>&euro;
-							</p>
-							<div id="payment-wrapper">
-								<a class="waves-effect waves-light btn amber lighten-3"
-									id="payment-button" style="color: black; margin: 20px;"
-									onClick="openGateway()"><i class="material-icons left"
-									style="color: #357ac0;">payment</i><b>Paga ora e conferma
-										ordine</b></a>
+						</div>
+						<div class="row">
+							<div class="input-field">
+								<input id="email" type="text" class="validate" disabled
+									value="<%=user.getEmail()%>"> <label for="email">Email</label>
 							</div>
 						</div>
-
 					</div>
+					<h5 class="checkout-form-header">Dati di spedizione</h5>
+					<div class="checkout-form-section">
+						<div class="input-field col s6">
+							<input id="state" type="text" class="validate"> <label
+								for="state">Stato</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="city" type="text" class="validate"> <label
+								for="city">Città</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="zip_code" type="text" class="validate"> <label
+								for="zip_code">ZIP Code</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="address" type="text" class="validate"> <label
+								for="address">Indirizzo</label>
+						</div>
+					</div>
+
+					<h5 class="checkout-form-header">Vuoi comunicarci qualcosa?</h5>
+					<div class="checkout-form-section">
+						<div class="input-field col s12">
+							<textarea id="details" class="materialize-textarea"></textarea>
+							<label for="details">Dettagli ordine (opzionale)</label>
+						</div>
+					</div>
+				</form>
+
+			</div>
+
+			<div class="order">
+				<h3>Riepilogo ordine</h3>
+				<h5 class="checkout-form-header">Prodotti</h5>
+				<div class="checkout-form-section">
+					<table>
+						<thead>
+							<tr>
+								<th>Prodotto</th>
+								<th>Subtotale</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+								for (int i = 0; i < cart.size(); i++) {
+									Product p = cart.get(i).getProduct();
+							%>
+							<tr>
+								<td><%=p.getName()%><b>&nbsp;X<%=cart.get(i).getQuantity()%></b></td>
+								<td><%=p.getPrice()%>&euro;</td>
+							</tr>
+							<%
+								}
+							%>
+
+							<tr>
+								<td><b>Spedizione </b><%=shipping.getName()%></td>
+								<td><%=shipping.getPrice()%>&euro;</td>
+							</tr>
+
+						</tbody>
+					</table>
+					<div class="wrap-row"
+						style="justify-content: space-around; align-items: center;">
+						<p>
+							Tasse:
+							<%=String.format("%.2f", iva)%>&euro;
+						</p>
+						<br />
+						<p>
+							Totale <b id="total_iva"><%=String.format("%.2f", total_iva)%></b>&euro;
+						</p>
+						<div id="payment-wrapper">
+							<a class="waves-effect waves-light btn amber lighten-3"
+								id="payment-button" style="color: black; margin: 20px;"
+								onClick="openGateway()"><i class="material-icons left"
+								style="color: #357ac0;">payment</i><b>Paga ora e conferma
+									ordine</b></a>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
+	</div>
+
+
+	<div id="modal1" class="modal">
+		<div class="modal-content">
+		<div style="display:flex; align-items:center; justify-content:space-around;" >
+		<div class="preloader-wrapper small active">
+				<div class="spinner-layer spinner-green-only">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+			<h4>Stiamo creando il tuo ordine ;)</h4>
+		
+		</div>
+			
+
+		</div>
+
+	</div>
 
 	<jsp:include page="../Footer.jsp" />
 
 	<script>
+	 document.addEventListener('DOMContentLoaded', function() {
+		    var elems = document.querySelectorAll('.modal');
+		    var instances = M.Modal.init(elems, {});
+		  });
+	
+	 function openSpinner(){
+		 var elem = document.getElementById("modal1");
+		 var instance = M.Modal.getInstance(elem);
+		 instance.open()
+
+	 }
 	
 		function openGateway() {
 			if (validateInput()) {
@@ -173,7 +212,7 @@
 					if (typeof token !== "undefined") {
 						$("#payment-wrapper")
 								.html(
-										"<h5 style='margin-bottom:0px;'>Pagamento completato</h5><p  style='margin-top:0px;'>Codice pagamento: "
+										"<h5 style='margin-bottom:0px; margin-left:20px;'>Pagamento completato</h5><p  style='margin-top:0px;'>Codice pagamento: "
 												+ token + "</p>")
 							
 						console.log("Richiamo il post")
@@ -185,10 +224,13 @@
 							details: $("#details").val(),
 							payment_id: token
 						}
-						console.log($.post("<%=request.getContextPath()%>/order/add",
-								data, function() {
-									alert("Ordine completato...");
-								}))
+						
+						
+						openSpinner();
+
+						$.post("<%=request.getContextPath()%>/order/add", data, function() {
+										window.location.replace("<%=request.getContextPath()%>/thankYou")
+										})
 
 					} else {
 						alert("Pagamento non riuscito...")

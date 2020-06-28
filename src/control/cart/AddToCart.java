@@ -53,8 +53,7 @@ public class AddToCart extends HttpServlet {
 			bean.setQuantity(Integer.parseInt(request.getParameter("quantity")));
 			cart.add(bean);
 			request.getSession().setAttribute("cart", cart);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/home");
-			dispatcher.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/home");
 		}catch(Exception e) {
 			response.setStatus(400);
 			response.getWriter().append("Errore");

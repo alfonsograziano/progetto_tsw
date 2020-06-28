@@ -48,7 +48,7 @@
 	<div class="container" style="margin-top: 20px;">
 
 
-		<div class="wrap-row">
+		<div class="center">
 
 			<a style="margin: 20px;"
 				href="${pageContext.request.contextPath}/GetUserOrders"
