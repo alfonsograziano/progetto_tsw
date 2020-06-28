@@ -3,14 +3,15 @@ function valida() {
 	var name = document.invio.name.value;
 	var id = document.invio.id.value;
 	var newId = document.invio.newId.value;
+	var val = document.getElementById("val");
 	var letters = /^[A-Za-z]+$/;
 	if (!name.match(letters) || (name == "") || (name == "undefined")) {
-		alert("Devi inserire un nome");
+		val.innerHTML = "Inserisci un nome valido!";
 		document.invio.name.focus();
 		return false;
 	}
 	if (!id.match(letters) || (id == "") || (id == "undefined")) {
-		alert("Devi inserire un id");
+		val.innerHTML = "Inserisci un id valido!";
 		document.invio.id.focus();
 		return false;
 	} else {

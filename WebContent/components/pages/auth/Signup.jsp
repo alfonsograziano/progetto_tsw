@@ -81,12 +81,14 @@
 							</div>
 
 							<br />
-							<div class='row'>
+							
+						</form>
+						<div class='row'>
+						<p id="val" style="color: red"></p>
 								<button type='submit'
 									class='col s12 btn btn-large waves-effect indigo'
 									onclick="valida()">Registrati</button>
 							</div>
-						</form>
 			</div>
 			Hai già un account? <a
 				href="${pageContext.request.contextPath}/login">Accedi</a>

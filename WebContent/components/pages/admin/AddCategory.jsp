@@ -17,7 +17,7 @@
 		<div class="section"></div>
 
 		<h4>Aggiungi una nuova categoria...</h4>
-		<form class="col s12" method="get"
+		<form class="col s12" 
 			style="width: 100%; max-width: 500px;"
 			 name="invio">
 			<div class='input-field col s12'>
@@ -30,9 +30,10 @@
 					for='email'>Slug della categoria</label>
 			</div>
 
-			<button name='btn_login'
-				class='col s12 btn btn-large waves-effect indigo' onclick="valida()">Aggiungi</button>
 		</form>
+		<p id="val" style="color: red"></p>
+		<button name='btn_login'
+				class='col s12 btn btn-large waves-effect indigo' onclick="valida()">Aggiungi</button>
 	</div>
 
 

@@ -3,21 +3,22 @@ function valida() {
 	var name = document.invio.name.value;
 	var price = document.invio.price.value;
 	var iva = document.invio.iva.value;
+	var val = document.getElementById("val");
 	var controlPrice = /(\d+\.\d{1,2})/g;
 	var number = /^\d+$/;
 	if (name=="") {
-		alert("Devi inserire un nome");
+		val.innerHTML = "Inserisci un nome valido!";
 		document.invio.name.focus();
 		return false;
 	}
 	else if (!price.match(controlPrice) || price=="") {
-		alert("Devi inserire il prezzo, attenzione deve essere numerico!");
+		val.innerHTML = "Inserisci un prezzo valido!";
 		document.invio.price.value = "";
 		document.invio.price.focus();
 		return false;
 	}
 	else if (!iva.match(number) || iva=="") {
-		alert("Devi inserire l'iva, attenzione deve essere numerico!");
+		val.innerHTML = "Inserisci una percentuale di iva valida!";
 		document.invio.price.value = "";
 		document.invio.price.focus();
 		return false;

@@ -3,22 +3,23 @@ function valida() {
 	var name = document.invio.name.value;
 	var days = document.invio.days.value;
 	var price = document.invio.price.value;
+	var val = document.getElementById("val");
 	var letters = /^[A-Za-z]+$/;
 	var controlPrice = /(\d+\.\d{1,2})/g;
 	var numbers = /^[0-9]+$/;
 	if (!name.match(letters) || name == "") {
-		alert("Devi inserire un nome");
+		val.innerHTML = "Inserisci un nome valido!";
 		document.invio.nome.focus();
 		return false;
 	}
 	if (!days.match(numbers) || (isNaN(days)) || (days == "") || (days == "undefined")) {
-		alert("Devi inserire il numero di giorni, attenzione deve essere numerico!");
+		val.innerHTML = "Inserisci un numero di giorni valido!";
 		document.invio.days.value = "";
 		document.invio.days.focus();
 		return false;
 	}
 	if (!price.match(controlPrice) || (isNaN(price)) || (price == "") || (price == "undefined")) {
-		alert("Devi inserire il prezzo, attenzione deve essere numerico!");
+		val.innerHTML = "Inserisci un prezzo valido!";
 		document.invio.price.value = "";
 		document.invio.price.focus();
 		return false;

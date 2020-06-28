@@ -57,12 +57,15 @@
 					</div>
 
 					<br />
-					<div class='row'>
+					
+				</form>
+				
+				<div class='row'>
+				<p id="val" style="color: red"></p>
 						<button type='submit' name='btn_login'
 							class='col s12 btn btn-large waves-effect indigo'
 							onclick="valida()">Login</button>
 					</div>
-				</form>
 			</div>
 		</div>
 					Non hai un account? <a href="${pageContext.request.contextPath}/signup">Iscriviti</a>

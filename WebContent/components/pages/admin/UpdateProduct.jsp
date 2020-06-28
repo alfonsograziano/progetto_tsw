@@ -110,9 +110,11 @@
 
 					</div>
 
-					<button onClick="updateProduct()" name='btn_login'
-						class='col s12 btn btn-large waves-effect indigo'>Aggiorna</button>
+					
 				</form>
+				<p id="val" style="color: red"></p>
+				<button onClick="updateProduct()" name='btn_login'
+						class='col s12 btn btn-large waves-effect indigo'>Aggiorna</button>
 			</div>
 			<div>
 				<h5>Immagini</h5>

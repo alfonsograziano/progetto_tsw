@@ -33,7 +33,8 @@
 					for='password'>Prezzo</label>
 			</div>
 
-			<button type='submit' name='btn_login'
-				class='col s12 btn btn-large waves-effect indigo' onclick=valida()>Aggiungi</button>
 		</form>
+		<p id="val" style="color: red"></p>
+		<button type='submit' name='btn_login'
+				class='col s12 btn btn-large waves-effect indigo' onclick=valida()>Aggiungi</button>
 	</div>

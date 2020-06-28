@@ -4,26 +4,27 @@ function valida() {
 	var name = document.invio.name.value;
 	var surname = document.invio.surname.value;
 	var password = document.invio.password.value;
+	var val = document.getElementById("val");
 	var letters = /^[A-Za-z]+$/;
 	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var passformat = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
 	if (!password.match(passformat)|| password=="") {
-		alert("Devi inserire una password che contenga dai 7 ai 15 caratteri, contenga almeno un numero e un carattere speciale");
+		val.innerHTML = "Devi inserire una password che contenga dai 7 ai 15 caratteri, contenga almeno un numero e un carattere speciale";
 		document.invio.password.focus();
 		return false;
 	}
 	if (!surname.match(letters)|| surname=="") {
-		alert("Devi inserire un cognome");
+		val.innerHTML = "Inserisci un cognome valido!";
 		document.invio.surname.focus();
 		return false;
 	}
 	if (!name.match(letters)|| name=="") {
-		alert("Devi inserire un nome");
+		val.innerHTML = "Inserisci un nome valido!";
 		document.invio.name.focus();
 		return false;
 	}
 	if (!email.match(mailformat)|| email=="") {
-		alert("Devi inserire una mail valida");
+		val.innerHTML = "Inserisci una mail valida!";
 		document.invio.email.focus();
 		return false;
 	} else {

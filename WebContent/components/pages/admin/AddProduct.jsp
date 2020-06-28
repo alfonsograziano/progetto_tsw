@@ -45,8 +45,10 @@
 				<input class='validate' type='number' step="1.00" name='iva' id='iva' /> <label
 					for='password'>Iva</label>
 			</div>
-			<button type='submit' name='btn_login'
-				class='col s12 btn btn-large waves-effect indigo' onclick=valida()>Aggiungi</button>
+			
 		</form>
+		<p id="val" style="color: red"></p>
+		<button type='submit' name='btn_login'
+				class='col s12 btn btn-large waves-effect indigo' onclick=valida()>Aggiungi</button>
 	</div>
 
